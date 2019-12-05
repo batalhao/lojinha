@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 public class Produto {
 
 	@NotBlank(message = "SKU é obrigatório")
-	private String sku;
+	private String sku; 
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
 //	@NotBlank

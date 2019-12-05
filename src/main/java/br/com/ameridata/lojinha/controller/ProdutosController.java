@@ -40,7 +40,7 @@ public class ProdutosController {
 		System.out.println(">>> Sku: " + produto.getSku());
 		System.out.println(">>> Nome: " + produto.getNome());
 		System.out.println(">>> Descrição: " + produto.getDescricao());
-		return "redirect:/produtos/novo"; /* GET */ 
+		return "redirect:/produtos/novo"; /* GET */  
 	}
 
 	@RequestMapping(value = "produtos/cadastro")
