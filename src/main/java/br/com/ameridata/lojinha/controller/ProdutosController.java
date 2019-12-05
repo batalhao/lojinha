@@ -43,9 +43,9 @@ public class ProdutosController {
 		return "redirect:/produtos/novo"; /* GET */  
 	}
 
-	@RequestMapping(value = "produtos/cadastro")
-	public String cadastro() {
-		return "produto/cadastro-produto";
-	}
+//	@RequestMapping(value = "produtos/cadastro")
+//	public String cadastro() {
+//		return "produto/cadastro-produto";
+//	}
 
 }
