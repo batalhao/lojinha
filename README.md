@@ -1,2 +1,2 @@
-# lojinha
-Lojinha Web desenvolvida em Java/Spring e MySQL 
+# Lojinha Java Web
+Lojinha Web desenvolvida em Java/Spring, Thymeleaf e MySQL
