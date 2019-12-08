@@ -18,6 +18,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import br.com.ameridata.lojinha.controller.ProdutosController;
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
 @ComponentScan(basePackageClasses = { ProdutosController.class })
@@ -47,6 +48,8 @@ public class WebConfig implements ApplicationContextAware, WebMvcConfigurer /* e
 
 		engine.setEnableSpringELCompiler(true);
 		engine.setTemplateResolver(templateResolver());
+
+		engine.addDialect(new LayoutDialect());
 
 		return engine;
 	}
