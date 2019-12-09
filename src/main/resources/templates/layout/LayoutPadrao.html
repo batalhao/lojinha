@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>Ameridata | Lojinha Java</title>
+
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/ameridata.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}" />
+</head>
+
+<body>
+
+	<div class="aw-layout-page">
+
+		<nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
+			<div class="container-fluid">
+
+				<div class="navbar-header">
+					<a class="navbar-brand  hidden-xs" href="#">
+						<img alt="Ameridata" th:src="@{/layout/images/logo.png}" />
+					</a>
+
+					<ul class="nav  navbar-nav">
+						<li>
+							<a href="#" class="js-sidebar-toggle"><i class="fa  fa-bars"></i></a>
+						</li>
+					</ul>
+				</div>
+
+				<ul class="nav navbar-nav  navbar-right">
+
+					<!-- <li>
+						<a href="#" class="js-search-modal-trigger-show"><i class="fa  fa-search"></i></a>
+					</li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+							<i class="fa  fa-envelope"></i> <span class="label  label-danger  aw-label-corner">48</span>
+						</a>
+
+						<ul class="dropdown-menu">
+							<li><a href="javascript:;">Item 1</a></li>
+							<li><a href="javascript:;">Item 2</a></li>
+						</ul>
+					</li> -->
+
+					<!-- <li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">
+							<i class="fa  fa-user"></i>
+						</a>
+
+						<ul class="dropdown-menu">
+							<li>
+								<div class="aw-logged-user">
+									<img src="https://api.adorable.io/avatars/80/joaodascouves" width="80" height="80"
+										alt="João das Couves" class="aw-logged-user__picture" />
+									<span class="aw-logged-user__name">João das Couves</span>
+								</div>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Meu perfil</a></li>
+							<li><a href="#">Alterar senha</a></li>
+							<li><a href="#">Pagamentos</a></li>
+						</ul>
+					</li> -->
+
+					<li>
+						<a href="#"><em class="fa  fa-sign-out"></em></a>
+					</li>
+				</ul>
+
+			</div>
+		</nav>
+
+		<aside class="aw-layout-sidebar  js-sidebar">
+			<div class="aw-layout-sidebar__content">
+
+				<nav class="aw-menu  js-menu">
+					<ul class="aw-menu__list">
+
+						<li class="aw-menu__item">
+							<a href="dashboard.html"><i class="fa  fa-fw  fa-home"></i><span>Dashboard</span></a>
+						</li>
+
+						<li class="aw-menu__item  is-active">
+							<a href="#">
+								<!-- <i class="fa  fa-fw  fa-file-text"></i> -->
+								<i class="fa fa-database" aria-hidden="true"></i>
+								<span>Gestão de Estoque</span>
+								<i class="aw-menu__navigation-icon  fa"></i>
+							</a>
+
+							<ul class="aw-menu__list  aw-menu__list--sublist">
+								<li class="aw-menu__item  aw-menu__item--link is-active">
+									<a href="cadastro-produto.html">Produtos</a></li>
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a href="pesquisa-produtos.html">Fabricantes</a></li>
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a href="tabela-sem-dados.html">Fornecedores</a></li>
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a href="tabela-sem-dados.html">Unidades</a></li>
+								<!-- <li class="aw-menu__item  aw-menu__item--link">
+									<a href="tabela-sem-dados.html">Origens</a></li> -->
+							</ul>
+						</li>
+
+						<li class="aw-menu__item  is-expanded">
+							<a href="#">
+								<!-- <i class="fa  fa-fw  fa-file-text"></i> -->
+								<i class="fa fa-briefcase" aria-hidden="true"></i>
+								<span>Cadastros</span>
+								<i class="aw-menu__navigation-icon  fa"></i>
+							</a>
+
+							<ul class="aw-menu__list  aw-menu__list--sublist">
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a href="pagina-vazia.html">Estados</a> </li>
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a href="pagina-vazia.html">Cidades</a> </li>
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a href="login.html">Clientes</a></li>
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a href="esqueceu-a-senha.html">Usuários</a> </li>
+								<!-- <li class="aw-menu__item  aw-menu__item--link">
+									<a href="403.html">403</a> </li>
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a href="404.html">404</a> </li>
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a href="500.html">500</a> </li> -->
+							</ul>
+						</li>
+
+					</ul>
+				</nav>
+
+			</div>
+		</aside>
+
+		<section class="aw-layout-content  js-content" layout:fragment="conteudo">
+
+		</section>
+
+		<footer class="aw-layout-footer  js-content">
+			<div class="container-fluid">
+				<span class="aw-footer-disclaimer">&copy; 2019 Ameridata. Todos os direitos reservados.
+					Desenvolvido por Paulo R. Batalhão</span>
+			</div>
+		</footer>
+
+	</div>
+
+	<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
+	<script th:src="@{/layout/javascripts/ameridata.min.js}"></script>
+
+</body>
+
+</html>
