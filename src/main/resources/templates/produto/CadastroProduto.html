@@ -2,12 +2,13 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/LayoutPadrao">
 
-<head></head>
+<head>
+	<title>Cadastro de produto</title>
+</head>
 
 <body>
 
 	<section layout:fragment="conteudo">
-
 
 		<div class="page-header">
 			<div class="container-fluid">
@@ -37,8 +38,8 @@
 
 					<div class="col-sm-3">
 						<div class="form-group">
-							<label for="codigoBarras">Código de barras</label>
-							<input id="codigoBarras" type="text" class="form-control" />
+							<label for="gtin">GTIN</label>
+							<input id="gtin" type="text" class="form-control" />
 						</div>
 					</div>
 
@@ -56,12 +57,18 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-3">
-						<div class="form-group">
-							<label for="fabricante">Fabricante*</label>
+					<div class="col-sm-3  form-group">
+						<label for="fabricante">Fabricante*</label>
+						<div class="lj-field-action">
 							<select id="fabricante" class="form-control">
 								<option value="">Selecione o fabricante</option>
 							</select>
+
+							<div class="lj-field-action__icon">
+								<a href="#" data-toggle="modal" data-target="#modalCadastroRapidoFabricante">
+									<i class="glyphicon  glyphicon-plus-sign  lj-glyphicon-large"></i>
+								</a>
+							</div>
 						</div>
 					</div>
 
@@ -106,7 +113,7 @@
 							<label for="custoUnitario">Custo unitário*</label>
 							<div class="input-group">
 								<div class="input-group-addon">R$</div>
-								<input id="custoUnitario" type="text" class="form-control" />
+								<input id="custoUnitario" type="text" class="form-control  js-decimal" />
 							</div>
 						</div>
 					</div>
@@ -116,7 +123,7 @@
 							<label for="precoVenda">Preço de venda*</label>
 							<div class="input-group">
 								<div class="input-group-addon">R$</div>
-								<input id="precoVenda" type="text" class="form-control" />
+								<input id="precoVenda" type="text" class="form-control  js-decimal" />
 							</div>
 						</div>
 					</div>
@@ -125,7 +132,7 @@
 						<div class="form-group">
 							<label for="comissao">Comissão*</label>
 							<div class="input-group">
-								<input id="comissao" type="text" class="form-control" />
+								<input id="comissao" type="text" class="form-control  js-decimal" />
 								<div class="input-group-addon">%</div>
 							</div>
 						</div>
@@ -134,7 +141,8 @@
 					<div class="col-sm-3">
 						<div class="form-group">
 							<label for="estoque">Estoque*</label>
-							<input id="estoque" type="text" class="form-control" placeholder="Quantidade em estoque" />
+							<input id="estoque" type="text" class="form-control  js-plain"
+								placeholder="Quantidade em estoque" />
 						</div>
 					</div>
 				</div>
@@ -147,6 +155,8 @@
 
 			</form>
 		</div>
+
+		<div th:replace="fabricante/CadastroRapidoFabricante :: modalCadastroRapidoFabricante"></div>
 
 	</section>
 
