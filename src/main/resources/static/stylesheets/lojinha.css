@@ -1,0 +1,21 @@
+/*  
+* UTILS 
+*/
+
+.lj-glyphicon-large {
+    font-size: 18px;
+}
+
+/* 
+* COMPONENTES
+*/
+
+/* Field Action */
+
+.lj-field-action {
+    display: flex;
+}
+
+.lj-field-action__icon {
+    margin: 6px 0 0 5px;
+}
