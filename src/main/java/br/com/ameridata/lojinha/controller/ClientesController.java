@@ -24,13 +24,13 @@ public class ClientesController {
 		if (result.hasErrors()) {
 			return novo(cliente);
 		}
- 
+
 		// Salvar banco de dados...
 
 		attributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!");
 
 		System.out.println(">>> Nome: " + cliente.getNome());
-		return "redirect:/cliente/novo";
+		return "redirect:/clientes/novo";
 	}
 
 }
