@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body>
+    <aside class="aw-layout-sidebar  js-sidebar" th:fragment="layout-sidebar">
+        <div class="aw-layout-sidebar__content">
+
+            <nav class="aw-menu  js-menu">
+                <ul class="aw-menu__list">
+
+                    <li class="aw-menu__item">
+                        <a href="dashboard.html"><i class="fa  fa-fw  fa-home"></i><span>Dashboard</span></a>
+                    </li>
+
+                    <li class="aw-menu__item  is-active">
+                        <a href="#">
+                            <!-- <i class="fa  fa-fw  fa-file-text"></i> -->
+                            <i class="fa fa-database" aria-hidden="true"></i>
+                            <span>Gestão de Estoque</span>
+                            <i class="aw-menu__navigation-icon  fa"></i>
+                        </a>
+
+                        <ul class="aw-menu__list  aw-menu__list--sublist">
+                            <li class="aw-menu__item  aw-menu__item--link is-active">
+                                <a href="cadastro-produto.html">Produtos</a></li>
+                            <li class="aw-menu__item  aw-menu__item--link">
+                                <a href="pesquisa-produtos.html">Fabricantes</a></li>
+                            <li class="aw-menu__item  aw-menu__item--link">
+                                <a href="tabela-sem-dados.html">Fornecedores</a></li>
+                            <li class="aw-menu__item  aw-menu__item--link">
+                                <a href="tabela-sem-dados.html">Unidades</a></li>
+                            <!-- <li class="aw-menu__item  aw-menu__item--link">
+                                            <a href="tabela-sem-dados.html">Origens</a></li> -->
+                        </ul>
+                    </li>
+
+                    <li class="aw-menu__item  is-expanded">
+                        <a href="#">
+                            <!-- <i class="fa  fa-fw  fa-file-text"></i> -->
+                            <i class="fa fa-briefcase" aria-hidden="true"></i>
+                            <span>Cadastros</span>
+                            <i class="aw-menu__navigation-icon  fa"></i>
+                        </a>
+
+                        <ul class="aw-menu__list  aw-menu__list--sublist">
+                            <li class="aw-menu__item  aw-menu__item--link">
+                                <a href="pagina-vazia.html">Estados</a> </li>
+                            <li class="aw-menu__item  aw-menu__item--link">
+                                <a href="pagina-vazia.html">Cidades</a> </li>
+                            <li class="aw-menu__item  aw-menu__item--link">
+                                <a href="login.html">Clientes</a></li>
+                            <li class="aw-menu__item  aw-menu__item--link">
+                                <a href="esqueceu-a-senha.html">Usuários</a> </li>
+                            <!-- <li class="aw-menu__item  aw-menu__item--link">
+                                            <a href="403.html">403</a> </li>
+                                        <li class="aw-menu__item  aw-menu__item--link">
+                                            <a href="404.html">404</a> </li>
+                                        <li class="aw-menu__item  aw-menu__item--link">
+                                            <a href="500.html">500</a> </li> -->
+                        </ul>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </div>
+    </aside>
+</body>
+
+</html>
