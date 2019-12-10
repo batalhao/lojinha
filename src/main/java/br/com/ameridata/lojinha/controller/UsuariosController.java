@@ -17,8 +17,8 @@ public class UsuariosController {
 	@RequestMapping(value = "/usuarios/novo", method = RequestMethod.GET)
 	public String novo(Usuario usuario) {
 		return "usuario/CadastroUsuario";
-	} 
-
+	}
+ 
 	@RequestMapping(value = "/usuarios/novo", method = RequestMethod.POST)
 	public String cadastrar(@Valid Usuario usuario, BindingResult result, Model model, RedirectAttributes attributes) {
 		if (result.hasErrors()) {

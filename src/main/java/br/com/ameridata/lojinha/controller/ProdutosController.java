@@ -2,6 +2,8 @@ package br.com.ameridata.lojinha.controller;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +16,14 @@ import br.com.ameridata.lojinha.model.Produto;
 @Controller
 public class ProdutosController {
 
+	private static final Logger logger = LoggerFactory.getLogger(ProdutosController.class);
+
+//	private ApplicationContext context = new AnnotationConfigApplicationContext(WebConfig.class);
+//	Produto p = context.getBean(Produto.class);
+
 	@RequestMapping(value = "/produtos/novo", method = RequestMethod.GET)
 	public String novo(Produto produto /* Model model */) {
+		logger.info("Novo produto chamado"); // será retirado. Apenas para testes
 //		model.addAttribute(new Produto());
 		return "produto/CadastroProduto";
 	}
@@ -40,7 +48,7 @@ public class ProdutosController {
 		System.out.println(">>> Sku: " + produto.getSku());
 		System.out.println(">>> Nome: " + produto.getNome());
 		System.out.println(">>> Descrição: " + produto.getDescricao());
-		return "redirect:/produtos/novo"; /* GET */  
+		return "redirect:/produtos/novo"; /* GET */
 	}
 
 //	@RequestMapping(value = "produtos/cadastro")
