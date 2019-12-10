@@ -40,6 +40,9 @@
 		<!-- Logging -->
 		<log4j.version>2.12.1</log4j.version> <!-- 2.6 -->
 		<jcl-over-slf4j.version>1.7.29</jcl-over-slf4j.version> <!-- 1.7.21 -->
+
+		<!-- JPA / Hibernate -->
+		<hibernate.version>5.4.10.Final</hibernate.version> <!-- 5.1.0.Final -->
 	</properties>
 
 	<build>
@@ -139,6 +142,14 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${jcl-over-slf4j.version}</version>
+		</dependency>
+
+		<!-- JPA / Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
