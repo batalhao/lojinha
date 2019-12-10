@@ -13,6 +13,8 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/ameridata.min.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lojinha.css}" />
+
+	<link rel="shortcut icon" type="image/png" th:href="@{/images/favicon.png}" />
 </head>
 
 <body>
@@ -36,6 +38,7 @@
 	<script th:src="@{/javascripts/vendors/jquery.maskMoney.min.js}"></script>
 	<script th:src="@{/javascripts/lojinha.js}"></script>
 
+	<th:block layout:fragment="javascript-extra"></th:block>
 </body>
 
 </html>
