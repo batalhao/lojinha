@@ -40,13 +40,13 @@ public abstract class EntidadeExterna implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_entidade")
-	private String tipoEntidade;
+	private TipoEntidade tipoEntidade;
 
-	public String getTipoEntidade() {
+	public TipoEntidade getTipoEntidade() {
 		return tipoEntidade;
 	}
 
-	public void setTipoEntidade(String tipoEntidade) {
+	public void setTipoEntidade(TipoEntidade tipoEntidade) {
 		this.tipoEntidade = tipoEntidade;
 	}
 
