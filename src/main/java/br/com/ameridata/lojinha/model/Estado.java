@@ -28,7 +28,7 @@ public class Estado implements Serializable {
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
 
-	@OneToMany(mappedBy = "cidade")
+	@OneToMany(mappedBy = "estado")
 	private List<Cidade> cidades;
 
 	public String getUf() {
