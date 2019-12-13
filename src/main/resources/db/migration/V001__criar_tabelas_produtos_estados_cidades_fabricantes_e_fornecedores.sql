@@ -9,7 +9,7 @@ CREATE TABLE fornecedores (
   complemento VARCHAR(50) NULL,
   cep VARCHAR(50) NULL,
   tipo_entidade VARCHAR(50) NULL,
-  ativo CHAR(1) NULL
+  ativo BIT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE fabricantes (
@@ -23,7 +23,7 @@ CREATE TABLE fabricantes (
   complemento VARCHAR(50) NULL,
   cep VARCHAR(50) NULL,
   tipo_entidade VARCHAR(50) NULL,
-  ativo CHAR(1) NULL
+  ativo BIT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE estados (
