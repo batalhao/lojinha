@@ -63,7 +63,7 @@
 				<artifactId>flyway-maven-plugin</artifactId>
 				<version>${flyway-maven-plugin.version}</version>
 				<configuration>
-					<driver>com.mysql.jdbc.Driver</driver>
+					<driver>com.mysql.cj.jdbc.Driver</driver> <!-- com.mysql.jdbc.Driver -->
 				</configuration>
 			</plugin>
 		</plugins>
@@ -120,7 +120,7 @@
 
 		<!-- Bean Validation / Hibernate Validator -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
+			<groupId>org.hibernate.validator</groupId> <!-- org.hibernate -->
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
 			<scope>compile</scope>
