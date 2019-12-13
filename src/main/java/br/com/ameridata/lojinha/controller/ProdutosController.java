@@ -1,9 +1,12 @@
 package br.com.ameridata.lojinha.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ameridata.lojinha.model.Produto;
+import br.com.ameridata.lojinha.repository.Produtos;
 
 @Controller
 public class ProdutosController {
@@ -21,10 +25,16 @@ public class ProdutosController {
 //	private ApplicationContext context = new AnnotationConfigApplicationContext(WebConfig.class);
 //	Produto p = context.getBean(Produto.class);
 
+	@Autowired
+	private Produtos produtos;
+
 	@RequestMapping(value = "/produtos/novo", method = RequestMethod.GET)
 	public String novo(Produto produto /* Model model */) {
 		logger.info("Novo produto chamado"); // será retirado. Apenas para testes
 //		model.addAttribute(new Produto());
+		Optional<Produto> produtoOptional = produtos.findBySku("AA111"); // Apagar
+		produtoOptional = produtos.findBySkuIgnoreCase("AA111"); // Apagar
+		System.out.println(produtoOptional.isPresent());
 		return "produto/CadastroProduto";
 	}
 
