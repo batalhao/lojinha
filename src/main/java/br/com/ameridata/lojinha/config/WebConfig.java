@@ -6,6 +6,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -18,6 +20,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import br.com.ameridata.lojinha.controller.ProdutosController;
+import br.com.ameridata.lojinha.controller.converter.FabricanteConverter;
+import br.com.ameridata.lojinha.controller.converter.FornecedorConverter;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
@@ -70,4 +74,12 @@ public class WebConfig implements ApplicationContextAware, WebMvcConfigurer /* e
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
 	}
 
+	@Bean
+	public FormattingConversionService mvcConversionService() {
+		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+		conversionService.addConverter(new FornecedorConverter());
+		conversionService.addConverter(new FabricanteConverter());
+
+		return conversionService;
+	}
 }

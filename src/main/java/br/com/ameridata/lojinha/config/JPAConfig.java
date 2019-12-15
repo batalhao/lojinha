@@ -13,13 +13,15 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import br.com.ameridata.lojinha.model.Produto;
 import br.com.ameridata.lojinha.repository.Produtos;
 
 @Configuration
-@EnableJpaRepositories(basePackageClasses = Produtos.class)
+@EnableJpaRepositories(basePackageClasses = Produtos.class, enableDefaultTransactions = false)
 //@ComponentScan(basePackageClasses = Produtos.class)
+@EnableTransactionManagement
 public class JPAConfig {
 
 	@Bean
@@ -35,7 +37,7 @@ public class JPAConfig {
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 
 		adapter.setDatabase(Database.MYSQL);
-		adapter.setShowSql(true);
+		adapter.setShowSql(false);
 		adapter.setGenerateDdl(false); /* FlyWay */
 		adapter.setDatabasePlatform("org.hibernate.dialect.MySQLDialect");
 
