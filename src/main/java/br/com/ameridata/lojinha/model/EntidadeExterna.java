@@ -21,7 +21,7 @@ public abstract class EntidadeExterna implements Serializable {
 
 	private String nome;
 
-	@Column(name = "cpf_cnpj")
+//	@Column(name = "cpf_cnpj")
 	private String documento;
 
 	private String telefone;
@@ -124,6 +124,10 @@ public abstract class EntidadeExterna implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override

@@ -26,15 +26,15 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "SKU é obrigatório")
+	@NotBlank(message = "SKU é obrigatório.")
 	private String sku;
 
 	private String gtin;
 
-	@NotBlank(message = "Nome é obrigatório")
+	@NotBlank(message = "Nome é obrigatório.")
 	private String nome;
 
-	@Size(min = 1, max = 50, message = "A descrição deve ter tamanho entre 1 e 50")
+	@Size(min = 1, max = 50, message = "A descrição deve ter tamanho entre 1 e 50.")
 	private String descricao;
 
 	@Column(name = "custo_unitario")
