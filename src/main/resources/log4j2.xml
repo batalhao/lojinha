@@ -11,7 +11,7 @@
 	<Loggers>
 		<Logger name="br.com.ameridata.lojinha.controller" level="info" />
 
-		<Logger name="org.hibernate.SQL" level="debug" /> <!-- Retirar -->
+		<Logger name="org.hibernate" level="debug" /> <!-- Retirar -->  
 
 		<Root level="error">
 			<AppenderRef ref="Console" />
