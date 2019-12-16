@@ -22,6 +22,8 @@ import br.com.ameridata.lojinha.model.Unidade;
 import br.com.ameridata.lojinha.repository.Fabricantes;
 import br.com.ameridata.lojinha.repository.Fornecedores;
 import br.com.ameridata.lojinha.service.CadastroProdutoService;
+import br.com.ameridata.lojinha.service.exception.ProdutoNomeCadastradoException;
+import br.com.ameridata.lojinha.service.exception.ProdutoSkuCadastradoException;
 
 @Controller
 public class ProdutosController {
@@ -61,7 +63,16 @@ public class ProdutosController {
 			return novo(produto);
 		}
 
-		produtoService.salvar(produto);
+		try {
+			produtoService.salvar(produto);
+		} catch (ProdutoNomeCadastradoException e) {
+			result.rejectValue("nome", e.getMessage(), e.getMessage());
+			return novo(produto);
+		} catch (ProdutoSkuCadastradoException e) {
+			result.rejectValue("sku", e.getMessage(), e.getMessage());
+			return novo(produto);
+		}
+
 		attributes.addFlashAttribute("mensagem", "Produto salvo com sucesso!");
 
 		return new ModelAndView("redirect:/produtos/novo");
