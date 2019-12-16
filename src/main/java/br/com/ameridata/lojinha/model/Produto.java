@@ -13,8 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import br.com.ameridata.lojinha.validation.SKU;
 
 @Entity
 @Table(name = "produtos")
@@ -26,47 +33,63 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "SKU é obrigatório.")
+	@ManyToOne
+//	@NotNull(message = "Empresa: Campo obrigatório.")
+	@JoinColumn(name = "empresa_id")
+	private Empresa empresa;
+
+	@SKU
+	@NotBlank(message = "SKU: Campo obrigatório.")
 	private String sku;
 
+	@Pattern(regexp = "([0-9]+)?", message = "GTIN: Informe apenas números.")
+	@Size(max = 14, message = "GTIN: Tamanho máximo de 14 dígitos numéricos.")
 	private String gtin;
 
-	@NotBlank(message = "Nome é obrigatório.")
+	@NotBlank(message = "Nome: Campo obrigatório.")
+	@Size(max = 50, message = "Nome: Tamanho máximo de 50 caracteres.")
 	private String nome;
 
-	@Size(min = 1, max = 50, message = "A descrição deve ter tamanho entre 1 e 50.")
+	@NotBlank(message = "Descrição: Campo obrigatório.")
+	@Size(max = 150, message = "Descrição: Tamanho entre 1 e 150 caracteres.")
 	private String descricao;
 
+	@NotNull(message = "Custo unitário: Campo obrigatório.")
+	@DecimalMin(value = "0.01", message = "Custo unitário: Deve ser maior que R$0,01")
+	@DecimalMax(value = "9999999.99", message = "Custo unitário: Deve ser menor que R$9.999.999,99")
 	@Column(name = "custo_unitario")
 	private BigDecimal custoUnitario;
 
+	@NotNull(message = "Preço de venda: Campo obrigatório.")
+	@DecimalMin(value = "0.01", message = "Preço de venda: Deve ser maior que R$0,01")
+	@DecimalMax(value = "9999999.99", message = "Preço de venda: Deve ser menor que R$9.999.999,99")
 	@Column(name = "preco_venda")
 	private BigDecimal precoVenda;
 
+//	@NotNull(message = "Comissão: Campo obrigatório.")
+	@DecimalMax(value = "100.00", message = "Comissão: Deve ser menor ou igual a 100,00%")
 	private BigDecimal comissao;
 
+//	@NotNull(message = "Estoque: Campo obrigatório.")
+	@Max(value = 999999, message = "Estoque: Deve ser menor que 999.999")
 	@Column(name = "quantidade_estoque")
 	private Integer quantidadeEstoque;
 
+	@NotNull(message = "Fabricante: Campo obrigatório.")
 	@ManyToOne
 	@JoinColumn(name = "fabricante_id")
 	private Fabricante fabricante;
 
+	@NotNull(message = "Fornecedor: Campo obrigatório.")
 	@ManyToOne
 	@JoinColumn(name = "fornecedor_id")
 	private Fornecedor fornecedor;
 
-	@ManyToOne
-	@JoinColumn(name = "estado_id")
-	private Estado estado;
-
-	@ManyToOne()
-	@JoinColumn(name = "cidade_id")
-	private Cidade cidade;
-
+	@NotNull(message = "Unidade: Campo obrigatório.")
 	@Enumerated(EnumType.STRING)
 	private Unidade unidade;
 
+	@NotNull(message = "Origem: Campo obrigatório.")
 	@Enumerated(EnumType.STRING)
 	private Origem origem;
 
@@ -76,6 +99,14 @@ public class Produto implements Serializable {
 
 	public void setSku(String sku) {
 		this.sku = sku;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 	public String getGtin() {
@@ -148,22 +179,6 @@ public class Produto implements Serializable {
 
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
-	}
-
-	public Estado getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-
-	public Cidade getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
 	}
 
 	public Unidade getUnidade() {
