@@ -21,7 +21,6 @@ public abstract class EntidadeExterna implements Serializable {
 
 	private String nome;
 
-//	@Column(name = "cpf_cnpj")
 	private String documento;
 
 	private String telefone;
