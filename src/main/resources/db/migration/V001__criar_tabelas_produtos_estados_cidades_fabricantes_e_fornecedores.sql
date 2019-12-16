@@ -3,6 +3,20 @@ CREATE TABLE empresas (
   nome VARCHAR(50) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
+CREATE TABLE clientes (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,  
+  nome VARCHAR(150) NULL,
+  documento VARCHAR(50) NULL,
+  telefone VARCHAR(50) NULL,
+  email VARCHAR(50) NULL,
+  logradouro VARCHAR(50) NULL,
+  numero VARCHAR(50) NULL,
+  complemento VARCHAR(50) NULL,
+  cep VARCHAR(50) NULL,
+  tipo_pessoa VARCHAR(50) NULL,
+  ativo BIT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+
 CREATE TABLE fornecedores (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,  
   nome VARCHAR(150) NULL,
@@ -13,7 +27,7 @@ CREATE TABLE fornecedores (
   numero VARCHAR(50) NULL,
   complemento VARCHAR(50) NULL,
   cep VARCHAR(50) NULL,
-  tipo_entidade VARCHAR(50) NULL,
+  tipo_pessoa VARCHAR(50) NULL,
   ativo BIT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
@@ -27,7 +41,7 @@ CREATE TABLE fabricantes (
   numero VARCHAR(50) NULL,
   complemento VARCHAR(50) NULL,
   cep VARCHAR(50) NULL,
-  tipo_entidade VARCHAR(50) NULL,
+  tipo_pessoa VARCHAR(50) NULL,
   ativo BIT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
