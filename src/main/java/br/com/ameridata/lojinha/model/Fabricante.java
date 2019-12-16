@@ -8,8 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "fabricantes")
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Fabricante extends EntidadeExterna {
+public class Fabricante extends Pessoa {
 
 	private static final long serialVersionUID = 1554927925039454917L;
 

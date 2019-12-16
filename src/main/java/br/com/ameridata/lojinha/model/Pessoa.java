@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class EntidadeExterna implements Serializable {
+public abstract class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = -8183707589451071606L;
 
@@ -38,15 +38,15 @@ public abstract class EntidadeExterna implements Serializable {
 	private boolean ativo;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo_entidade")
-	private TipoEntidade tipoEntidade;
+	@Column(name = "tipo_pessoa")
+	private TipoPessoa tipoPessoa;
 
-	public TipoEntidade getTipoEntidade() {
-		return tipoEntidade;
+	public TipoPessoa getTipoPessoa() {
+		return tipoPessoa;
 	}
 
-	public void setTipoEntidade(TipoEntidade tipoEntidade) {
-		this.tipoEntidade = tipoEntidade;
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
 	}
 
 	public String getNome() {
@@ -145,7 +145,7 @@ public abstract class EntidadeExterna implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EntidadeExterna other = (EntidadeExterna) obj;
+		Pessoa other = (Pessoa) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

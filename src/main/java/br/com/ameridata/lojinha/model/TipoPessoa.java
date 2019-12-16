@@ -1,12 +1,12 @@
 package br.com.ameridata.lojinha.model;
 
-public enum TipoEntidade {
+public enum TipoPessoa {
 
 	F("Física"), J("Juríca");
 
 	private String descricao;
 
-	TipoEntidade(String descricao) {
+	TipoPessoa(String descricao) {
 		this.descricao = descricao;
 	}
 
