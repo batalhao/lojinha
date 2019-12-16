@@ -9,4 +9,14 @@ public class Cliente extends Pessoa {
 
 	private static final long serialVersionUID = -1182010512331746884L;
 
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 }
