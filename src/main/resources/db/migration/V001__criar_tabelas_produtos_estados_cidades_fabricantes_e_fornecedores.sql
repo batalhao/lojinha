@@ -3,59 +3,71 @@ CREATE TABLE empresas (
   nome VARCHAR(50) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
-CREATE TABLE clientes (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,  
-  nome VARCHAR(150) NULL,
-  documento VARCHAR(50) NULL,
-  telefone VARCHAR(50) NULL,
-  email VARCHAR(50) NULL,
-  logradouro VARCHAR(50) NULL,
-  numero VARCHAR(50) NULL,
-  complemento VARCHAR(50) NULL,
-  cep VARCHAR(50) NULL,
-  tipo_pessoa VARCHAR(50) NULL,
-  ativo BIT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
-CREATE TABLE fornecedores (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,  
-  nome VARCHAR(150) NULL,
-  documento VARCHAR(50) NULL,
-  telefone VARCHAR(50) NULL,
-  email VARCHAR(50) NULL,
-  logradouro VARCHAR(50) NULL,
-  numero VARCHAR(50) NULL,
-  complemento VARCHAR(50) NULL,
-  cep VARCHAR(50) NULL,
-  tipo_pessoa VARCHAR(50) NULL,
-  ativo BIT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
-CREATE TABLE fabricantes (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,  
-  nome VARCHAR(150) NULL,
-  documento VARCHAR(50) NULL,
-  telefone VARCHAR(50) NULL,
-  email VARCHAR(50) NULL,
-  logradouro VARCHAR(50) NULL,
-  numero VARCHAR(50) NULL,
-  complemento VARCHAR(50) NULL,
-  cep VARCHAR(50) NULL,
-  tipo_pessoa VARCHAR(50) NULL,
-  ativo BIT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
 CREATE TABLE estados (
   id INT PRIMARY KEY AUTO_INCREMENT,  
-  uf CHAR(2) NULL,
-  nome VARCHAR(50) NULL
+  uf CHAR(2) NOT NULL,
+  nome VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE cidades (
   id INT PRIMARY KEY AUTO_INCREMENT,  
-  nome VARCHAR(50) NULL,
-  estado_id INT NULL,
+  nome VARCHAR(50) NOT NULL,
+  estado_id INT NOT NULL,
   FOREIGN KEY (estado_id) REFERENCES estados(id)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+
+CREATE TABLE clientes (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,  
+  nome VARCHAR(50) NOT NULL,
+  documento VARCHAR(14) NOT NULL,
+  telefone VARCHAR(15) NULL,
+  email VARCHAR(100) NULL,
+  logradouro VARCHAR(100) NULL,
+  numero VARCHAR(20) NULL,
+  complemento VARCHAR(50) NULL,
+  cep VARCHAR(10) NULL,
+  tipo_pessoa VARCHAR(1) NOT NULL,
+  estado_id INT NULL,
+  cidade_id INT NULL,
+  ativo BIT NULL,
+  FOREIGN KEY (estado_id) REFERENCES estados(id),
+  FOREIGN KEY (cidade_id) REFERENCES cidades(id)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+
+CREATE TABLE fornecedores (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,  
+  nome VARCHAR(50) NOT NULL,
+  documento VARCHAR(14) NOT NULL,
+  telefone VARCHAR(15) NULL,
+  email VARCHAR(100) NULL,
+  logradouro VARCHAR(100) NULL,
+  numero VARCHAR(20) NULL,
+  complemento VARCHAR(50) NULL,
+  cep VARCHAR(10) NULL,
+  tipo_pessoa VARCHAR(1) NOT NULL,
+  estado_id INT NULL,
+  cidade_id INT NULL,
+  ativo BIT NULL,
+  FOREIGN KEY (estado_id) REFERENCES estados(id),
+  FOREIGN KEY (cidade_id) REFERENCES cidades(id)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+
+CREATE TABLE fabricantes (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,  
+  nome VARCHAR(50) NOT NULL,
+  documento VARCHAR(14) NOT NULL,
+  telefone VARCHAR(15) NULL,
+  email VARCHAR(100) NULL,
+  logradouro VARCHAR(100) NULL,
+  numero VARCHAR(20) NULL,
+  complemento VARCHAR(50) NULL,
+  cep VARCHAR(10) NULL,
+  tipo_pessoa VARCHAR(1) NOT NULL,
+  estado_id INT NULL,
+  cidade_id INT NULL,
+  ativo BIT NULL,
+  FOREIGN KEY (estado_id) REFERENCES estados(id),
+  FOREIGN KEY (cidade_id) REFERENCES cidades(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE produtos (
