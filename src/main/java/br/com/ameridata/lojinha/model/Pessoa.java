@@ -8,7 +8,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @MappedSuperclass
 public abstract class Pessoa implements Serializable {
@@ -19,27 +26,66 @@ public abstract class Pessoa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "Nome: Campo obrigatório.")
+	@Size(max = 50, message = "Nome: Tamanho máximo de 50 caracteres.")
 	private String nome;
 
+	@NotBlank(message = "Documento: Campo obrigatório.")
+	@Pattern(regexp = "([0-9]+)?", message = "Documento: Informe apenas números.")
+	@Size(max = 14, message = "Documento: Tamanho máximo de 14 caracteres.")
 	private String documento;
 
+	@Pattern(regexp = "([0-9]+)?", message = "Telefone: Informe apenas números.")
+	@Size(max = 15, message = "Telefone: Tamanho máximo de 15 caracteres.")
 	private String telefone;
 
+	@Email(message = "Email: Inválido")
+	@Size(max = 100, message = "Email: Tamanho máximo de 100 caracteres.")
 	private String email;
 
+	@Size(max = 100, message = "Logradouro: Tamanho máximo de 100 caracteres.")
 	private String logradouro;
 
+	@Size(max = 20, message = "Número: Tamanho máximo de 20 caracteres.")
 	private String numero;
 
+	@Size(max = 50, message = "Complemento: Tamanho máximo de 50 caracteres.")
 	private String complemento;
 
+	@Size(max = 10, message = "CEP: Tamanho máximo de 10 caracteres.")
 	private String cep;
 
+	@NotNull(message = "Status: Campo obrigatório.")
 	private boolean ativo;
 
 	@Enumerated(EnumType.STRING)
+	@NotNull(message = "Tipo pessoa: Campo obrigatório.")
 	@Column(name = "tipo_pessoa")
 	private TipoPessoa tipoPessoa;
+
+	@ManyToOne
+	@JoinColumn(name = "estado_id")
+	private Estado estado;
+
+	@ManyToOne
+	@JoinColumn(name = "cidade_id")
+	private Cidade cidade;
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
 
 	public TipoPessoa getTipoPessoa() {
 		return tipoPessoa;
