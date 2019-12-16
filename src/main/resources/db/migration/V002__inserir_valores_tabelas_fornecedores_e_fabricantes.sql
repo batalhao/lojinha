@@ -12,3 +12,5 @@ insert into fornecedores(nome, ativo) values('Petz Piracicaba', b'1');
 insert into fornecedores(nome, ativo) values('Cobasi', b'1');
 insert into fornecedores(nome, ativo) values('Pet Center', b'0');
 insert into fornecedores(nome, ativo) values('Amicão', b'1');
+
+insert into empresas(nome) values('Ameridata');
