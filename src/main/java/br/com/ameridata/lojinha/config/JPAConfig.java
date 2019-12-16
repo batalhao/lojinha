@@ -20,7 +20,6 @@ import br.com.ameridata.lojinha.repository.Produtos;
 
 @Configuration
 @EnableJpaRepositories(basePackageClasses = Produtos.class, enableDefaultTransactions = false)
-//@ComponentScan(basePackageClasses = Produtos.class)
 @EnableTransactionManagement
 public class JPAConfig {
 
