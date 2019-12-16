@@ -75,12 +75,20 @@
 					<div class="col-sm-3">
 						<div class="form-group"  th:classappend="${#fields.hasErrors('fornecedor')} ? has-error">
 							<label for="fornecedor" class="control-label">Fornecedor*</label>
-							<select id="fornecedor" class="form-control" th:field=*{fornecedor}>
-								<option value="">Selecione o fornecedor</option>
-								<option th:each="fornecedor : ${fornecedores}" th:value="${fornecedor.id}"
-									th:text="${fornecedor.nome}"></option>
-							</select>
-						</div>
+							<div class="lj-field-action">
+								<select id="fornecedor" class="form-control" th:field=*{fornecedor}>
+									<option value="">Selecione o fornecedor</option>
+									<option th:each="fornecedor : ${fornecedores}" th:value="${fornecedor.id}"
+										th:text="${fornecedor.nome}"></option>
+								</select>
+								
+								<div class="lj-field-action__icon">
+									<a href="#" data-toggle="modal" data-target="#modalCadastroRapidoFornecedor">
+										<i class="glyphicon  glyphicon-plus-sign  lj-glyphicon-large"></i>
+									</a>
+								</div>								
+							</div>
+						</div>						
 					</div>
 
 					<div class="col-sm-3">
@@ -162,7 +170,8 @@
 			</form>
 		</div>
 
-		<div th:replace="fabricante/CadastroRapidoFabricante :: modalCadastroRapidoFabricante"></div>
+		<div th:replace="fabricante/CadastroRapidoFabricante :: modalCadastroRapidoFabricante"></div>		
+		<div th:replace="fornecedor/CadastroRapidoFornecedor :: modalCadastroRapidoFornecedor"></div>
 
 	</section>
 
