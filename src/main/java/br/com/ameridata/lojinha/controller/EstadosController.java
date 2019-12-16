@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.ameridata.lojinha.model.Estado;
 
 @Controller
-public class EstadoController {
+public class EstadosController {
 
 	@RequestMapping(value = "/estados/novo", method = RequestMethod.GET)
 	public String novo(Estado estado) {
