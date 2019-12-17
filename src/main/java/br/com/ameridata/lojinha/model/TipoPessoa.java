@@ -2,7 +2,7 @@ package br.com.ameridata.lojinha.model;
 
 public enum TipoPessoa implements Comparable<TipoPessoa> {
 
-	F("Física"), J("Juríca");
+	F("Física"), J("Jurídica");
 
 	private String descricao;
 
