@@ -56,7 +56,7 @@ public abstract class Pessoa implements Serializable {
 	private String cep;
 
 	@NotNull(message = "Status: Campo obrigatório.")
-	private boolean ativo;
+	private Boolean ativo;
 
 	@Enumerated(EnumType.STRING)
 	@NotNull(message = "Tipo pessoa: Campo obrigatório.")
@@ -159,11 +159,11 @@ public abstract class Pessoa implements Serializable {
 		this.cep = cep;
 	}
 
-	public boolean isAtivo() {
+	public Boolean isAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(boolean ativo) {
+	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
 
