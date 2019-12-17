@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ameridata.lojinha.model.Cliente;
+import br.com.ameridata.lojinha.model.Status;
 import br.com.ameridata.lojinha.model.TipoPessoa;
 import br.com.ameridata.lojinha.repository.Cidades;
 import br.com.ameridata.lojinha.repository.Estados;
@@ -43,8 +44,9 @@ public class ClientesController {
 		listaTiposPessoas.sort(Comparator.comparing(TipoPessoa::getDescricao));
 		modelAndView.addObject("tiposPessoas", listaTiposPessoas);
 
-		modelAndView.addObject("estados", estados.findAllOrderByNomeAsc());
-		modelAndView.addObject("cidades", cidades.findAllOrderByNomeAsc());
+		modelAndView.addObject("status", Status.values());
+		modelAndView.addObject("estados", estados.findAllByOrderByNomeAsc());
+		modelAndView.addObject("cidades", cidades.findAllByOrderByNomeAsc());
 
 		return modelAndView;
 	}
