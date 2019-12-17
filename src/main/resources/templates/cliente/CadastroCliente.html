@@ -1,128 +1,160 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:th="http://www.thymeleaf.org" layout:decorator="'layout/LayoutPadrao'">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/LayoutPadrao">
 
 <head>
 	<title>Cadastro de cliente</title>
-
-	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-switch.min.css}" />
 </head>
 
-<section layout:fragment="conteudo">
+<body>
+  
+	<section layout:fragment="conteudo">
 
-	<div class="page-header">
-		<div class="container-fluid">
-			<h1>
-				Cadastro de cliente
-			</h1>
+		<div class="page-header">
+			<div class="container-fluid">
+				<h1>
+					Cadastro de cliente
+				</h1>
+			</div>
 		</div>
-	</div>
 
-	<div class="container-fluid">
-		<form>
-			<div class="row">
-				<div class="form-group  col-sm-9">
-					<label for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome" autofocus="autofocus" />
-				</div>
+		<div class="container-fluid">
 
-				<div class="form-group  col-sm-3">
-					<label class="control-label">Status</label>
-					<div>
-						<input type="checkbox" class="js-status" data-size="small" data-off-color="danger"
-							data-on-text="Ativo" data-off-text="Inativo" />
-					</div>
-				</div>
-				<!-- <div class="form-group  col-sm-3">
-					<label class="control-label">Status</label>
-					<div class="checkbox">
-						<input type="checkbox" />
-						<label>Ativo</label>
-					</div>
-				</div> -->
-			</div>
+			<th:block th:include="fragments/MensagemSucesso"></th:block>
 
-			<div class="row">
-				<div class="form-group  col-sm-4">
-					<label>Tipo pessoa*</label>
-					<div>
-						<div class="radio  radio-inline">
-							<input type="radio" name="tipoPessoa">
-							<label>Física</label>
-						</div>
-						<div class="radio  radio-inline">
-							<input type="radio" name="tipoPessoa">
-							<label>Juridica</label>
+			<form method="POST" th:object="${cliente}" class="form-vertical  js-form-loading">
+
+				<th:block th:include="fragments/MensagensErroValidacao"></th:block>
+
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+							<label for="nome" class="control-label">Nome*</label>
+							<input id="nome" type="text" class="form-control" th:field="*{nome}" />
 						</div>
 					</div>
+					
+<!-- 					<div class="col-lg-3  col-sm-6">
+						<div class="form-group" th:classappend="${#fields.hasErrors('status')} ? has-error">
+							<label for="status" class="control-label">Status*</label>
+							<div>
+								<th:block th:each="s : ${status}">
+									<div class="radio  radio-inline">
+										<input th:id="|id_${s}|" type="radio" th:value="${s}"
+											th:field="*{s}">
+										<label th:for="|id_${s}|" th:text="${s.descricao}">Ativo</label>
+									</div>
+								</th:block>
+							</div>
+						</div>
+					</div> -->				
 				</div>
 
-				<div class="form-group  col-sm-8">
-					<label for="cpfOuCnpj">CPF/CNPJ*</label>
-					<input type="text" class="form-control" id="cpfOuCnpj" />
+				<div class="row">
+					<div class="col-lg-4  col-sm-6">
+						<div class="form-group" th:classappend="${#fields.hasErrors('tipoPessoa')} ? has-error">
+							<label for="tipoPessoa" class="control-label">Tipo pessoa*</label>
+							<div>
+								<th:block th:each="tipoPessoa : ${tiposPessoas}">
+									<div class="radio  radio-inline">
+										<input th:id="|id_${tipoPessoa}|" type="radio" th:value="${tipoPessoa}" th:field="*{tipoPessoa}">
+										<label th:for="|id_${tipoPessoa}|" th:text="${tipoPessoa.descricao}">Física</label>
+									</div>  
+								</th:block>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-sm-8">
+						<div class="form-group" th:classappend="${#fields.hasErrors('documento')} ? has-error">
+							<label for="documento" class="control-label">CPF/CNPJ (Documento)*</label>
+							<input id="documento" type="text" class="form-control" th:field="*{documento}" />
+						</div>
+					</div>				
 				</div>
-			</div>
+				
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group" th:classappend="${#fields.hasErrors('telefone')} ? has-error">
+							<label for="telefone" class="control-label">Telefone</label>
+							<input id="telefone" type="text" class="form-control" th:field="*{telefone}" />
+						</div>
+					</div>				
 
-			<div class="row">
-				<div class="form-group  col-sm-4">
-					<label for="telefone">Telefone</label>
-					<input type="text" class="form-control" id="telefone" />
-				</div>
-
-				<div class="form-group  col-sm-8">
-					<label for="email">E-mail</label>
-					<input type="text" class="form-control" id="email" />
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group  col-sm-4">
-					<label for="logradouro">Logradouro</label>
-					<input type="text" class="form-control" id="logradouro" />
-				</div>
-
-				<div class="form-group  col-sm-4">
-					<label for="numero">Número</label>
-					<input type="text" class="form-control" id="numero" />
-				</div>
-
-				<div class="form-group  col-sm-4">
-					<label for="complemento">Complemento</label>
-					<input type="text" class="form-control" id="complemento" />
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group  col-sm-4">
-					<label for="cep">CEP</label>
-					<input type="text" class="form-control" id="cep" />
+					<div class="col-sm-8">
+						<div class="form-group" th:classappend="${#fields.hasErrors('email')} ? has-error">
+							<label for="email" class="control-label">Email</label>
+							<input id="email" type="text" class="form-control" th:field="*{email}" />
+						</div>
+					</div>				
 				</div>
 
-				<div class="form-group  col-sm-4">
-					<label for="estado">Estado</label>
-					<select id="estado" class="form-control">
-						<option value="">Selecione o estado</option>
-					</select>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group" th:classappend="${#fields.hasErrors('logradouro')} ? has-error">
+							<label for="logradouro" class="control-label">Logradouro</label>
+							<input id="logradouro" type="text" class="form-control" th:field="*{logradouro}" />
+						</div>
+					</div>				
+
+					<div class="col-sm-4">
+						<div class="form-group" th:classappend="${#fields.hasErrors('numero')} ? has-error">
+							<label for="numero" class="control-label">Número</label>
+							<input id="numero" type="text" class="form-control" th:field="*{numero}" />
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="form-group" th:classappend="${#fields.hasErrors('complemento')} ? has-error">
+							<label for="complemento" class="control-label">Complemento</label>
+							<input id="complemento" type="text" class="form-control" th:field="*{complemento}" />
+						</div>
+					</div>				
 				</div>
 
-				<div class="form-group  col-sm-4">
-					<label for="cidade">Cidade</label>
-					<select id="cidade" class="form-control">
-						<option value="">Selecione a cidade</option>
-					</select>
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="form-group" th:classappend="${#fields.hasErrors('cep')} ? has-error">
+							<label for="cep" class="control-label">CEP</label>
+							<input id="cep" type="text" class="form-control" th:field="*{cep}" />
+						</div>
+					</div>
+					
+					<div class="col-sm-3  form-group" th:classappend="${#fields.hasErrors('estado')} ? has-error">
+						<label for="estado" class="control-label">Estado</label>
+						<div class="lj-field-action">
+							<select id="estado" class="form-control" th:field=*{estado}>
+								<option value="">Selecione o estado</option>
+								<option th:each="estado : ${estados}" th:value="${estado.id}"
+									th:text="${estado.nome}"></option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+						<div class="form-group"  th:classappend="${#fields.hasErrors('cidade')} ? has-error">
+							<label for="cidade" class="control-label">Cidade</label>
+							<div class="lj-field-action">
+								<select id="cidade" class="form-control" th:field=*{cidade}>
+									<option value="">Selecione a cidade</option>
+									<option th:each="cidade : ${cidades}" th:value="${cidade.id}"
+										th:text="${cidade.nome}"></option>
+								</select>											
+							</div>
+						</div>						
+					</div>
 				</div>
-			</div>
 
-			<button type="submit" class="btn  btn-primary">Salvar</button>
-		</form>
-	</div>
-</section>
+				
+				<div class="form-group">
+					<button class="btn  btn-primary" type="submit">Salvar</button>				
+				</div>
 
-<th:block layout:fragment="javascript-extra">
-	<script th:src="@{/javascripts/vendors/bootstrap-switch.min.js}"></script>
-	<script>
-		$('.js-status').bootstrapSwitch();
-	</script>
-</th:block>
+			</form>
+		</div>
+
+	</section>
+
+</body>
 
 </html>
