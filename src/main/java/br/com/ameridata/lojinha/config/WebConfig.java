@@ -27,6 +27,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import br.com.ameridata.lojinha.controller.ProdutosController;
 import br.com.ameridata.lojinha.controller.converter.EmpresaConverter;
+import br.com.ameridata.lojinha.controller.converter.EstadoConverter;
 import br.com.ameridata.lojinha.controller.converter.FabricanteConverter;
 import br.com.ameridata.lojinha.controller.converter.FornecedorConverter;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
@@ -87,6 +88,7 @@ public class WebConfig implements ApplicationContextAware, WebMvcConfigurer /* e
 		conversionService.addConverter(new FornecedorConverter());
 		conversionService.addConverter(new FabricanteConverter());
 		conversionService.addConverter(new EmpresaConverter());
+		conversionService.addConverter(new EstadoConverter());
 
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
 		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);

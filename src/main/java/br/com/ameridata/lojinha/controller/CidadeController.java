@@ -31,7 +31,7 @@ public class CidadeController {
 
 	@RequestMapping(value = "/cidades/novo", method = RequestMethod.GET)
 	public ModelAndView novo(Cidade cidade) {
-		ModelAndView modelAndView = new ModelAndView("Cidade/CadastroCidade");
+		ModelAndView modelAndView = new ModelAndView("cidade/CadastroCidade");
 
 		List<Estado> listaEstados = estados.findAll();
 		listaEstados.sort(Comparator.comparing(Estado::getNome));

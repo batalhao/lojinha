@@ -1,40 +1,60 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="'layout/LayoutPadrao'">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/LayoutPadrao">
 
 <head>
 	<title>Cadastro de cidade</title>
 </head>
 
-<section layout:fragment="conteudo">
+<body>
 
-	<div class="page-header">
-		<div class="container-fluid">
-			<h1>
-				Cadastro de cidade
-			</h1>
-		</div>
-	</div>
+	<section layout:fragment="conteudo">
 
-	<div class="container-fluid">
-		<form>
-			<div class="row">
-				<div class="form-group  col-sm-4">
-					<label for="estado">Estado</label>
-					<select id="estado" class="form-control">
-						<option value="">Selecione o estado</option>
-					</select>
-				</div>
-
-				<div class="form-group  col-sm-8">
-					<label for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome" autofocus="autofocus" />
-				</div>
+		<div class="page-header">
+			<div class="container-fluid">
+				<h1>
+					Cadastro de cidade
+				</h1> 
 			</div>
+		</div>
 
-			<button type="submit" class="btn  btn-primary">Salvar</button>
-		</form>
-	</div>
-</section>
+		<div class="container-fluid">
+
+			<th:block th:include="fragments/MensagemSucesso"></th:block>
+
+			<form method="POST" th:object="${cidade}" class="form-vertical  js-form-loading">
+
+				<th:block th:include="fragments/MensagensErroValidacao"></th:block>
+
+				<div class="row">
+					<div class="col-sm-3  form-group" th:classappend="${#fields.hasErrors('estado')} ? has-error">
+						<label for="estado" class="control-label">Estado*</label>
+						<div class="lj-field-action">
+							<select id="estado" class="form-control" th:field=*{estado}>
+								<option value="">Selecione o estado</option>
+								<option th:each="estado : ${estados}" th:value="${estado.id}"
+									th:text="${estado.nome}"></option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-sm-9">
+						<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+							<label for="nome" class="control-label">Nome*</label>
+							<input id="nome" type="text" class="form-control" th:field="*{nome}" />
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<button class="btn  btn-primary" type="submit">Salvar</button>			
+				</div>
+
+			</form>
+		</div>
+
+	</section>
+
+</body>
 
 </html>
