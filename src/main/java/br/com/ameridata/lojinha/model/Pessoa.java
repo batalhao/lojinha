@@ -55,7 +55,7 @@ public abstract class Pessoa implements Serializable {
 	@Size(max = 10, message = "CEP: Tamanho máximo de 10 caracteres.")
 	private String cep;
 
-	@NotNull(message = "Status: Campo obrigatório.")
+//	@NotNull(message = "Status: Campo obrigatório.")
 	private Boolean ativo;
 
 	@Enumerated(EnumType.STRING)

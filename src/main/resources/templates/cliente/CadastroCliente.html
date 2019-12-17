@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  
+
 	<section layout:fragment="conteudo">
 
 		<div class="page-header">
@@ -34,20 +34,15 @@
 						</div>
 					</div>
 					
-<!-- 					<div class="col-lg-3  col-sm-6">
-						<div class="form-group" th:classappend="${#fields.hasErrors('status')} ? has-error">
-							<label for="status" class="control-label">Status*</label>
-							<div>
-								<th:block th:each="s : ${status}">
-									<div class="radio  radio-inline">
-										<input th:id="|id_${s}|" type="radio" th:value="${s}"
-											th:field="*{s}">
-										<label th:for="|id_${s}|" th:text="${s.descricao}">Ativo</label>
-									</div>
-								</th:block>
-							</div>
+					<!-- ############################## -->
+					<!-- <div class="form-group  col-sm-3">
+						<label class="control-label">Status</label> 
+						<div>
+							<input type="checkbox" class="js-status" data-size="small" data-off-color="danger" 
+								data-on-text="Ativo" data-off-text="Inativo" th:field="*{ativo}"/>
 						</div>
-					</div> -->				
+					</div>		 -->
+					<!-- ############################## -->
 				</div>
 
 				<div class="row">
@@ -55,7 +50,7 @@
 						<div class="form-group" th:classappend="${#fields.hasErrors('tipoPessoa')} ? has-error">
 							<label for="tipoPessoa" class="control-label">Tipo pessoa*</label>
 							<div>
-								<th:block th:each="tipoPessoa : ${tiposPessoas}">
+								<th:block th:each="tipoPessoa : ${tiposPessoa}">
 									<div class="radio  radio-inline">
 										<input th:id="|id_${tipoPessoa}|" type="radio" th:value="${tipoPessoa}" th:field="*{tipoPessoa}">
 										<label th:for="|id_${tipoPessoa}|" th:text="${tipoPessoa.descricao}">Física</label>
@@ -113,14 +108,15 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-4">
 						<div class="form-group" th:classappend="${#fields.hasErrors('cep')} ? has-error">
 							<label for="cep" class="control-label">CEP</label>
 							<input id="cep" type="text" class="form-control" th:field="*{cep}" />
 						</div>
 					</div>
 					
-					<div class="col-sm-3  form-group" th:classappend="${#fields.hasErrors('estado')} ? has-error">
+					
+					<div class="col-sm-4  form-group" th:classappend="${#fields.hasErrors('estado')} ? has-error">
 						<label for="estado" class="control-label">Estado</label>
 						<div class="lj-field-action">
 							<select id="estado" class="form-control" th:field=*{estado}>
@@ -131,21 +127,18 @@
 						</div>
 					</div>
 
-					<div class="col-sm-3">
-						<div class="form-group"  th:classappend="${#fields.hasErrors('cidade')} ? has-error">
-							<label for="cidade" class="control-label">Cidade</label>
-							<div class="lj-field-action">
-								<select id="cidade" class="form-control" th:field=*{cidade}>
-									<option value="">Selecione a cidade</option>
-									<option th:each="cidade : ${cidades}" th:value="${cidade.id}"
-										th:text="${cidade.nome}"></option>
-								</select>											
-							</div>
-						</div>						
+					<div class="col-sm-4  form-group" th:classappend="${#fields.hasErrors('cidade')} ? has-error">
+						<label for="cidade" class="control-label">Cidade</label>
+						<div class="lj-field-action">
+							<select id="cidade" class="form-control" th:field=*{cidade}>
+								<option value="">Selecione a cidade</option>
+								<option th:each="cidade : ${cidades}" th:value="${cidade.id}"
+									th:text="${cidade.nome}"></option>
+							</select>
+						</div>
 					</div>
 				</div>
-
-				
+ 				
 				<div class="form-group">
 					<button class="btn  btn-primary" type="submit">Salvar</button>				
 				</div>

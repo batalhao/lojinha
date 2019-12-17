@@ -15,6 +15,6 @@ public interface Cidades extends JpaRepository<Cidade, Long> {
 
 	public Optional<Cidade> findByNomeIgnoreCase(String nome);
 
-	public Optional<List<Cidade>> findAllByOrderByNomeAsc();
+	public List<Cidade> findAllByOrderByNomeAsc();
 
 }

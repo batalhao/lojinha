@@ -16,7 +16,7 @@ import br.com.ameridata.lojinha.service.CadastroEmpresaService;
 import br.com.ameridata.lojinha.service.exception.EmpresaNomeCadastradoException;
 
 @Controller
-public class EmpresaController {
+public class EmpresasController {
 
 	@Autowired
 	private CadastroEmpresaService empresaService;

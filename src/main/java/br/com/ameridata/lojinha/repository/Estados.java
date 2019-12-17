@@ -19,6 +19,6 @@ public interface Estados extends JpaRepository<Estado, Long> {
 
 	public Optional<Estado> findByNomeIgnoreCase(String nome);
 
-	public Optional<List<Estado>> findAllByOrderByNomeAsc();
+	public List<Estado> findAllByOrderByNomeAsc();
 
 }

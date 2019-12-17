@@ -42,7 +42,7 @@ public class ClientesController {
 
 		List<TipoPessoa> listaTiposPessoas = Arrays.asList(TipoPessoa.values());
 		listaTiposPessoas.sort(Comparator.comparing(TipoPessoa::getDescricao));
-		modelAndView.addObject("tiposPessoas", listaTiposPessoas);
+		modelAndView.addObject("tiposPessoa", listaTiposPessoas);
 
 		modelAndView.addObject("status", Status.values());
 		modelAndView.addObject("estados", estados.findAllByOrderByNomeAsc());

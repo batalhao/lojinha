@@ -29,7 +29,7 @@ CREATE TABLE clientes (
   tipo_pessoa VARCHAR(1) NOT NULL,
   estado_id INT NULL,
   cidade_id INT NULL,
-  ativo BIT NULL,
+  ativo BOOLEAN NULL DEFAULT true,
   FOREIGN KEY (estado_id) REFERENCES estados(id),
   FOREIGN KEY (cidade_id) REFERENCES cidades(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
@@ -47,7 +47,7 @@ CREATE TABLE fornecedores (
   tipo_pessoa VARCHAR(1) NOT NULL,
   estado_id INT NULL,
   cidade_id INT NULL,
-  ativo BIT NULL,
+  ativo BOOLEAN NULL DEFAULT true,
   FOREIGN KEY (estado_id) REFERENCES estados(id),
   FOREIGN KEY (cidade_id) REFERENCES cidades(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
@@ -65,7 +65,7 @@ CREATE TABLE fabricantes (
   tipo_pessoa VARCHAR(1) NOT NULL,
   estado_id INT NULL,
   cidade_id INT NULL,
-  ativo BIT NULL,
+  ativo BOOLEAN NULL DEFAULT true,
   FOREIGN KEY (estado_id) REFERENCES estados(id),
   FOREIGN KEY (cidade_id) REFERENCES cidades(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;

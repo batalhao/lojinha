@@ -21,7 +21,7 @@ import br.com.ameridata.lojinha.service.CadastroCidadeService;
 import br.com.ameridata.lojinha.service.exception.CidadeNomeCadastradoException;
 
 @Controller
-public class CidadeController {
+public class CidadesController {
 
 	@Autowired
 	private Estados estados;
