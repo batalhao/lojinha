@@ -1,5 +1,6 @@
 package br.com.ameridata.lojinha.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +19,6 @@ public interface Estados extends JpaRepository<Estado, Long> {
 
 	public Optional<Estado> findByNomeIgnoreCase(String nome);
 
-	public Optional<Estado> findAllOrderByNomeAsc();
+	public Optional<List<Estado>> findAllByOrderByNomeAsc();
 
 }
