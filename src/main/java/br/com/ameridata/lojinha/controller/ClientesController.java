@@ -22,7 +22,6 @@ import br.com.ameridata.lojinha.repository.Cidades;
 import br.com.ameridata.lojinha.repository.Estados;
 import br.com.ameridata.lojinha.service.CadastroClienteService;
 import br.com.ameridata.lojinha.service.exception.ClienteDocumentoCadastradoException;
-import br.com.ameridata.lojinha.service.exception.ClienteNomeCadastradoException;
 
 @Controller
 public class ClientesController {
@@ -60,9 +59,6 @@ public class ClientesController {
 
 		try {
 			clienteService.salvar(cliente);
-		} catch (ClienteNomeCadastradoException e) {
-			result.rejectValue("nome", e.getMessage(), e.getMessage());
-			return novo(cliente);
 		} catch (ClienteDocumentoCadastradoException e) {
 			result.rejectValue("documento", e.getMessage(), e.getMessage());
 			return novo(cliente);
