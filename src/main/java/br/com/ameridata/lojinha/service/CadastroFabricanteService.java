@@ -17,13 +17,13 @@ public class CadastroFabricanteService {
 	private Fabricantes fabricantes;
 
 	@Transactional
-	public void salvar(Fabricante fabricante) {
+	public Fabricante salvar(Fabricante fabricante) {
 		Optional<Fabricante> fabricanteOptional = fabricantes.findByDocumento(fabricante.getDocumento());
 		if (fabricanteOptional.isPresent()) {
 			throw new FabricanteDocumentoCadastradoException("Documento: Fabricante já cadastrado.");
 		}
 
-		fabricantes.save(fabricante);
+		return fabricantes.saveAndFlush(fabricante);
 	}
 
 }
