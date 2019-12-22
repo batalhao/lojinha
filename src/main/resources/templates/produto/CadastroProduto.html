@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/LayoutPadrao">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/LayoutPadrao"
+	xmlns:lojinha="http://lojinha.ameridata.com.br/">
 
 <head>
 	<title>Cadastro de produto</title>
@@ -20,15 +21,17 @@
 
 		<div class="container-fluid">
 
-			<th:block th:include="fragments/MensagemSucesso"></th:block>
+			<!-- <th:block th:include="fragments/MensagemSucesso"></th:block> -->
 
 			<form method="POST" th:object="${produto}" class="form-vertical  js-form-loading">
 
-				<th:block th:include="fragments/MensagensErroValidacao"></th:block>
+				<!-- <th:block th:include="fragments/MensagensErroValidacao"></th:block> -->
+				
+				<lojinha:message/>
 
 				<div class="row">
 					<div class="col-sm-2">
-						<div class="form-group" th:classappend="${#fields.hasErrors('sku')} ? has-error">
+						<div class="form-group" lojinha:classforerror="sku">
 							<label for="sku" class="control-label">SKU*</label> 
 							<input id="sku" type="text" class="form-control" th:field="*{sku}" />
 						</div>

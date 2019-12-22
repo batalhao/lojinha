@@ -31,6 +31,7 @@ import br.com.ameridata.lojinha.controller.converter.EmpresaConverter;
 import br.com.ameridata.lojinha.controller.converter.EstadoConverter;
 import br.com.ameridata.lojinha.controller.converter.FabricanteConverter;
 import br.com.ameridata.lojinha.controller.converter.FornecedorConverter;
+import br.com.ameridata.lojinha.thymeleaf.LojinhaDialect;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
@@ -63,6 +64,7 @@ public class WebConfig implements ApplicationContextAware, WebMvcConfigurer /* e
 		engine.setTemplateResolver(templateResolver());
 
 		engine.addDialect(new LayoutDialect());
+		engine.addDialect(new LojinhaDialect());
 
 		return engine;
 	}
