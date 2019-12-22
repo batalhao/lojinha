@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -70,6 +71,11 @@ public abstract class Pessoa implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "cidade_id")
 	private Cidade cidade;
+
+	@PrePersist
+	private void prePersist() {
+		this.ativo = true;
+	}
 
 	public Estado getEstado() {
 		return estado;

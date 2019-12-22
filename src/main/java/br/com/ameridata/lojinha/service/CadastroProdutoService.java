@@ -36,8 +36,6 @@ public class CadastroProdutoService {
 			throw new ProdutoNomeCadastradoException("Nome: Produto já cadastrado.");
 		}
 
-		produto.setSku(produto.getSku().toUpperCase());
-
 		produtos.save(produto);
 	}
 
