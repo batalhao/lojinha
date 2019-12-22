@@ -30,6 +30,7 @@ import br.com.ameridata.lojinha.service.CadastroFabricanteService;
 import br.com.ameridata.lojinha.service.exception.FabricanteDocumentoCadastradoException;
 
 @Controller
+@RequestMapping("/fabricantes")
 public class FabricantesController {
 
 	@Autowired
@@ -41,7 +42,7 @@ public class FabricantesController {
 	@Autowired
 	private CadastroFabricanteService fabricanteService;
 
-	@RequestMapping(value = "/fabricantes/novo", method = RequestMethod.GET)
+	@RequestMapping(value = "/novo", method = RequestMethod.GET)
 	public ModelAndView novo(Fabricante fabricante) {
 		ModelAndView modelAndView = new ModelAndView("fabricante/CadastroFabricante");
 
@@ -56,7 +57,7 @@ public class FabricantesController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/fabricantes/novo", method = RequestMethod.POST)
+	@RequestMapping(value = "/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Fabricante fabricante, BindingResult result, Model model,
 			RedirectAttributes attributes) {
 		if (result.hasErrors()) {
@@ -75,8 +76,7 @@ public class FabricantesController {
 		return new ModelAndView("redirect:/fabricantes/novo");
 	}
 
-	@RequestMapping(value = "/fabricantes", method = RequestMethod.POST, consumes = {
-			MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid Fabricante fabricante, BindingResult result) {
 		List<String> listaErros = new ArrayList<>();
 		if (result.hasErrors()) {
