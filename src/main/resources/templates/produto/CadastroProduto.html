@@ -5,7 +5,7 @@
 
 <head>
 	<title>Cadastro de produto</title>
-	
+
 	<link rel="stylesheet" th:href="@{/stylesheets/vendors/upload.min.css}">
 </head>
 
@@ -28,13 +28,13 @@
 			<form method="POST" th:object="${produto}" class="form-vertical  js-form-loading">
 
 				<!-- <th:block th:include="fragments/MensagensErroValidacao"></th:block> -->
-				
-				<lojinha:message/>
+
+				<lojinha:message />
 
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="form-group" lojinha:classforerror="sku">
-							<label for="sku" class="control-label">SKU*</label> 
+							<label for="sku" class="control-label">SKU*</label>
 							<input id="sku" type="text" class="form-control" th:field="*{sku}" />
 						</div>
 					</div>
@@ -173,7 +173,7 @@
 
 						<label class="control-label">Foto</label>
 						
-						<div class="js-container-foto-produto">
+						<div class="js-container-foto-produto" th:attr="data-url-fotos=@{/fotos}">
 							<div id="upload-drop" class="lj-upload">
 								<i class="glyphicon  glyphicon-cloud-upload"></i>
 								<span>Arraste a foto aqui ou </span>
@@ -202,50 +202,7 @@
 	<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/upload.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
-	
-	<script>
-	$(function() {
-		var settings = {
-				type: 'json',
-				filelimit: 1,
-				allow: '*.(jpg|jpeg|png)',
-				action: '/lojinha/fotos',
-				complete: function(resposta){
-					/* console.log("resposta", resposta); */
-					/* $('input[name=foto]').val(resposta.nome);
-					$('input[name=contentType]').val(resposta.contentType); */
-					
-					var inputNomeFoto = $('input[name=foto]');
-					var inputContentType = $('input[name=contentType]');
-					
-					var htmlFotoProdutoTemplate = $('#foto-produto').html();
-					var template = Handlebars.compile(htmlFotoProdutoTemplate);
-					var htmlFotoProduto = template({nomeFoto: resposta.nome});
-					
-					var containerFotoProduto = $('.js-container-foto-produto');
-					
-					var uploadDrop = $('#upload-drop');
-					
-					inputNomeFoto.val(resposta.nome);
-					inputContentType.val(resposta.contentType);
-					
-					uploadDrop.addClass('hidden');
-					containerFotoProduto.append(htmlFotoProduto);
-					
-					$('.js-remove-foto').on('click', function() {
-						$('.js-foto-produto').remove();
-						uploadDrop.removeClass('hidden');
-						inputNomeFoto.val('');
-						inputContentType.val('');
-					});
-					
-				}
-		};
-		
-		UIkit.uploadSelect($('#upload-select'), settings);
-		UIkit.uploadDrop($('#upload-drop'), settings);
-	});
-	</script>
+	<script th:src="@{/javascripts/produto.upload-foto.js}"></script>
 </th:block>
 
 </body>
