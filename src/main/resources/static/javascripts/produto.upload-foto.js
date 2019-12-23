@@ -1,42 +1,62 @@
-$(function () {
-	var settings = {
-		type: 'json',
-		filelimit: 1,
-		allow: '*.(jpg|jpeg|png)',
-		action: $('.js-container-foto-produto').data('url-fotos'), /* '/lojinha/fotos', */
-		complete: function (resposta) {
-			/* console.log("resposta", resposta); */
+var Lojinha = Lojinha || {};
 
-			/* $('input[name=foto]').val(resposta.nome);
-			$('input[name=contentType]').val(resposta.contentType); */
+Lojinha.UploadFoto = (function () {
 
-			var inputNomeFoto = $('input[name=foto]');
-			var inputContentType = $('input[name=contentType]');
+	function UploadFoto() {
+		this.inputNomeFoto = $('input[name=foto]');
+		this.inputContentType = $('input[name=contentType]');
 
-			var htmlFotoProdutoTemplate = $('#foto-produto').html();
-			var template = Handlebars.compile(htmlFotoProdutoTemplate);
-			var htmlFotoProduto = template({ nomeFoto: resposta.nome });
+		this.htmlFotoProdutoTemplate = $('#foto-produto').html();
+		this.template = Handlebars.compile(this.htmlFotoProdutoTemplate);
 
-			var containerFotoProduto = $('.js-container-foto-produto');
+		this.containerFotoProduto = $('.js-container-foto-produto');
 
-			var uploadDrop = $('#upload-drop');
+		this.uploadDrop = $('#upload-drop');
+	}
 
-			inputNomeFoto.val(resposta.nome);
-			inputContentType.val(resposta.contentType);
-
-			uploadDrop.addClass('hidden');
-			containerFotoProduto.append(htmlFotoProduto);
-
-			$('.js-remove-foto').on('click', function () {
-				$('.js-foto-produto').remove();
-				uploadDrop.removeClass('hidden');
-				inputNomeFoto.val('');
-				inputContentType.val('');
-			});
-
+	UploadFoto.prototype.iniciar = function () {
+		var settings = {
+			type: 'json',
+			filelimit: 1,
+			allow: '*.(jpg|jpeg|png)',
+			action: this.containerFotoProduto.data('url-fotos'),
+			complete: onUploadCompleto.bind(this)
 		}
-	};
 
-	UIkit.uploadSelect($('#upload-select'), settings);
-	UIkit.uploadDrop($('#upload-drop'), settings);
+		UIkit.uploadSelect($('#upload-select'), settings);
+		UIkit.uploadDrop(this.uploadDrop, settings);
+
+		if (this.inputNomeFoto.val()) {
+			onUploadCompleto.call(this, {
+				nome: this.inputNomeFoto.val(),
+				contentType: this.inputContentType.val()
+			});
+		}
+	}
+
+	function onUploadCompleto(resposta) {
+		this.inputNomeFoto.val(resposta.nome);
+		this.inputContentType.val(resposta.contentType);
+
+		this.uploadDrop.addClass('hidden');
+		var htmlFotoProduto = this.template({ nomeFoto: resposta.nome });
+		this.containerFotoProduto.append(htmlFotoProduto);
+
+		$('.js-remove-foto').on('click', onRemoverFoto.bind(this));
+	}
+
+	function onRemoverFoto() {
+		$('.js-foto-produto').remove();
+		this.uploadDrop.removeClass('hidden');
+		this.inputNomeFoto.val('');
+		this.inputContentType.val('');
+	}
+
+	return UploadFoto;
+
+})();
+
+$(function () {
+	var uploadFoto = new Lojinha.UploadFoto();
+	uploadFoto.iniciar();
 });
