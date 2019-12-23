@@ -5,6 +5,8 @@
 
 <head>
 	<title>Cadastro de produto</title>
+	
+	<link rel="stylesheet" th:href="@{/stylesheets/vendors/upload.min.css}">
 </head>
 
 <body>
@@ -164,10 +166,23 @@
 					</div>
 				</div>
 
+				<div class="row">
+					<div class="form-group  col-sm-12">
+						<input type="hidden" th:field="*{foto}">
+						<input type="hidden" th:field="*{contentType}">
+
+						<label class="control-label">Foto</label>
+						
+						<div id="upload-drop" class="lj-upload">
+							<i class="glyphicon  glyphicon-cloud-upload"></i> 
+							<span>Arraste a foto aqui ou </span>
+							<a class="lj-upload-form-file">selecione <input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/></a>
+						</div> 
+					</div>
+				</div>
+
 				<div class="form-group">
 					<button class="btn  btn-primary" type="submit">Salvar</button>
-					<!-- <a href="pesquisa-produtos.html" class="btn  btn-default">Cancelar</a> -->
-					<!-- <a href="#" class="btn  btn-link  aw-btn-link-danger" onclick="excluir()">Excluir este produto</a> -->
 				</div>
 
 			</form>
@@ -180,6 +195,27 @@
 
 <th:block layout:fragment="javascript-extra">
 	<script th:src="@{/javascripts/fabricante.cadastro-rapido.js}"></script>
+	<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
+	<script th:src="@{/javascripts/vendors/upload.min.js}"></script>
+	
+	<script>
+	$(function() {
+		var settings = {
+				type: 'json',
+				filelimit: 1,
+				allow: '*.(jpg|jpeg|png)',
+				action: '/lojinha/fotos',
+				complete: function(resposta){
+					/* console.log("resposta", resposta); */
+					$('input[name=foto]').val(resposta.nome);
+					$('input[name=contentType]').val(resposta.contentType);
+				}
+		};
+		
+		UIkit.uploadSelect($('#upload-select'), settings);
+		UIkit.uploadDrop($('#upload-drop'), settings);
+	});
+	</script>
 </th:block>
 
 </body>

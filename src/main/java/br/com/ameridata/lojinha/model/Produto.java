@@ -95,6 +95,11 @@ public class Produto implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Origem origem;
 
+	private String foto;
+
+	@Column(name = "content_type")
+	private String contentType;
+
 	@PrePersist
 	@PreUpdate
 	private void prePersistUpdate() {
@@ -203,6 +208,22 @@ public class Produto implements Serializable {
 
 	public void setOrigem(Origem origem) {
 		this.origem = origem;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 	public Long getId() {
