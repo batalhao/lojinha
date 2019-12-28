@@ -26,33 +26,33 @@
 							</a>
 						</div>
 					</div>
-				</div>
+				</div> 
 			</div>
 		</div>
 
 		<div class="container-fluid">
-			<form method="GET">
+			<form method="GET" th:object="${produtoFilter}">
 				<div class="row">
-					<div class="form-group  col-sm-3">
+					<div class="form-group  col-sm-2">
 						<label class="control-label" for="sku">SKU</label>
-						<input type="text" class="form-control" id="sku" autofocus="autofocus" />
+						<input type="text" class="form-control" id="sku" th:field="*{sku}" autofocus="autofocus" />
 					</div>
 
 					<div class="form-group  col-sm-3">
 						<label class="control-label" for="sku">GTIN</label>
-						<input type="text" class="form-control" id="gtin" />
+						<input type="text" class="form-control" id="gtin" th:field="*{gtin}" />
 					</div>
 
-					<div class="form-group  col-sm-6">
+					<div class="form-group  col-sm-7">
 						<label class="control-label" for="nome">Nome</label>
-						<input type="text" class="form-control" id="nome" />
+						<input type="text" class="form-control" id="nome" th:field="*{nome}" />
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="form-group  col-sm-3">
 						<label class="control-label" for="fabricante">Fabricante</label>
-						<select id="fabricante" class="form-control">
+						<select id="fabricante" class="form-control" th:field="*{fabricante}">
 							<option value="">Todos os fabricantes</option>
 							<option th:each="fabricante : ${fabricantes}" th:text="${fabricante.nome}"
 								th:value="${fabricante.id}">
@@ -62,7 +62,7 @@
 
 					<div class="form-group  col-sm-3">
 						<label class="control-label" for="fornecedor">Fornecedor</label>
-						<select id="fornecedor" class="form-control">
+						<select id="fornecedor" class="form-control" th:field="*{fornecedor}">
 							<option value="">Todos os fornecedores</option>
 							<option th:each="fornecedor : ${fornecedores}" th:text="${fornecedor.nome}"
 								th:value="${fornecedor.id}">
@@ -72,7 +72,7 @@
 
 					<div class="form-group  col-sm-3">
 						<label class="control-label" for="unidade">Unidade</label>
-						<select id="unidade" class="form-control">
+						<select id="unidade" class="form-control" th:field="*{unidade}">
 							<option value="">Todos as unidades</option>
 							<option th:each="unidade : ${unidades}" th:value="${unidade}"
 								th:text="${unidade.descricao}">
@@ -84,15 +84,16 @@
 						<label class="control-label">Origem</label>
 						<div>
 							<th:block th:each="origem : ${origens}">
-								<div class="custom-control-input  checkbox-inline">
-									<input th:id="|id_${origem}|" type="checkbox" th:value="${origem}" name="origem" />
-									<label th:for="|id_${origem}|" th:text="${origem.descricao}">Nacional</label>
+								<div class="radio  radio-inline">
+									<input th:id="|id_${origem}|" type="radio" th:value="${origem}"
+										th:field="*{origem}" />
+									<label th:for="|id_${origem}|" th:text="${origem.descricaoAbreviada}">Nac.</label>
 								</div>
 							</th:block>
-							<!-- <div class="radio  radio-inline">
+							<div class="radio  radio-inline">
 								<input id="todasOrigens" type="radio" th:checked="*{origem} == null" name="origem" />
 								<label for="todasOrigens">Todas</label>
-							</div> -->
+							</div>
 						</div>
 					</div>
 				</div>
@@ -101,22 +102,22 @@
 					<div class="col-sm-3  form-group">
 						<label for="custoDe">Custo unitário</label>
 						<div class="form-inline">
-							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
-								id="custoDe" />
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal" id="custoDe"
+								th:field="*{custoDe}" />
 							<label for="custoAte" class="aw-form-label-between">até</label>
-							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
-								id="custoAte" />
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal" id="custoAte"
+								th:field="*{custoAte}" />
 						</div>
 					</div>
 
 					<div class="col-sm-3  form-group">
 						<label for="precoDe">Preço de venda</label>
 						<div class="form-inline">
-							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
-								id="precoDe" />
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal" id="precoDe"
+								th:field="*{precoDe}" />
 							<label for="precoAte" class="aw-form-label-between">até</label>
-							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
-								id="precoAte" />
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal" id="precoAte"
+								th:field="*{precoAte}" />
 						</div>
 					</div>
 
@@ -124,21 +125,21 @@
 						<label for="comissaoDe">Comissão</label>
 						<div class="form-inline">
 							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
-								id="comissaoDe" />
+								id="comissaoDe" th:field="*{comissaoDe}" />
 							<label for="comissaoAte" class="aw-form-label-between">até</label>
 							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
-								id="comissaoAte" />
+								id="comissaoAte" th:field="*{comissaoAte}" />
 						</div>
 					</div>
 
 					<div class="col-sm-3  form-group">
 						<label for="estoqueDe">Estoque</label>
 						<div class="form-inline">
-							<input type="text" class="form-control  aw-form-control-inline-sm  js-plain"
-								id="estoqueDe" />
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-plain" id="estoqueDe"
+								th:field="*{estoqueDe}" />
 							<label for="estoqueAte" class="aw-form-label-between">até</label>
-							<input type="text" class="form-control  aw-form-control-inline-sm  js-plain"
-								id="estoqueAte" />
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-plain" id="estoqueAte"
+								th:field="*{estoqueAte}" />
 						</div>
 					</div>
 				</div>
@@ -169,7 +170,8 @@
 					<tbody>
 						<tr th:each="produto : ${produtos}">
 							<td class="text-center">
-								<img th:src="@{/fotos/thumbnail.{foto}(foto=${produto.FotoOrNoImageIcon})}" class="img-responsive" />
+								<img th:src="@{/fotos/thumbnail.{foto}(foto=${produto.FotoOrNoImageIcon})}"
+									class="img-responsive" />
 							</td>
 							<td class="text-center" th:text="${produto.sku}">SKU</td>
 							<td th:text="${produto.gtin}">GTIN</td>

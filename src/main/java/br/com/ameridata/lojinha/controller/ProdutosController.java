@@ -23,6 +23,7 @@ import br.com.ameridata.lojinha.model.Unidade;
 import br.com.ameridata.lojinha.repository.Fabricantes;
 import br.com.ameridata.lojinha.repository.Fornecedores;
 import br.com.ameridata.lojinha.repository.Produtos;
+import br.com.ameridata.lojinha.repository.filter.ProdutoFilter;
 import br.com.ameridata.lojinha.service.CadastroProdutoService;
 import br.com.ameridata.lojinha.service.exception.ProdutoNomeCadastradoException;
 import br.com.ameridata.lojinha.service.exception.ProdutoSkuCadastradoException;
@@ -87,7 +88,7 @@ public class ProdutosController {
 	}
 
 	@GetMapping
-	public ModelAndView pesquisar() {
+	public ModelAndView pesquisar(ProdutoFilter produtoFilter) {
 		ModelAndView modelAndView = new ModelAndView("produto/PesquisaProdutos");
 
 		modelAndView.addObject("origens", Origem.values());
@@ -102,7 +103,7 @@ public class ProdutosController {
 		listaUnidades.sort(Comparator.comparing(Unidade::getDescricao));
 		modelAndView.addObject("unidades", listaUnidades);
 
-		modelAndView.addObject("produtos", produtos.findAll());
+		modelAndView.addObject("produtos", produtos.filtrar(produtoFilter));
 
 		return modelAndView;
 	}

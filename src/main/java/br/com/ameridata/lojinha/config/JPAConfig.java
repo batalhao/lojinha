@@ -19,7 +19,7 @@ import br.com.ameridata.lojinha.model.Produto;
 import br.com.ameridata.lojinha.repository.Produtos;
 
 @Configuration
-@EnableJpaRepositories(basePackageClasses = Produtos.class, enableDefaultTransactions = false)
+@EnableJpaRepositories(basePackageClasses = Produtos.class, enableDefaultTransactions = false, repositoryImplementationPostfix = "Impl")
 @EnableTransactionManagement
 public class JPAConfig {
 
