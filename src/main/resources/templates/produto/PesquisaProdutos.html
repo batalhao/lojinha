@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/LayoutPadrao"
+	xmlns:lojinha="http://lojinha.ameridata.com.br/">
+
+<head>
+	<title>Pesquisa de produtos</title>
+</head>
+
+<body>
+
+	<section layout:fragment="conteudo">
+
+		<div class="page-header">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-10">
+						<h1>Pesquisa de produtos</h1>
+					</div>
+
+					<div class="col-sm-2">
+						<div class="aw-page-header-controls">
+							<a class="btn  btn-default" th:href="@{/produtos/novo}">
+								<i class="glyphicon  glyphicon-plus-sign"></i>
+								<span class="hidden-xs  hidden-sm">Incluir</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid">
+			<form method="GET">
+				<div class="row">
+					<div class="form-group  col-sm-3">
+						<label class="control-label" for="sku">SKU</label>
+						<input type="text" class="form-control" id="sku" autofocus="autofocus" />
+					</div>
+
+					<div class="form-group  col-sm-3">
+						<label class="control-label" for="sku">GTIN</label>
+						<input type="text" class="form-control" id="gtin" />
+					</div>
+
+					<div class="form-group  col-sm-6">
+						<label class="control-label" for="nome">Nome</label>
+						<input type="text" class="form-control" id="nome" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group  col-sm-3">
+						<label class="control-label" for="fabricante">Fabricante</label>
+						<select id="fabricante" class="form-control">
+							<option value="">Todos os fabricantes</option>
+							<option th:each="fabricante : ${fabricantes}" th:text="${fabricante.nome}"
+								th:value="${fabricante.id}">
+							</option>
+						</select>
+					</div>
+
+					<div class="form-group  col-sm-3">
+						<label class="control-label" for="fornecedor">Fornecedor</label>
+						<select id="fornecedor" class="form-control">
+							<option value="">Todos os fornecedores</option>
+							<option th:each="fornecedor : ${fornecedores}" th:text="${fornecedor.nome}"
+								th:value="${fornecedor.id}">
+							</option>
+						</select>
+					</div>
+
+					<div class="form-group  col-sm-3">
+						<label class="control-label" for="unidade">Unidade</label>
+						<select id="unidade" class="form-control">
+							<option value="">Todos as unidades</option>
+							<option th:each="unidade : ${unidades}" th:value="${unidade}"
+								th:text="${unidade.descricao}">
+							</option>
+						</select>
+					</div>
+
+					<div class="form-group  col-sm-3">
+						<label class="control-label">Origem</label>
+						<div>
+							<th:block th:each="origem : ${origens}">
+								<div class="custom-control-input  checkbox-inline">
+									<input th:id="|id_${origem}|" type="checkbox" th:value="${origem}" name="origem" />
+									<label th:for="|id_${origem}|" th:text="${origem.descricao}">Nacional</label>
+								</div>
+							</th:block>
+							<!-- <div class="radio  radio-inline">
+								<input id="todasOrigens" type="radio" th:checked="*{origem} == null" name="origem" />
+								<label for="todasOrigens">Todas</label>
+							</div> -->
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-3  form-group">
+						<label for="custoDe">Custo unitário</label>
+						<div class="form-inline">
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
+								id="custoDe" />
+							<label for="custoAte" class="aw-form-label-between">até</label>
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
+								id="custoAte" />
+						</div>
+					</div>
+
+					<div class="col-sm-3  form-group">
+						<label for="precoDe">Preço de venda</label>
+						<div class="form-inline">
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
+								id="precoDe" />
+							<label for="precoAte" class="aw-form-label-between">até</label>
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
+								id="precoAte" />
+						</div>
+					</div>
+
+					<div class="col-sm-3  form-group">
+						<label for="comissaoDe">Comissão</label>
+						<div class="form-inline">
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
+								id="comissaoDe" />
+							<label for="comissaoAte" class="aw-form-label-between">até</label>
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal"
+								id="comissaoAte" />
+						</div>
+					</div>
+
+					<div class="col-sm-3  form-group">
+						<label for="estoqueDe">Estoque</label>
+						<div class="form-inline">
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-plain"
+								id="estoqueDe" />
+							<label for="estoqueAte" class="aw-form-label-between">até</label>
+							<input type="text" class="form-control  aw-form-control-inline-sm  js-plain"
+								id="estoqueAte" />
+						</div>
+					</div>
+				</div>
+
+				<button type="submit" class="btn  btn-primary">Pesquisar</button>
+			</form>
+
+			<div class="table-responsive  lj-tabela-simples">
+				<table class="table  table-hover">
+					<thead>
+						<tr>
+							<th class="table-produtos-col-foto"></th>
+							<th class="table-produtos-col-sku">SKU</th>
+							<th class="table-produtos-col-gtin">GTIN</th>
+							<th class="table-produtos-col-nome">Nome</th>
+							<th class="table-produtos-col-fabricante">Fabricante</th>
+							<th class="table-produtos-col-fornecedor">Fornecedor</th>
+							<th class="table-produtos-col-unidade">Unidade</th>
+							<th class="table-produtos-col-origem">Origem</th>
+							<th class="table-produtos-col-custoUnitario">Custo unitário</th>
+							<th class="table-produtos-col-precoVenda">Preço de venda</th>
+							<th class="table-produtos-col-comissao">Comissão</th>
+							<th class="table-produtos-col-estoque">Estoque</th>
+							<th class="table-produtos-col-acoes"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="produto : ${produtos}">
+							<td class="text-center">
+								<img th:src="@{/fotos/temp/{foto}(foto=${produto.foto})}" class="img-responsive" />
+							</td>
+							<td class="text-center" th:text="${produto.sku}">SKU</td>
+							<td th:text="${produto.gtin}">GTIN</td>
+							<td th:text="${produto.nome}">Nome</td>
+							<td th:text="${produto.fabricante.nome}">Fabricante</td>
+							<td th:text="${produto.fornecedor.nome}">Fornecedor</td>
+							<td th:text="${produto.unidade.descricao}">Unidade</td>
+							<td th:text="${produto.origem.descricao}">Origem</td>
+							<td class="text-right" th:text="|R$ ${produto.custoUnitario}|">R$ 0,00</td>
+							<td class="text-right" th:text="|R$ ${produto.precoVenda}|">R$ 0,00</td>
+							<td class="text-right" th:text="|${produto.comissao} %|">0,00 %</td>
+							<td class="text-right" th:text="|${produto.quantidadeEstoque}|">0,00</td>
+							<td class="text-center">
+								<a class="btn  btn-link  btn-xs" title="Editar">
+									<i class="glyphicon glyphicon-pencil"></i>
+								</a>
+								<a class="btn  btn-link  btn-xs" title="Excluir">
+									<i class="glyphicon glyphicon-remove"></i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+	</section>
+
+</body>
+
+</html>
