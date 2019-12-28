@@ -33,8 +33,8 @@
 
 				<div class="row">
 					<div class="col-sm-2">
-						<div class="form-group" lojinha:classforerror="sku">
-							<label for="sku" class="control-label">SKU*</label>
+						<div class="form-group  lj-required" lojinha:classforerror="sku">
+							<label for="sku" class="control-label">SKU</label>
 							<input id="sku" type="text" class="form-control" th:field="*{sku}" />
 						</div>
 					</div>
@@ -47,21 +47,21 @@
 					</div>
 
 					<div class="col-sm-7">
-						<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
-							<label for="nome" class="control-label">Nome*</label>
+						<div class="form-group  lj-required" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+							<label for="nome" class="control-label">Nome</label>
 							<input id="nome" type="text" class="form-control" th:field="*{nome}" />
 						</div>
 					</div>
 				</div>
 
-				<div class="form-group" th:classappend="${#fields.hasErrors('descricao')} ? has-error">
-					<label for="descricao" class="control-label">Descrição*</label>
+				<div class="form-group  lj-required" th:classappend="${#fields.hasErrors('descricao')} ? has-error">
+					<label for="descricao" class="control-label">Descrição</label>
 					<textarea id="descricao" rows="3" class="form-control" th:field="*{descricao}"></textarea>
 				</div>
 
 				<div class="row">
-					<div class="col-sm-3  form-group" th:classappend="${#fields.hasErrors('fabricante')} ? has-error">
-						<label for="fabricante" class="control-label">Fabricante*</label>
+					<div class="col-sm-3  form-group  lj-required" th:classappend="${#fields.hasErrors('fabricante')} ? has-error">
+						<label for="fabricante" class="control-label">Fabricante</label>
 						<div class="lj-field-action">
 							<select id="fabricante" class="form-control" th:field=*{fabricante}>
 								<option value="">Selecione o fabricante</option>
@@ -78,8 +78,8 @@
 					</div>
 
 					<div class="col-sm-3">
-						<div class="form-group"  th:classappend="${#fields.hasErrors('fornecedor')} ? has-error">
-							<label for="fornecedor" class="control-label">Fornecedor*</label>
+						<div class="form-group  lj-required"  th:classappend="${#fields.hasErrors('fornecedor')} ? has-error">
+							<label for="fornecedor" class="control-label">Fornecedor</label>
 							<div class="lj-field-action">
 								<select id="fornecedor" class="form-control" th:field=*{fornecedor}>
 									<option value="">Selecione o fornecedor</option>
@@ -97,8 +97,8 @@
 					</div>
 
 					<div class="col-sm-3">
-						<div class="form-group"  th:classappend="${#fields.hasErrors('unidade')} ? has-error">
-							<label for="unidade" class="control-label">Unidade*</label>
+						<div class="form-group  lj-required"  th:classappend="${#fields.hasErrors('unidade')} ? has-error">
+							<label for="unidade" class="control-label">Unidade</label>
 							<select id="unidade" class="form-control" th:field="*{unidade}">
 								<option value="">Selecione a unidade</option>
 								<option th:each="unidade : ${unidades}" th:value="${unidade}"
@@ -108,8 +108,8 @@
 					</div>
 
 					<div class="col-lg-3  col-sm-6">
-						<div class="form-group" th:classappend="${#fields.hasErrors('origem')} ? has-error">
-							<label for="origem" class="control-label">Origem*</label>
+						<div class="form-group  lj-required" th:classappend="${#fields.hasErrors('origem')} ? has-error">
+							<label for="origem" class="control-label">Origem</label>
 							<div>
 								<th:block th:each="origem : ${origens}">
 									<div class="radio  radio-inline">
@@ -125,8 +125,8 @@
 
 				<div class="row">
 					<div class="col-sm-3">
-						<div class="form-group" th:classappend="${#fields.hasErrors('custoUnitario')} ? has-error">
-							<label for="custoUnitario" class="control-label">Custo unitário*</label>
+						<div class="form-group  lj-required" th:classappend="${#fields.hasErrors('custoUnitario')} ? has-error">
+							<label for="custoUnitario" class="control-label">Custo unitário</label>
 							<div class="input-group">
 								<div class="input-group-addon">R$</div>
 								<input id="custoUnitario" type="text" class="form-control  js-decimal"
@@ -136,8 +136,8 @@
 					</div>
 
 					<div class="col-sm-3">
-						<div class="form-group" th:classappend="${#fields.hasErrors('precoVenda')} ? has-error">
-							<label for="precoVenda" class="control-label">Preço de venda*</label>
+						<div class="form-group  lj-required" th:classappend="${#fields.hasErrors('precoVenda')} ? has-error">
+							<label for="precoVenda" class="control-label">Preço de venda</label>
 							<div class="input-group">
 								<div class="input-group-addon">R$</div>
 								<input id="precoVenda" type="text" class="form-control  js-decimal"

@@ -6,6 +6,10 @@
     font-size: 18px;
 }
 
+.lj-required > .control-label:after {
+	content: "*"
+}
+
 /* 
 * COMPONENTES
 */
