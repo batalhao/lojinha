@@ -88,7 +88,7 @@ public class ProdutosController {
 	}
 
 	@GetMapping
-	public ModelAndView pesquisar(ProdutoFilter produtoFilter) {
+	public ModelAndView pesquisar(ProdutoFilter produtoFilter, BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView("produto/PesquisaProdutos");
 
 		modelAndView.addObject("origens", Origem.values());
