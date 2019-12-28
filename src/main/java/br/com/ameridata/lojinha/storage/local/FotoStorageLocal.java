@@ -8,6 +8,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.FileTime;
+import java.time.Instant;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -65,6 +67,26 @@ public class FotoStorageLocal implements FotoStorage {
 		} catch (IOException e) {
 			throw new RuntimeException(String.format("Erro ao recuperar a foto temporária: %s",
 					this.localTemporario.resolve(nome).toString()), e);
+		}
+	}
+
+	@Override
+	public void save(String foto) {
+		try {
+			Files.move(this.localTemporario.resolve(foto), this.local.resolve(foto));
+		} catch (IOException e) {
+			throw new RuntimeException(String.format("Erro ao mover a foto de: %s, para: %s",
+					this.localTemporario.resolve(foto), this.local.resolve(foto)), e);
+		}
+
+		Instant instant = Instant.now();
+		FileTime fileTime = FileTime.from(instant);
+
+		try {
+			Files.setLastModifiedTime(this.local.resolve(foto), fileTime);
+		} catch (IOException e) {
+			throw new RuntimeException(
+					String.format("Erro ao atualizar a data/hora da foto: %s", this.local.resolve(foto).toString()), e);
 		}
 	}
 

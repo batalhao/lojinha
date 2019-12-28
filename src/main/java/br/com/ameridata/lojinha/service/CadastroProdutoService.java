@@ -3,12 +3,14 @@ package br.com.ameridata.lojinha.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.ameridata.lojinha.model.Empresa;
 import br.com.ameridata.lojinha.model.Produto;
 import br.com.ameridata.lojinha.repository.Produtos;
+import br.com.ameridata.lojinha.service.event.produto.ProdutoSalvoEvent;
 import br.com.ameridata.lojinha.service.exception.ProdutoNomeCadastradoException;
 import br.com.ameridata.lojinha.service.exception.ProdutoSkuCadastradoException;
 
@@ -17,6 +19,9 @@ public class CadastroProdutoService {
 
 	@Autowired
 	private Produtos produtos;
+
+	@Autowired
+	private ApplicationEventPublisher publisher;
 
 	@Transactional
 	public void salvar(Produto produto) {
@@ -37,6 +42,8 @@ public class CadastroProdutoService {
 		}
 
 		produtos.save(produto);
+
+		publisher.publishEvent(new ProdutoSalvoEvent(produto));
 	}
 
 }

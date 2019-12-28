@@ -191,6 +191,10 @@
 								</a>
 							</td>
 						</tr>
+
+						<tr th:if="${#lists.isEmpty(produtos)}">
+							<td colspan="13">Nenhum produto encontrado</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
