@@ -8,8 +8,8 @@ Lojinha.MaskMoney = (function () {
 	}
 
 	MaskMoney.prototype.enable = function () {
-		this.decimal.maskMoney({ precision: 2, thousands: ".", decimal: ",", allowZero: true });
-		this.plain.maskMoney({ precision: 0, thousands: "", allowZero: true });
+		this.decimal.maskMoney({ precision: 2, thousands: ".", decimal: ",", allowZero: true, allowEmpty: true });
+		this.plain.maskMoney({ precision: 0, thousands: "", allowZero: true, allowEmpty: true });
 	}
 
 	return MaskMoney;
