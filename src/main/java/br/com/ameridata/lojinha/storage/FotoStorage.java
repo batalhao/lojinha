@@ -8,6 +8,8 @@ public interface FotoStorage {
 
 	public byte[] recuperarFotoTemporaria(String nome);
 
+	public byte[] recuperarFoto(String nome);
+
 	public void save(String foto);
 
 }

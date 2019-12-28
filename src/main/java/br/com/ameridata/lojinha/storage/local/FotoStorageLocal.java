@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.common.hash.Hashing;
 
 import br.com.ameridata.lojinha.storage.FotoStorage;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 public class FotoStorageLocal implements FotoStorage {
 
@@ -71,6 +73,16 @@ public class FotoStorageLocal implements FotoStorage {
 	}
 
 	@Override
+	public byte[] recuperarFoto(String nome) {
+		try {
+			return Files.readAllBytes(this.local.resolve(nome));
+		} catch (IOException e) {
+			throw new RuntimeException(
+					String.format("Erro ao recuperar a foto: %s", this.local.resolve(nome).toString()), e);
+		}
+	}
+
+	@Override
 	public void save(String foto) {
 		try {
 			Files.move(this.localTemporario.resolve(foto), this.local.resolve(foto));
@@ -87,6 +99,13 @@ public class FotoStorageLocal implements FotoStorage {
 		} catch (IOException e) {
 			throw new RuntimeException(
 					String.format("Erro ao atualizar a data/hora da foto: %s", this.local.resolve(foto).toString()), e);
+		}
+
+		try {
+			Thumbnails.of(this.local.resolve(foto).toString()).size(100, 100).toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+		} catch (IOException e) {
+			throw new RuntimeException(
+					String.format("Erro ao criar o Thumbnail da foto: %s", this.local.resolve(foto).toString()), e);
 		}
 	}
 

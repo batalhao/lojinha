@@ -23,6 +23,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.util.StringUtils;
+
 import br.com.ameridata.lojinha.validation.SKU;
 
 @Entity
@@ -212,6 +214,10 @@ public class Produto implements Serializable {
 
 	public String getFoto() {
 		return foto;
+	}
+
+	public String getFotoOrNoImageIcon() {
+		return StringUtils.isEmpty(foto) ? "no-image-icon-sm.png" : foto;
 	}
 
 	public void setFoto(String foto) {
