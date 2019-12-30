@@ -30,12 +30,12 @@ public class FotoStorageLocal implements FotoStorage {
 	private Path localTemporario;
 
 	public FotoStorageLocal() {
-		this(FileSystems.getDefault().getPath("C:\\Lojinha", "LJfotos"));
+		this(FileSystems.getDefault().getPath(System.getenv("HOME"), "Lojinha.Fotos"));
 	}
 
 	public FotoStorageLocal(Path path) {
 		this.local = path;
-		this.localTemporario = FileSystems.getDefault().getPath(this.local.toString(), "LJtemp");
+		this.localTemporario = FileSystems.getDefault().getPath(this.local.toString(), "Lojinha.Fotos.Temp");
 
 		criarPastas();
 	}
