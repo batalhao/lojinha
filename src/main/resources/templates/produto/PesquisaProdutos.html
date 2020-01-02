@@ -154,25 +154,21 @@
 						<tr>
 							<th class="table-produtos-col-foto" id="foto"></th>
 							<th class="table-produtos-col-sku" id="sku">
-								<a th:href="${pagina.urlOrdenada('sku')}"  th:remove="${pagina.vazia} ? tag">
-									<span>SKU</span>
-									<span class="dropup" th:remove="${pagina.descendente('sku')} ? tag" 
-										th:if="${pagina.ordenada('sku')}">
-										<span class="caret">
-										</span>
-									</span>
-								</a> 
+								<!-- <th:block th:replace="fragments/Ordenacao :: order(${pagina}, 'sku', 'SKU')"></th:block> -->
+								<lojinha:order page="${pagina}" field="sku" text="SKU"/>
 							</th>
 							<th class="table-produtos-col-gtin" id="gtin">GTIN</th>
 							<th class="table-produtos-col-nome" id="nome">
-								<a th:href="${pagina.urlOrdenada('nome')}" th:remove="${pagina.vazia} ? tag">
+								<th:block th:replace="fragments/Ordenacao :: order(${pagina}, 'nome', 'Nome')"></th:block>
+								
+								<!--  <a th:href="${pagina.urlOrdenada('nome')}" th:remove="${pagina.vazia} ? tag">
 									<span>Nome</span>
 									<span class="dropup" th:remove="${pagina.descendente('nome')} ? tag" 
 										th:if="${pagina.ordenada('nome')}">
 										<span class="caret">
 										</span>
 									</span>
-								</a> 
+								</a>  -->
 							</th>
 							<th class="table-produtos-col-fabricante" id="fabricante">Fabricante</th>
 							<th class="table-produtos-col-fornecedor" id="fornecedor">Fornecedor</th>

@@ -9,6 +9,7 @@ import org.thymeleaf.standard.StandardDialect;
 
 import br.com.ameridata.lojinha.thymeleaf.processor.ClassForErrorAttributeTagProcessor;
 import br.com.ameridata.lojinha.thymeleaf.processor.MessageElementTagProcessor;
+import br.com.ameridata.lojinha.thymeleaf.processor.OrderElementTagProcessor;
 
 public class LojinhaDialect extends AbstractProcessorDialect {
 
@@ -21,6 +22,7 @@ public class LojinhaDialect extends AbstractProcessorDialect {
 		final Set<IProcessor> processors = new HashSet<>();
 		processors.add(new ClassForErrorAttributeTagProcessor(dialectPrefix));
 		processors.add(new MessageElementTagProcessor(dialectPrefix));
+		processors.add(new OrderElementTagProcessor(dialectPrefix));
 
 		return processors;
 	}
