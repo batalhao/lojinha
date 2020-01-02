@@ -7,6 +7,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -88,7 +91,8 @@ public class ProdutosController {
 	}
 
 	@GetMapping
-	public ModelAndView pesquisar(ProdutoFilter produtoFilter, BindingResult result) {
+	public ModelAndView pesquisar(ProdutoFilter produtoFilter, BindingResult result,
+			@PageableDefault(size = 2) Pageable pageable) {
 		ModelAndView modelAndView = new ModelAndView("produto/PesquisaProdutos");
 
 		modelAndView.addObject("origens", Origem.values());
@@ -103,7 +107,9 @@ public class ProdutosController {
 		listaUnidades.sort(Comparator.comparing(Unidade::getDescricao));
 		modelAndView.addObject("unidades", listaUnidades);
 
-		modelAndView.addObject("produtos", produtos.filtrar(produtoFilter));
+		Page<Produto> page = produtos.filtrar(produtoFilter, pageable);
+		
+		modelAndView.addObject("produtos", page);
 
 		return modelAndView;
 	}

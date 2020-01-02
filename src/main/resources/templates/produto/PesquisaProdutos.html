@@ -168,7 +168,7 @@
 					</thead>
 
 					<tbody>
-						<tr th:each="produto : ${produtos}">
+						<tr th:each="produto : ${produtos.content}">
 							<td class="text-center">
 								<img th:src="@{/fotos/thumbnail.{foto}(foto=${produto.FotoOrNoImageIcon})}"
 									class="img-responsive" />
@@ -194,34 +194,32 @@
 							</td>
 						</tr>
 
-						<tr th:if="${#lists.isEmpty(produtos)}">
+						<tr th:if="${#lists.isEmpty(produtos.content)}">
 							<td colspan="13">Nenhum produto encontrado</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 
-			<div class="col-sm-12  text-center">
+			<div class="col-sm-12  text-center" th:if="${not #lists.isEmpty(produtos.content)}">
 				<nav>
 					<ul class="pagination  pagination-sm">
 						<li class="disabled">
 							<a href="#"><span>&laquo;</span></a>
 						</li>
-						<li class="active">
-							<a href="#">1</a>
-						</li>
-						<li>
-							<a href="#">2</a>
-						</li>
-						<li>
-							<a href="#">3</a>
-						</li>
-						<li>
+						<th:block th:each="p : ${#numbers.sequence(1, produtos.totalPages)}" 
+							th:with="numeroPagina=${p - 1}, paginaAtual=${produtos.number}">
+							<li th:class="${paginaAtual == numeroPagina} ? active">
+								<a th:href="|?page=${numeroPagina}|">[[${p}]]</a>
+							</li>
+						</th:block>
+						
+						<li class="disabled">
 							<a href="#"><span>&raquo;</span></a>
-						</li>
+						</li> 
 					</ul>
 				</nav>
-			</div>    
+			</div>
 
 		</div>
 
