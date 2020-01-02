@@ -1,30 +1,31 @@
 package br.com.ameridata.lojinha.repository.helper.produto;
 
-import java.util.Iterator;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import br.com.ameridata.lojinha.model.Produto;
 import br.com.ameridata.lojinha.repository.filter.ProdutoFilter;
+import br.com.ameridata.lojinha.repository.paginacao.PaginacaoUtil;
 
 public class ProdutosImpl implements ProdutosQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
+	
+	@Autowired
+	private PaginacaoUtil paginacaoUtil;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -33,16 +34,7 @@ public class ProdutosImpl implements ProdutosQueries {
 		@SuppressWarnings("deprecation")
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Produto.class);
 
-		criteria.setFirstResult(pageable.getPageSize() * pageable.getPageNumber());
-		criteria.setMaxResults(pageable.getPageSize());
-
-		Sort sort = pageable.getSort();
-
-		if (!sort.isEmpty()) {
-			Sort.Order order = sort.iterator().next();
-			String property = order.getProperty();
-			criteria.addOrder(order.isAscending() ? Order.asc(property) : Order.desc(property));
-		}
+		paginacaoUtil.preparar(criteria, pageable);
 
 		adicionarFiltro(filtro, criteria);
 

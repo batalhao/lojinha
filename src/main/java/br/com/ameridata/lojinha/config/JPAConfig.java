@@ -4,6 +4,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
@@ -19,6 +20,7 @@ import br.com.ameridata.lojinha.model.Produto;
 import br.com.ameridata.lojinha.repository.Produtos;
 
 @Configuration
+@ComponentScan(basePackageClasses = Produtos.class)
 @EnableJpaRepositories(basePackageClasses = Produtos.class, enableDefaultTransactions = false, repositoryImplementationPostfix = "Impl")
 @EnableTransactionManagement
 public class JPAConfig {
