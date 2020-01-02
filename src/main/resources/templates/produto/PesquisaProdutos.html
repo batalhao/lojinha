@@ -144,7 +144,8 @@
 					</div>
 				</div>
 
-				<button type="submit" class="btn  btn-primary">Pesquisar</button>
+				<button type="submit" class="btn btn-success">Pesquisar</button>
+				<a class="btn btn-primary" th:href="@{/produtos/}" role="button">Limpar</a>
 			</form>
 
 			<div class="table-responsive  lj-tabela-simples">
@@ -152,9 +153,27 @@
 					<thead>
 						<tr>
 							<th class="table-produtos-col-foto" id="foto"></th>
-							<th class="table-produtos-col-sku" id="sku">SKU</th>
+							<th class="table-produtos-col-sku" id="sku">
+								<a th:href="${pagina.urlOrdenada('sku')}"  th:remove="${pagina.vazia} ? tag">
+									<span>SKU</span>
+									<span class="dropup" th:remove="${pagina.descendente('sku')} ? tag" 
+										th:if="${pagina.ordenada('sku')}">
+										<span class="caret">
+										</span>
+									</span>
+								</a> 
+							</th>
 							<th class="table-produtos-col-gtin" id="gtin">GTIN</th>
-							<th class="table-produtos-col-nome" id="nome">Nome</th>
+							<th class="table-produtos-col-nome" id="nome">
+								<a th:href="${pagina.urlOrdenada('nome')}" th:remove="${pagina.vazia} ? tag">
+									<span>Nome</span>
+									<span class="dropup" th:remove="${pagina.descendente('nome')} ? tag" 
+										th:if="${pagina.ordenada('nome')}">
+										<span class="caret">
+										</span>
+									</span>
+								</a> 
+							</th>
 							<th class="table-produtos-col-fabricante" id="fabricante">Fabricante</th>
 							<th class="table-produtos-col-fornecedor" id="fornecedor">Fornecedor</th>
 							<th class="table-produtos-col-unidade" id="unidade">Unidade</th>
@@ -173,7 +192,8 @@
 								<img th:src="@{/fotos/thumbnail.{foto}(foto=${produto.FotoOrNoImageIcon})}"
 									class="img-responsive" th:alt="${produto.sku}"/>
 							</td>
-							<td class="text-center" th:text="${produto.sku}">SKU</td>
+							<!-- <td class="text-center" th:text="${produto.sku}">SKU</td> -->
+							<td th:text="${produto.sku}">SKU</td>
 							<td th:text="${produto.gtin}">GTIN</td>
 							<td th:text="${produto.nome}">Nome</td>
 							<td th:text="${produto.fabricante.nome}">Fabricante</td>
