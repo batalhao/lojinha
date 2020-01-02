@@ -151,27 +151,27 @@
 				<table class="table  table-hover">
 					<thead>
 						<tr>
-							<th class="table-produtos-col-foto"></th>
-							<th class="table-produtos-col-sku">SKU</th>
-							<th class="table-produtos-col-gtin">GTIN</th>
-							<th class="table-produtos-col-nome">Nome</th>
-							<th class="table-produtos-col-fabricante">Fabricante</th>
-							<th class="table-produtos-col-fornecedor">Fornecedor</th>
-							<th class="table-produtos-col-unidade">Unidade</th>
-							<th class="table-produtos-col-origem">Origem</th>
-							<th class="table-produtos-col-custoUnitario">Custo unitário</th>
-							<th class="table-produtos-col-precoVenda">Preço de venda</th>
-							<th class="table-produtos-col-comissao">Comissão</th>
-							<th class="table-produtos-col-estoque">Estoque</th>
-							<th class="table-produtos-col-acoes"></th>
+							<th class="table-produtos-col-foto" id="foto"></th>
+							<th class="table-produtos-col-sku" id="sku">SKU</th>
+							<th class="table-produtos-col-gtin" id="gtin">GTIN</th>
+							<th class="table-produtos-col-nome" id="nome">Nome</th>
+							<th class="table-produtos-col-fabricante" id="fabricante">Fabricante</th>
+							<th class="table-produtos-col-fornecedor" id="fornecedor">Fornecedor</th>
+							<th class="table-produtos-col-unidade" id="unidade">Unidade</th>
+							<th class="table-produtos-col-origem" id="origem">Origem</th>
+							<th class="table-produtos-col-custoUnitario" id="custoUnitario">Custo unitário</th>
+							<th class="table-produtos-col-precoVenda" id="precoVenda">Preço de venda</th>
+							<th class="table-produtos-col-comissao" id="comissao">Comissão</th>
+							<th class="table-produtos-col-estoque" id="estoque">Estoque</th>
+							<th class="table-produtos-col-acoes" id="acoes"></th>
 						</tr>
 					</thead>
 
 					<tbody>
-						<tr th:each="produto : ${produtos.content}">
+						<tr th:each="produto : ${pagina.conteudo}">
 							<td class="text-center">
 								<img th:src="@{/fotos/thumbnail.{foto}(foto=${produto.FotoOrNoImageIcon})}"
-									class="img-responsive" />
+									class="img-responsive" th:alt="${produto.sku}"/>
 							</td>
 							<td class="text-center" th:text="${produto.sku}">SKU</td>
 							<td th:text="${produto.gtin}">GTIN</td>
@@ -194,28 +194,33 @@
 							</td>
 						</tr>
 
-						<tr th:if="${#lists.isEmpty(produtos.content)}">
+						<tr th:if="${pagina.vazia}">
 							<td colspan="13">Nenhum produto encontrado</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 
-			<div class="col-sm-12  text-center" th:if="${not #lists.isEmpty(produtos.content)}">
+			<div class="col-sm-12  text-center" th:if="${not #lists.isEmpty(pagina.conteudo)}">
 				<nav>
-					<ul class="pagination  pagination-sm">
-						<li class="disabled">
-							<a href="#"><span>&laquo;</span></a>
+					<ul class="pagination  pagination-sm" th:with="paginaAtual=${pagina.Atual}">
+						<li th:class="${pagina.primeira} ? disabled">
+							<a th:href="${pagina.urlParaPagina(paginaAtual - 1)}" th:remove="${pagina.primeira} ? tag">
+								<span>&laquo;</span>
+							</a>
 						</li>
-						<th:block th:each="p : ${#numbers.sequence(1, produtos.totalPages)}" 
-							th:with="numeroPagina=${p - 1}, paginaAtual=${produtos.number}">
+						
+						<th:block th:each="p : ${#numbers.sequence(1, pagina.total)}" th:with="numeroPagina=${p - 1}">
 							<li th:class="${paginaAtual == numeroPagina} ? active">
-								<a th:href="|?page=${numeroPagina}|">[[${p}]]</a>
+								<!-- <a th:href="|?page=${numeroPagina}|">[[${p}]]</a> -->
+								<a th:href="${pagina.urlParaPagina(numeroPagina)}">[[${p}]]</a>
 							</li>
 						</th:block>
-						
-						<li class="disabled">
-							<a href="#"><span>&raquo;</span></a>
+						 
+						<li th:class="${pagina.ultima} ? disabled">
+							<a th:href="${pagina.urlParaPagina(paginaAtual + 1)}" th:remove="${pagina.ultima} ? tag">
+								<span>&raquo;</span>
+							</a>
 						</li> 
 					</ul>
 				</nav>
