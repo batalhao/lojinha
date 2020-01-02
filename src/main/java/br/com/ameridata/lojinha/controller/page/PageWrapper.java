@@ -72,13 +72,6 @@ public class PageWrapper<T> {
 
 	public boolean descendente(String propriedade) {
 		return inverterOrdenacao(propriedade).equals("asc");
-
-//		Order order = !page.getSort().isEmpty() ? page.getSort().getOrderFor(propriedade) : null;
-//		boolean direcaoDesc = false;
-//		if (order != null) {
-//			direcaoDesc = Sort.Direction.DESC.equals(order.getDirection()) ? true : false;
-//		}
-//		return direcaoDesc;
 	}
 
 	public boolean ordenada(String propriedade) {
