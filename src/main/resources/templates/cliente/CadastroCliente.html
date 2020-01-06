@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/LayoutPadrao">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorator="layout/LayoutPadrao">
 
 <head>
 	<title>Cadastro de cliente</title>
@@ -46,26 +47,26 @@
 				</div>
 
 				<div class="row">
-					<div class="col-lg-4  col-sm-6">
-						<div class="form-group" th:classappend="${#fields.hasErrors('tipoPessoa')} ? has-error">
-							<label for="tipoPessoa" class="control-label">Tipo pessoa*</label>
-							<div>
-								<th:block th:each="tipoPessoa : ${tiposPessoa}">
-									<div class="radio  radio-inline">
-										<input th:id="|id_${tipoPessoa}|" type="radio" th:value="${tipoPessoa}" th:field="*{tipoPessoa}">
-										<label th:for="|id_${tipoPessoa}|" th:text="${tipoPessoa.descricao}">Física</label>
-									</div>  
-								</th:block>
-							</div>
+					<div class="form-group  col-lg-4  col-sm-6" th:classappend="${#fields.hasErrors('tipoPessoa')} ? has-error">
+						<label for="tipoPessoa" class="control-label">Tipo pessoa*</label>
+						<div>
+							<th:block th:each="tipoPessoa : ${tiposPessoa}">
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="|id_${tipoPessoa}|" class="js-radio-tipo-pessoa" 
+										name="tipoPessoa" data:documento="${tipoPessoa.documento}" data:mascara="${tipoPessoa.mascara}"
+										th:value="${tipoPessoa}" th:field="*{tipoPessoa}"> 
+									<label class="control-label" th:for="|id_${tipoPessoa}|" th:text="${tipoPessoa.descricao}">Física</label>
+								</div> 
+							</th:block>
 						</div>
 					</div>
 					
 					<div class="col-sm-8">
 						<div class="form-group" th:classappend="${#fields.hasErrors('documento')} ? has-error">
 							<label for="documento" class="control-label">CPF/CNPJ (Documento)*</label>
-							<input id="documento" type="text" class="form-control" th:field="*{documento}" />
+							<input id="documento" type="text" class="form-control" th:field="*{documento}" disabled />
 						</div>
-					</div>				
+					</div>			
 				</div>
 				
 				<div class="row">
@@ -147,6 +148,10 @@
 		</div>
 
 	</section>
+	
+	<th:block layout:fragment="javascript-extra">
+		<script th:src="@{/javascripts/pessoa.mascara-cpf-cnpj.js}"></script>
+	</th:block>
 
 </body>
 

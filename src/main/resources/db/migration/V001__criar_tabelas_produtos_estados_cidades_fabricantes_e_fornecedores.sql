@@ -19,7 +19,7 @@ CREATE TABLE cidades (
 CREATE TABLE clientes (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,  
   nome VARCHAR(50) NOT NULL,
-  documento VARCHAR(14) NOT NULL,
+  documento VARCHAR(18) NOT NULL,
   telefone VARCHAR(15) NULL,
   email VARCHAR(100) NULL,
   logradouro VARCHAR(100) NULL,
@@ -37,7 +37,7 @@ CREATE TABLE clientes (
 CREATE TABLE fornecedores (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,  
   nome VARCHAR(50) NOT NULL,
-  documento VARCHAR(14) NOT NULL,
+  documento VARCHAR(18) NOT NULL,
   telefone VARCHAR(15) NULL,
   email VARCHAR(100) NULL,
   logradouro VARCHAR(100) NULL,
@@ -55,7 +55,7 @@ CREATE TABLE fornecedores (
 CREATE TABLE fabricantes (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,  
   nome VARCHAR(50) NOT NULL,
-  documento VARCHAR(14) NOT NULL,
+  documento VARCHAR(18) NOT NULL,
   telefone VARCHAR(15) NULL,
   email VARCHAR(100) NULL,
   logradouro VARCHAR(100) NULL,

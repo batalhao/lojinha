@@ -26,6 +26,8 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
+
 import br.com.ameridata.lojinha.controller.ProdutosController;
 import br.com.ameridata.lojinha.controller.converter.CidadeConverter;
 import br.com.ameridata.lojinha.controller.converter.EmpresaConverter;
@@ -67,6 +69,7 @@ public class WebConfig implements ApplicationContextAware, WebMvcConfigurer /* e
 
 		engine.addDialect(new LayoutDialect());
 		engine.addDialect(new LojinhaDialect());
+		engine.addDialect(new DataAttributeDialect());
 
 		return engine;
 	}

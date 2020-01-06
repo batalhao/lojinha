@@ -32,8 +32,8 @@ public abstract class Pessoa implements Serializable {
 	private String nome;
 
 	@NotBlank(message = "Documento: Campo obrigatório.")
-	@Pattern(regexp = "([0-9]+)?", message = "Documento: Informe apenas números.")
-	@Size(max = 14, message = "Documento: Tamanho máximo de 14 caracteres.")
+//	@Pattern(regexp = "([0-9]+)?", message = "Documento: Informe apenas números.")
+	@Size(max = 18, message = "Documento: Tamanho máximo de 18 caracteres.")
 	private String documento;
 
 //	@Pattern(regexp = "([0-9]+)?", message = "Telefone: Informe apenas números.")
