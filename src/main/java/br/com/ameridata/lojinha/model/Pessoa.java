@@ -17,7 +17,16 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.group.GroupSequenceProvider;
+
+import br.com.ameridata.lojinha.model.validation.PessoaGroupSequenceProvider;
+import br.com.ameridata.lojinha.model.validation.group.CnpjGroup;
+import br.com.ameridata.lojinha.model.validation.group.CpfGroup;
+
 @MappedSuperclass
+@GroupSequenceProvider(PessoaGroupSequenceProvider.class)
 public abstract class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = -8183707589451071606L;
@@ -30,6 +39,8 @@ public abstract class Pessoa implements Serializable {
 	@Size(max = 50, message = "Nome: Tamanho máximo de 50 caracteres.")
 	private String nome;
 
+	@CPF(groups = CpfGroup.class, message = "Documento: CPF inválido")
+	@CNPJ(groups = CnpjGroup.class, message = "Documento: CNPJ inválido")
 	@NotBlank(message = "Documento: Campo obrigatório.")
 //	@Pattern(regexp = "([0-9]+)?", message = "Documento: Informe apenas números.")
 	@Size(max = 18, message = "Documento: Tamanho máximo de 18 caracteres.")

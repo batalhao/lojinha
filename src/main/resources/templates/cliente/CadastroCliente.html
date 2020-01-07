@@ -23,7 +23,7 @@
 
 			<th:block th:include="fragments/MensagemSucesso"></th:block>
 
-			<form method="POST" th:object="${cliente}" class="form-vertical  js-form-loading">
+			<form method="POST" th:object="${cliente}" class="form-vertical  js-form-loading" th:action="@{/clientes/novo}">
 
 				<th:block th:include="fragments/MensagensErroValidacao"></th:block>
 
@@ -62,8 +62,8 @@
 					</div>
 					
 					<div class="col-sm-8">
-						<div class="form-group" th:classappend="${#fields.hasErrors('documento')} ? has-error">
-							<label for="documento" class="control-label">CPF/CNPJ (Documento)*</label>
+						<div class="form-group  lj-required" th:classappend="${#fields.hasErrors('documento')} ? has-error">
+							<label for="documento" class="control-label">CPF/CNPJ</label>
 							<input id="documento" type="text" class="form-control" th:field="*{documento}" disabled />
 						</div>
 					</div>			
@@ -128,12 +128,15 @@
 						</div>
 					</div> -->
 					
-					<div class="form-group  col-sm-4">
-						<label for="estado">Estado</label>
-						<select id="estado" class="form-control">
-		                    <option value="">Selecione o estado</option>
-		                    <option th:each="estado : ${estados}" th:value="${estado.id}" th:text="${estado.nome}">São Paulo</option>
-		                </select>
+					<div class="form-group  col-sm-4" th:classappend="${#fields.hasErrors('estado')} ? has-error">
+						<label for="estado" class="control-label">Estado</label>
+						<div class="lj-field-action">
+							<select id="estado" class="form-control" th:field=*{estado}>
+			                    <option value="">Selecione o estado</option>
+			                    <option th:each="estado : ${estados}" th:value="${estado.id}" 
+			                    	th:text="${estado.nome}"></option>
+			                </select>
+		                </div>
 					</div>
 
 <!-- 					<div class="col-sm-4  form-group" th:classappend="${#fields.hasErrors('cidade')} ? has-error">
@@ -147,11 +150,11 @@
 						</div>
 					</div> -->
 					
-					<div class="form-group  col-sm-4">
-						<label  for="cidade">Cidade</label>
+					<div class="form-group  col-sm-4" th:classappend="${#fields.hasErrors('cidade')} ? has-error">
+						<label for="cidade" class="control-label">Cidade</label>
 						<div class="lj-field-action">
-							<select id="cidade" class="form-control" data:url="@{/cidades}">
-							</select>
+							<input type="hidden" id="codigoCidadeSelecionada" th:value="*{cidade} != null ? *{cidade.id}" />
+							<select id="cidade" class="form-control" data:url="@{/cidades}" th:field="*{cidade}"></select>
 							
 							<div class="lj-field-action__icon  js-img-loading" style="display: none">
 								<img th:src="@{/images/mini-loading.gif}"/>
