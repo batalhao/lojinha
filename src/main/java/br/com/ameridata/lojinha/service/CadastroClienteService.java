@@ -18,7 +18,8 @@ public class CadastroClienteService {
 
 	@Transactional
 	public void salvar(Cliente cliente) {
-		Optional<Cliente> clienteOptional = clientes.findByDocumento(cliente.getDocumento());
+		String documento = cliente.getDocumento().replaceAll("\\.|-|/", "");
+		Optional<Cliente> clienteOptional = clientes.findByDocumento(documento);
 		if (clienteOptional.isPresent()) {
 			throw new ClienteDocumentoCadastradoException("Documento: Cliente já cadastrado.");
 		}
