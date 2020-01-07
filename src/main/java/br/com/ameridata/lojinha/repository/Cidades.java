@@ -17,4 +17,6 @@ public interface Cidades extends JpaRepository<Cidade, Long> {
 
 	public List<Cidade> findAllByOrderByNomeAsc();
 
+	public List<Cidade> findByEstadoIdOrderByNomeAsc(Integer id);
+
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "cidades")
@@ -28,9 +31,10 @@ public class Cidade implements Serializable {
 	@Size(max = 50, message = "Nome: Tamanho máximo de 50 caracteres.")
 	private String nome;
 
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@NotNull(message = "Estado: Campo obrigatório.")
 	@JoinColumn(name = "estado_id")
+	@JsonIgnore
 	private Estado estado;
 
 	public String getNome() {
