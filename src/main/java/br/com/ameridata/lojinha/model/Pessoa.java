@@ -91,7 +91,11 @@ public abstract class Pessoa implements Serializable {
 
 	@PreUpdate
 	private void prePersistPreUpdate() {
-		this.documento = this.documento.replaceAll("\\.|-|/", "");
+		this.documento = removerFormatacaoDocumento(this.documento);
+	}
+
+	public String removerFormatacaoDocumento(String documento) {
+		return documento.replaceAll("\\.|-|/", "");
 	}
 
 	public Estado getEstado() {
