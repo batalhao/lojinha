@@ -15,8 +15,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "cidades")
 public class Cidade implements Serializable {
@@ -34,7 +32,7 @@ public class Cidade implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@NotNull(message = "Estado: Campo obrigatório.")
 	@JoinColumn(name = "estado_id")
-	@JsonIgnore
+//	@JsonIgnore
 	private Estado estado;
 
 	public String getNome() {

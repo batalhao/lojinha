@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -76,9 +77,11 @@ public class FabricantesController {
 		return new ModelAndView("redirect:/fabricantes/novo");
 	}
 
-	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+//	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid Fabricante fabricante, BindingResult result) {
 		List<String> listaErros = new ArrayList<>();
+
 		if (result.hasErrors()) {
 			List<FieldError> errors = result.getFieldErrors();
 

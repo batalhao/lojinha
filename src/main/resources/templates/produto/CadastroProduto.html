@@ -98,11 +98,11 @@
 										th:text="${fornecedor.nome}"></option>
 								</select>
 								
-								<div class="lj-field-action__icon">
+								<!-- <div class="lj-field-action__icon">
 									<a href="#" data-toggle="modal" data-target="#modalCadastroRapidoFornecedor">
 										<i class="glyphicon  glyphicon-plus-sign  lj-glyphicon-large"></i>
 									</a>
-								</div>								
+								</div> -->
 							</div>
 						</div>						
 					</div>
@@ -203,7 +203,7 @@
 		</div>
 
 		<div th:replace="fabricante/CadastroRapidoFabricante :: modalCadastroRapidoFabricante"></div>		
-		<div th:replace="fornecedor/CadastroRapidoFornecedor :: modalCadastroRapidoFornecedor"></div>
+		<!-- <div th:replace="fornecedor/CadastroRapidoFornecedor :: modalCadastroRapidoFornecedor"></div> -->
 
 		<th:block th:replace="handlebars/FotoProduto"></th:block>
 	</section>
