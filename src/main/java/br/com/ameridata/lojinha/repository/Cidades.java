@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.ameridata.lojinha.model.Cidade;
+import br.com.ameridata.lojinha.model.Estado;
 
 @Repository
 public interface Cidades extends JpaRepository<Cidade, Long> {
@@ -18,5 +19,7 @@ public interface Cidades extends JpaRepository<Cidade, Long> {
 	public List<Cidade> findAllByOrderByNomeAsc();
 
 	public List<Cidade> findByEstadoIdOrderByNomeAsc(Integer id);
+
+	public Optional<Cidade> findByNomeAndEstado(String nome, Estado estado);
 
 }

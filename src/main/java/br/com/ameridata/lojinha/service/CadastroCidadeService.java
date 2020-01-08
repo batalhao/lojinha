@@ -18,7 +18,7 @@ public class CadastroCidadeService {
 
 	@Transactional
 	public void salvar(Cidade cidade) {
-		Optional<Cidade> cidadeOptional = cidades.findByNomeIgnoreCase(cidade.getNome());
+		Optional<Cidade> cidadeOptional = cidades.findByNomeAndEstado(cidade.getNome(), cidade.getEstado());
 		if (cidadeOptional.isPresent()) {
 			throw new CidadeNomeCadastradoException("Nome: Cidade já cadastrada.");
 		}
