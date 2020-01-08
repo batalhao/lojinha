@@ -5,7 +5,18 @@ import br.com.ameridata.lojinha.model.validation.group.CpfGroup;
 
 public enum TipoPessoa implements Comparable<TipoPessoa> {
 
-	F("Física", "CPF", "000.000.000-00", CpfGroup.class), J("Jurídica", "CNPJ", "00.000.000/0000-00", CnpjGroup.class);
+	F("Física", "CPF", "000.000.000-00", CpfGroup.class) {
+		@Override
+		public String formatarDocumento(String documento) {
+			return documento.replaceAll("(\\d{3})(\\d{3})(\\d{3})", "$1.$2.$3-");
+		}
+	},
+	J("Jurídica", "CNPJ", "00.000.000/0000-00", CnpjGroup.class) {
+		@Override
+		public String formatarDocumento(String documento) {
+			return documento.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d{4})", "$1.$2.$3/$4-");
+		}
+	};
 
 	private String descricao;
 	private String documento;
@@ -18,6 +29,8 @@ public enum TipoPessoa implements Comparable<TipoPessoa> {
 		this.mascara = mascara;
 		this.group = group;
 	}
+
+	public abstract String formatarDocumento(String documento);
 
 	public String getDescricao() {
 		return this.descricao;

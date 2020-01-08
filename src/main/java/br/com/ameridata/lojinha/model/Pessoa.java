@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.Email;
@@ -94,8 +95,21 @@ public abstract class Pessoa implements Serializable {
 		this.documento = removerFormatacaoDocumento(this.documento);
 	}
 
-	public String removerFormatacaoDocumento(String documento) {
+	public static String removerFormatacaoDocumento(String documento) {
 		return documento.replaceAll("\\.|-|/", "");
+	}
+
+	@PostLoad
+	private void postLoad() {
+		this.documento = this.tipoPessoa.formatarDocumento(this.documento);
+
+		if (this.getCidade() == null) {
+			this.setCidade(new Cidade());
+		}
+
+		if (this.getEstado() == null) {
+			this.setEstado(new Estado());
+		}
 	}
 
 	public Estado getEstado() {

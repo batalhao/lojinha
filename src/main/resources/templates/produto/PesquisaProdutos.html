@@ -198,7 +198,7 @@
 							<td th:text="${produto.origem.descricao}">Origem</td>
 							<td class="text-right" th:text="|R$ ${produto.custoUnitario}|">R$ 0,00</td>
 							<td class="text-right" th:text="|R$ ${produto.precoVenda}|">R$ 0,00</td>
-							<td class="text-right" th:text="|${produto.comissao} %|">0,00 %</td>
+							<td class="text-right" th:text="${produto.comissao} != null ? |${produto.comissao} %|">0,00 %</td>
 							<td class="text-right" th:text="|${produto.quantidadeEstoque}|">0,00</td>
 							<td class="text-center">
 								<a class="btn  btn-link  btn-xs" title="Editar">

@@ -4,9 +4,12 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.ameridata.lojinha.controller.page.PageWrapper;
 import br.com.ameridata.lojinha.model.Cliente;
 import br.com.ameridata.lojinha.model.Status;
 import br.com.ameridata.lojinha.model.TipoPessoa;
 import br.com.ameridata.lojinha.repository.Cidades;
+import br.com.ameridata.lojinha.repository.Clientes;
 import br.com.ameridata.lojinha.repository.Estados;
+import br.com.ameridata.lojinha.repository.filter.ClienteFilter;
 import br.com.ameridata.lojinha.service.CadastroClienteService;
 import br.com.ameridata.lojinha.service.exception.ClienteDocumentoCadastradoException;
 
@@ -36,6 +42,9 @@ public class ClientesController {
 
 	@Autowired
 	private CadastroClienteService clienteService;
+
+	@Autowired
+	private Clientes clientes;
 
 //	@RequestMapping(value = "/clientes/novo", method = RequestMethod.GET)
 	@GetMapping(value = "/novo")
@@ -71,6 +80,28 @@ public class ClientesController {
 		attributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!");
 
 		return new ModelAndView("redirect:/clientes/novo");
+	}
+
+	@GetMapping
+	public ModelAndView pesquisar(ClienteFilter clienteFilter, BindingResult result,
+			@PageableDefault(size = 2) Pageable pageable, HttpServletRequest httpServletRequest) {
+		ModelAndView modelAndView = new ModelAndView("cliente/PesquisaClientes");
+
+//		List<TipoPessoa> listaTiposPessoas = Arrays.asList(TipoPessoa.values());
+//		listaTiposPessoas.sort(Comparator.comparing(TipoPessoa::getDescricao));
+//		modelAndView.addObject("tiposPessoa", listaTiposPessoas);
+//
+//		modelAndView.addObject("status", Status.values());
+//
+//		modelAndView.addObject("estados", estados.findAllByOrderByNomeAsc());
+//		modelAndView.addObject("cidades", cidades.findAllByOrderByNomeAsc());
+
+		PageWrapper<Cliente> pageWrapper = new PageWrapper<>(clientes.filtrar(clienteFilter, pageable),
+				httpServletRequest);
+
+		modelAndView.addObject("pagina", pageWrapper);
+
+		return modelAndView;
 	}
 
 }

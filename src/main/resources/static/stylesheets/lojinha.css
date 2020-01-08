@@ -139,3 +139,32 @@
 .table-produtos-col-acoes {
 	width: 80px;
 }
+
+/* Colunas - Pesquisa de Clientes */
+.table-clientes-col-nome {
+	
+}
+
+.table-clientes-col-tipo-pessoa {
+	width: 120px;
+	text-align: left;
+}
+
+.table-clientes-col-cpf-cnpj {
+	width: 140px;
+	text-align: left;
+}
+
+.table-clientes-col-telefone {
+	width: 140px;
+	text-align: left;
+}
+
+.table-clientes-col-cidade-estado {
+	width: 240px;
+	text-align: left;
+}
+
+.table-clientes-col-acoes {
+	width: 80px;
+}
