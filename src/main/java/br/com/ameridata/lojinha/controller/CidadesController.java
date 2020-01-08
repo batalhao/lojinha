@@ -84,13 +84,10 @@ public class CidadesController {
 		}
 
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		String jsonString = gson.toJson(cidades.findByEstadoIdOrderByNomeAsc(idEstado));
 
-		var clienteListType = new TypeToken<List<Cidade>>() {}.getType();
-
-		List<Cidade> outputList = gson.fromJson(jsonString, clienteListType);
-
-		return outputList;
+		return gson.fromJson(gson.toJson(cidades.findByEstadoIdOrderByNomeAsc(idEstado)),
+				new TypeToken<List<Cidade>>() {
+				}.getType());
 	}
 
 }
