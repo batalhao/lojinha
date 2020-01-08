@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import br.com.ameridata.lojinha.model.Cidade;
 import br.com.ameridata.lojinha.model.Estado;
 import br.com.ameridata.lojinha.repository.Cidades;
@@ -79,7 +82,13 @@ public class CidadesController {
 			throw new RuntimeException(e);
 		}
 
-		return cidades.findByEstadoIdOrderByNomeAsc(idEstado);
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String jsonString = gson.toJson(cidades.findByEstadoIdOrderByNomeAsc(idEstado));
+
+		@SuppressWarnings("unchecked")
+		List<Cidade> outputList = gson.fromJson(jsonString, List.class);
+
+		return outputList;
 	}
 
 }

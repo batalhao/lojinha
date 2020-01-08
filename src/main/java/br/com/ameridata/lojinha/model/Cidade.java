@@ -15,6 +15,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "cidades")
 public class Cidade implements Serializable {
@@ -23,10 +25,12 @@ public class Cidade implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Expose
 	private Integer id;
 
 	@NotBlank(message = "Nome: Campo obrigatório.")
 	@Size(max = 50, message = "Nome: Tamanho máximo de 50 caracteres.")
+	@Expose
 	private String nome;
 
 	@ManyToOne(fetch = FetchType.LAZY)
