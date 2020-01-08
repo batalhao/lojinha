@@ -17,13 +17,14 @@ public class CadastroFornecedorService {
 	private Fornecedores fornecedores;
 
 	@Transactional
-	public void salvar(Fornecedor fornecedor) {
-		Optional<Fornecedor> fornecedorOptional = fornecedores.findByDocumento(fornecedor.getDocumento());
+	public Fornecedor salvar(Fornecedor fornecedor) {
+		String documento = fornecedor.removerFormatacaoDocumento(fornecedor.getDocumento());
+		Optional<Fornecedor> fornecedorOptional = fornecedores.findByDocumento(documento);
 		if (fornecedorOptional.isPresent()) {
 			throw new FornecedorDocumentoCadastradoException("Documento: Fornecedor já cadastrado.");
 		}
 
-		fornecedores.save(fornecedor);
+		return fornecedores.saveAndFlush(fornecedor);
 	}
 
 }

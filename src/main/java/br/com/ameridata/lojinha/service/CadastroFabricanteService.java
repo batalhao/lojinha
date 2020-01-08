@@ -18,7 +18,8 @@ public class CadastroFabricanteService {
 
 	@Transactional
 	public Fabricante salvar(Fabricante fabricante) {
-		Optional<Fabricante> fabricanteOptional = fabricantes.findByDocumento(fabricante.getDocumento());
+		String documento = fabricante.removerFormatacaoDocumento(fabricante.getDocumento());
+		Optional<Fabricante> fabricanteOptional = fabricantes.findByDocumento(documento);
 		if (fabricanteOptional.isPresent()) {
 			throw new FabricanteDocumentoCadastradoException("Documento: Fabricante já cadastrado.");
 		}
