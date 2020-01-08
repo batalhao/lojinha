@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import br.com.ameridata.lojinha.model.Cidade;
 import br.com.ameridata.lojinha.model.Estado;
@@ -85,8 +86,9 @@ public class CidadesController {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		String jsonString = gson.toJson(cidades.findByEstadoIdOrderByNomeAsc(idEstado));
 
-		@SuppressWarnings("unchecked")
-		List<Cidade> outputList = gson.fromJson(jsonString, List.class);
+		var clienteListType = new TypeToken<List<Cidade>>() {}.getType();
+
+		List<Cidade> outputList = gson.fromJson(jsonString, clienteListType);
 
 		return outputList;
 	}
