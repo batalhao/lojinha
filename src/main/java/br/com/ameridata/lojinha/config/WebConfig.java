@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.util.Locale;
 
 import org.springframework.beans.BeansException;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -41,6 +44,7 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 @ComponentScan(basePackageClasses = { ProdutosController.class })
 @EnableWebMvc
 @EnableSpringDataWebSupport
+@EnableCaching
 public class WebConfig implements ApplicationContextAware, WebMvcConfigurer /* extends WebMvcConfigurerAdapter */ {
 
 	private ApplicationContext applicationContext;
@@ -111,6 +115,11 @@ public class WebConfig implements ApplicationContextAware, WebMvcConfigurer /* e
 	@Bean
 	public LocaleResolver localeResolver() {
 		return new FixedLocaleResolver(new Locale("pt", "BR"));
+	}
+
+	@Bean
+	public CacheManager cacheManager() {
+		return new ConcurrentMapCacheManager();
 	}
 
 }
