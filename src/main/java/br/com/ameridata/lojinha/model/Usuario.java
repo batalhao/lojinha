@@ -64,7 +64,7 @@ public class Usuario implements Serializable {
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 
-	@NotNull(message = "Grupos: Selecione pelo menos 1 grupo.")
+//	@NotNull(message = "Grupos: Selecione pelo menos 1 grupo.")
 	@ManyToMany
 	@JoinTable(name = "usuarios_grupos", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
 	private List<Grupo> grupos;
