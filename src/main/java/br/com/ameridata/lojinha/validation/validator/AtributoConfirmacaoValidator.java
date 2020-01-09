@@ -57,6 +57,13 @@ public class AtributoConfirmacaoValidator implements ConstraintValidator<Atribut
 		return valido;
 	}
 
+	/**
+	 * @author Paulo R. Batalhão
+	 * @param valorAtributo            - Atributo principal
+	 * @param valorAtributoConfirmacao - Atributo para confirmação
+	 * @return boolean - Retorna se os valores são iguais.
+	 */
+
 	private boolean ambosSaoIguais(String valorAtributo, String valorAtributoConfirmacao) {
 		return valorAtributo != null && valorAtributo.equals(valorAtributoConfirmacao);
 	}
