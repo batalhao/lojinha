@@ -87,15 +87,6 @@ public class ClientesController {
 			@PageableDefault(size = 2) Pageable pageable, HttpServletRequest httpServletRequest) {
 		ModelAndView modelAndView = new ModelAndView("cliente/PesquisaClientes");
 
-//		List<TipoPessoa> listaTiposPessoas = Arrays.asList(TipoPessoa.values());
-//		listaTiposPessoas.sort(Comparator.comparing(TipoPessoa::getDescricao));
-//		modelAndView.addObject("tiposPessoa", listaTiposPessoas);
-//
-//		modelAndView.addObject("status", Status.values());
-//
-//		modelAndView.addObject("estados", estados.findAllByOrderByNomeAsc());
-//		modelAndView.addObject("cidades", cidades.findAllByOrderByNomeAsc());
-
 		PageWrapper<Cliente> pageWrapper = new PageWrapper<>(clientes.filtrar(clienteFilter, pageable),
 				httpServletRequest);
 
