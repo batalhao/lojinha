@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -57,6 +58,8 @@ public class CidadesController {
 
 //	@RequestMapping(value = "/cidades/novo", method = RequestMethod.POST)
 	@PostMapping(value = "/novo")
+//	@CacheEvict(value = "cidades", allEntries = true)
+	@CacheEvict(value = "cidades", key = "#cidade.estado.id", condition = "#cidade.hasEstado()")
 	public ModelAndView cadastrar(@Valid Cidade cidade, BindingResult result, Model model,
 			RedirectAttributes attributes) {
 		if (result.hasErrors()) {
@@ -75,12 +78,12 @@ public class CidadesController {
 		return new ModelAndView("redirect:/cidades/novo");
 	}
 
-	@Cacheable("cidades")
+	@Cacheable(value = "cidades", key = "#idEstado")
 	@GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<Cidade> pesquisarPeloIdEstado(
 			@RequestParam(name = "estado", defaultValue = "0") Integer idEstado) {
 		try {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}

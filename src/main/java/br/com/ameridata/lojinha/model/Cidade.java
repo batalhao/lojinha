@@ -63,6 +63,10 @@ public class Cidade implements Serializable {
 		this.id = id;
 	}
 
+	public boolean hasEstado() {
+		return this.estado != null;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
