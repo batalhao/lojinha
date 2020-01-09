@@ -11,6 +11,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+/**
+ * Classe: Permissão
+ * 
+ * @author Paulo R. Batalhão
+ * @version 1.0.0
+ * @since 0.1.1
+ * 
+ */
+
 @Entity
 @Table(name = "permissoes")
 public class Permissao implements Serializable {

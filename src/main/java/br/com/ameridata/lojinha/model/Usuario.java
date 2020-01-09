@@ -14,11 +14,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import br.com.ameridata.lojinha.validation.AtributoConfirmacao;
+
+/**
+ * Classe: Usuário
+ * 
+ * @author Paulo R. Batalhão
+ * @version 1.0.0
+ * @since 0.1.1
+ * 
+ */
+
+@AtributoConfirmacao(atributo = "senha", atributoConfirmacao = "confirmacaoSenha", message = "Senha: A confirmação de senha é diferente.")
 @Entity
 @Table(name = "usuarios")
 public class Usuario implements Serializable {
@@ -42,13 +55,17 @@ public class Usuario implements Serializable {
 	@Size(max = 50, message = "Senha: Tamanho máximo de 50 caracteres.")
 	private String senha;
 
+	@Transient
+	@Size(max = 50, message = "Confirmação de senha: Tamanho máximo de 50 caracteres.")
+	private String confirmacaoSenha;
+
 	private boolean ativo;
 
 	@NotNull(message = "Data de nascimento: Campo obrigatório.")
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 
-	@NotNull(message = "Grupo(s): Selecione pelo menos 1 grupo.")
+	@NotNull(message = "Grupos: Selecione pelo menos 1 grupo.")
 	@ManyToMany
 	@JoinTable(name = "usuarios_grupos", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
 	private List<Grupo> grupos;
@@ -103,6 +120,14 @@ public class Usuario implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getConfirmacaoSenha() {
+		return confirmacaoSenha;
+	}
+
+	public void setConfirmacaoSenha(String confirmacaoSenha) {
+		this.confirmacaoSenha = confirmacaoSenha;
 	}
 
 	@Override

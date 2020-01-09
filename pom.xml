@@ -64,6 +64,9 @@
 
 		<!-- Google - Guava (Cache) -->
 		<guava.version>28.1-jre</guava.version> <!-- 19.0 -->
+
+		<!-- Apache Bean Utils -->
+		<commons-beanutils.version>1.9.4</commons-beanutils.version> <!-- 1.9.2 -->
 	</properties>
 
 	<build>
@@ -252,6 +255,14 @@
 			<groupId>com.github.mxab.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-data-attribute</artifactId>
 			<version>${thymeleaf-extras-data-attribute.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Apache Bean Utils -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${commons-beanutils.version}</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
