@@ -28,7 +28,6 @@ import br.com.ameridata.lojinha.validation.AtributoConfirmacao;
  * @author Paulo R. Batalhão
  * @version 1.0.0
  * @since 0.1.1
- * 
  */
 
 @AtributoConfirmacao(atributo = "senha", atributoConfirmacao = "confirmacaoSenha", message = "Senha: A confirmação de senha é diferente.")

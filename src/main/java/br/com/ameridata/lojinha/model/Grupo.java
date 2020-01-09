@@ -21,7 +21,6 @@ import javax.validation.constraints.Size;
  * @author Paulo R. Batalhão
  * @version 1.0.0
  * @since 0.1.1
- * 
  */
 
 @Entity

@@ -19,7 +19,6 @@ import br.com.ameridata.lojinha.validation.validator.AtributoConfirmacaoValidato
  * @author Paulo R. Batalhão
  * @version 1.0.0
  * @since 0.1.1
- * 
  */
 
 @Target({ ElementType.TYPE })
