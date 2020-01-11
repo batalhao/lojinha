@@ -3,6 +3,7 @@ package br.com.ameridata.lojinha.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -18,6 +19,9 @@ public class CadastroUsuarioService {
 	@Autowired
 	private Usuarios usuarios;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Transactional
 	public void salvar(Usuario usuario) {
 		Optional<Usuario> usuarioOptional = usuarios.findByEmail(usuario.getEmail());
@@ -26,8 +30,13 @@ public class CadastroUsuarioService {
 			throw new UsuarioEmailCadastradoException("E-mail: Usuário já cadastrado.");
 		}
 
-		if (usuario.isNovo() || StringUtils.isEmpty(usuario.getSenha())) {
+		if (usuario.isNovo() && StringUtils.isEmpty(usuario.getSenha())) {
 			throw new SenhaObrigatoriaUsuarioException("Senha: Campo obrigatório.");
+		}
+
+		if (usuario.isNovo()) {
+			usuario.setSenha(this.passwordEncoder.encode(usuario.getSenha()));
+			usuario.setConfirmacaoSenha(usuario.getSenha());
 		}
 
 		usuarios.save(usuario);

@@ -51,11 +51,11 @@ public class Usuario implements Serializable {
 	private String email;
 
 //	@NotBlank(message = "Senha: Campo obrigatório.")
-	@Size(max = 50, message = "Senha: Tamanho máximo de 50 caracteres.")
+//	@Size(max = 50, message = "Senha: Tamanho máximo de 50 caracteres.")
 	private String senha;
 
 	@Transient
-	@Size(max = 50, message = "Confirmação de senha: Tamanho máximo de 50 caracteres.")
+//	@Size(max = 50, message = "Confirmação de senha: Tamanho máximo de 50 caracteres.")
 	private String confirmacaoSenha;
 
 	private boolean ativo;
