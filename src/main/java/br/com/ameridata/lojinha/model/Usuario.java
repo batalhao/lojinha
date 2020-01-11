@@ -69,6 +69,10 @@ public class Usuario implements Serializable {
 	@JoinTable(name = "usuarios_grupos", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
 	private List<Grupo> grupos;
 
+	public boolean isNovo() {
+		return this.id == null;
+	}
+
 	public List<Grupo> getGrupos() {
 		return grupos;
 	}

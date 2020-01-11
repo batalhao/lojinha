@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.ameridata.lojinha.model.Usuario;
 import br.com.ameridata.lojinha.repository.Grupos;
 import br.com.ameridata.lojinha.service.CadastroUsuarioService;
+import br.com.ameridata.lojinha.service.exception.SenhaObrigatoriaUsuarioException;
 import br.com.ameridata.lojinha.service.exception.UsuarioEmailCadastradoException;
 
 @Controller
@@ -47,6 +48,9 @@ public class UsuariosController {
 			usuarioService.salvar(usuario);
 		} catch (UsuarioEmailCadastradoException e) {
 			result.rejectValue("email", e.getMessage(), e.getMessage());
+			return novo(usuario);
+		} catch (SenhaObrigatoriaUsuarioException e) {
+			result.rejectValue("senha", e.getMessage(), e.getMessage());
 			return novo(usuario);
 		}
 
