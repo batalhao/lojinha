@@ -43,6 +43,7 @@ import br.com.ameridata.lojinha.controller.converter.EmpresaConverter;
 import br.com.ameridata.lojinha.controller.converter.EstadoConverter;
 import br.com.ameridata.lojinha.controller.converter.FabricanteConverter;
 import br.com.ameridata.lojinha.controller.converter.FornecedorConverter;
+import br.com.ameridata.lojinha.controller.converter.GrupoConverter;
 import br.com.ameridata.lojinha.thymeleaf.LojinhaDialect;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
@@ -108,6 +109,7 @@ public class WebConfig implements ApplicationContextAware, WebMvcConfigurer /* e
 		conversionService.addConverter(new EmpresaConverter());
 		conversionService.addConverter(new EstadoConverter());
 		conversionService.addConverter(new CidadeConverter());
+		conversionService.addConverter(new GrupoConverter());
 
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
 		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);

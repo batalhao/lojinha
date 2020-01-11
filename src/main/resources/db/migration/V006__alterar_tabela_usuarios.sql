@@ -1,0 +1,2 @@
+ALTER TABLE usuarios 
+    MODIFY ativo BOOLEAN NOT NULL DEFAULT true;

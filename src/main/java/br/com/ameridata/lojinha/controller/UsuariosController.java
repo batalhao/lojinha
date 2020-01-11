@@ -9,9 +9,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ameridata.lojinha.model.Usuario;
+import br.com.ameridata.lojinha.repository.Grupos;
 import br.com.ameridata.lojinha.service.CadastroUsuarioService;
 import br.com.ameridata.lojinha.service.exception.UsuarioEmailCadastradoException;
 
@@ -22,15 +24,21 @@ public class UsuariosController {
 	@Autowired
 	private CadastroUsuarioService usuarioService;
 
+	@Autowired
+	private Grupos grupos;
+
 //	@RequestMapping(value = "/usuarios/novo", method = RequestMethod.GET)
 	@GetMapping(value = "/novo")
-	public String novo(Usuario usuario) {
-		return "usuario/CadastroUsuario";
+	public ModelAndView novo(Usuario usuario) {
+		ModelAndView modelAndView = new ModelAndView("usuario/CadastroUsuario");
+		modelAndView.addObject("grupos", grupos.findAll());
+		return modelAndView;
 	}
 
 //	@RequestMapping(value = "/usuarios/novo", method = RequestMethod.POST)
 	@PostMapping(value = "/novo")
-	public String cadastrar(@Valid Usuario usuario, BindingResult result, Model model, RedirectAttributes attributes) {
+	public ModelAndView salvar(@Valid Usuario usuario, BindingResult result, Model model,
+			RedirectAttributes attributes) {
 		if (result.hasErrors()) {
 			return novo(usuario);
 		}
@@ -44,7 +52,7 @@ public class UsuariosController {
 
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
 
-		return "redirect:/usuarios/novo";
+		return new ModelAndView("redirect:/usuarios/novo");
 	}
 
 }
