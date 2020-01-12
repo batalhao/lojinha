@@ -18,7 +18,7 @@ public class CadastroFornecedorService {
 
 	@Transactional
 	public Fornecedor salvar(Fornecedor fornecedor) {
-		String documento = fornecedor.removerFormatacaoDocumento(fornecedor.getDocumento());
+		String documento = Fornecedor.removerFormatacaoDocumento(fornecedor.getDocumento());
 		Optional<Fornecedor> fornecedorOptional = fornecedores.findByDocumento(documento);
 		if (fornecedorOptional.isPresent()) {
 			throw new FornecedorDocumentoCadastradoException("Documento: Fornecedor já cadastrado.");
