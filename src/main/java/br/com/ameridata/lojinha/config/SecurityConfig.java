@@ -30,17 +30,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/layout/**").antMatchers("/images/**").antMatchers("/javascripts/**")
+		web
+			.ignoring()
+				.antMatchers("/layout/**")
+				.antMatchers("/images/**")
+				.antMatchers("/fotos/**")
+				.antMatchers("/javascripts/**")
 				.antMatchers("/stylesheets/**");
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/cidades/novo").hasRole("CADASTRAR_CIDADE").antMatchers("/usuarios/novo")
-				.hasRole("CADASTRAR_USUARIO").antMatchers("/produtos/**").authenticated().anyRequest().denyAll().and()
-				.formLogin().loginPage("/login").permitAll().and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).and().exceptionHandling()
-				.accessDeniedPage("/403");
+		http
+			.authorizeRequests()
+				.antMatchers("/cidades/novo").hasRole("CADASTRAR_CIDADE")
+				.antMatchers("/usuarios/novo").hasRole("CADASTRAR_USUARIO")
+				.antMatchers("/produtos/**").authenticated()
+				.antMatchers("/fabricantes/**").authenticated()
+				.anyRequest().denyAll()
+			.and()
+				.formLogin().loginPage("/login").permitAll()
+			.and()
+				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.and()
+				.exceptionHandling().accessDeniedPage("/403");
 	}
 
 	@Bean

@@ -58,6 +58,23 @@ Lojinha.MaskDate = (function () {
 	return MaskDate;
 }());
 
+Lojinha.Security = (function (){
+	
+	function Security () {
+		this.token = $('input[name=_csrf]').val();
+		this.header = $('input[name=_csrf_header]').val();
+	}
+	
+	Security.prototype.enable = function() {
+		$(document).ajaxSend(function(event, jqhxr, settings){
+			jqhxr.setRequestHeader(this.header, this.token);
+		}.bind(this))
+	}
+	
+	return Security;
+	
+}());
+
 $(function () {
 	var maskMoney = new Lojinha.MaskMoney();
 	maskMoney.enable();
@@ -67,4 +84,7 @@ $(function () {
 	
 	var maskDate = new Lojinha.MaskDate();
 	maskDate.enable();
+	
+	var security = new Lojinha.Security();
+	security.enable();
 }); 

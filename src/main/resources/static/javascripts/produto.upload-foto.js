@@ -20,7 +20,8 @@ Lojinha.UploadFoto = (function () {
 			filelimit: 1,
 			allow: '*.(jpg|jpeg|png)',
 			action: this.containerFotoProduto.data('url-fotos'),
-			complete: onUploadCompleto.bind(this)
+			complete: onUploadCompleto.bind(this),
+			beforeSend: addCsrfToken
 		}
 
 		UIkit.uploadSelect($('#upload-select'), settings);
@@ -52,6 +53,12 @@ Lojinha.UploadFoto = (function () {
 		this.inputContentType.val('');
 	}
 
+	function addCsrfToken(xhr) {
+		var token = $('input[name=_csrf]').val();
+		var header = $('input[name=_csrf_header]').val();
+		xhr.setRequestHeader(header, token);
+	}
+	
 	return UploadFoto;
 
 })();
