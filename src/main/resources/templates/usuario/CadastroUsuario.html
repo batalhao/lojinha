@@ -7,7 +7,6 @@
     <title>Cadastro de usuário</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-switch.min.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-datepicker.standalone.min.css}" />
 </head>
 
 <section layout:fragment="conteudo">
@@ -100,8 +99,7 @@
 
 <th:block layout:fragment="javascript-extra">
     <script th:src="@{/javascripts/vendors/bootstrap-switch.min.js}"></script>
-    <script th:src="@{/javascripts/vendors/bootstrap-datepicker.min.js}"></script>
-    <script th:src="@{/javascripts/vendors/bootstrap-datepicker.pt-BR.min.js}"></script>
+
     <script>
         $('.js-status').bootstrapSwitch();
     </script>
