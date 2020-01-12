@@ -21,8 +21,8 @@
 		<div class="container-fluid">
 
 			<th:block th:include="fragments/MensagemSucesso"></th:block>
-
-			<form method="POST" th:object="${cidade}" class="form-vertical  js-form-loading">
+			
+			<form method="POST" class="form-vertical  js-form-loading" th:object="${cidade}" th:action="@{/cidades/novo}">
 
 				<th:block th:include="fragments/MensagensErroValidacao"></th:block>
 

@@ -36,7 +36,9 @@
 
 			<!-- <th:block th:include="fragments/MensagemSucesso"></th:block> -->
 
-			<form method="POST" th:object="${produto}" class="form-vertical  js-form-loading">
+			<!-- <form method="POST" th:object="${produto}" class="form-vertical  js-form-loading"> -->
+			
+			<form method="POST" th:object="${produto}" th:action="@{/produtos/novo}" class="form-vertical  js-form-loading">
 
 				<!-- <th:block th:include="fragments/MensagensErroValidacao"></th:block> -->
 
