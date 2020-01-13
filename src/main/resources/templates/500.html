@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <title>440 | Lojinha Java Web</title>
+  <title>500 | Lojinha Java Web</title>
 
   <link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/ameridata.min.css}"/>
@@ -25,16 +25,16 @@
 	
 	<div class="aw-error-panel">
 		<h1 class="aw-error-panel__code">
-			<i class="fa  fa-cog fa-spin"></i> 440
+			<i class="fa  fa-bug"></i> 500
 		</h1>
 		
-		<h2 class="aw-error-panel__title">Sessão expirada</h2>
+		<h2 class="aw-error-panel__title">Erro encontrado</h2>
 		
 		<div class="aw-error-panel__description">
-			Desculpe, sua sessão expirou. Por favor, realize um novo login para continuar
-			navegando pelo sistema. 
+			Desculpe, a aplicação gerou um erro inesperado. Por favor, faça login e tente novamente. 
+			Se o problema persistir entre em contato com o suporte.
 			<br/><br/>
-			<a th:href="@{/login}" class="btn  btn-primary">Voltar para o login</a>
+			<a th:href="@{/logout}" class="btn  btn-primary">Fazer login novamente</a>
 		</div>
 	</div>
 

@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/440").permitAll()
+				.antMatchers("/500").permitAll()
 				.antMatchers("/cidades/novo").hasRole("CADASTRAR_CIDADE")
 				.antMatchers("/usuarios/novo").hasRole("CADASTRAR_USUARIO")
 				.antMatchers("/produtos/**").authenticated()

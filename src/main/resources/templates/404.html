@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <title>440 | Lojinha Java Web</title>
+  <title>404 | Lojinha Java Web</title>
 
   <link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/ameridata.min.css}"/>
@@ -25,16 +25,16 @@
 	
 	<div class="aw-error-panel">
 		<h1 class="aw-error-panel__code">
-			<i class="fa  fa-cog fa-spin"></i> 440
+			<i class="fa  fa-chain-broken "></i> 404
 		</h1>
 		
-		<h2 class="aw-error-panel__title">Sessão expirada</h2>
+		<h2 class="aw-error-panel__title">Página não encontrada</h2>
 		
 		<div class="aw-error-panel__description">
-			Desculpe, sua sessão expirou. Por favor, realize um novo login para continuar
-			navegando pelo sistema. 
+			Desculpe, a página que você tentou acessar não existe ou foi movida.
+			Por favor, tente novamente ou entre em contato com o suporte.
 			<br/><br/>
-			<a th:href="@{/login}" class="btn  btn-primary">Voltar para o login</a>
+			<a href="javascript:history.back()" class="btn  btn-primary">Voltar para onde estava</a>
 		</div>
 	</div>
 
