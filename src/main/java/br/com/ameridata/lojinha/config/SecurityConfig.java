@@ -44,22 +44,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/440").permitAll()
-				.antMatchers("/401").permitAll()
 				.antMatchers("/cidades/novo").hasRole("CADASTRAR_CIDADE")
 				.antMatchers("/usuarios/novo").hasRole("CADASTRAR_USUARIO")
 				.antMatchers("/produtos/**").authenticated()
 				.antMatchers("/fabricantes/**").authenticated()
 				.anyRequest().denyAll()
 			.and()
-				.formLogin().loginPage("/login").permitAll()
+				.formLogin()
+					.loginPage("/login").permitAll()
 			.and()
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logout()
+					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.and()
-				.exceptionHandling().accessDeniedPage("/403")
+				.exceptionHandling()
+					.accessDeniedPage("/403")
 			.and()
-				.sessionManagement().maximumSessions(1).expiredUrl("/440")
-			.and()
-				.invalidSessionUrl("/401");
+				.sessionManagement()
+					.invalidSessionUrl("/440")
+					.maximumSessions(1).expiredUrl("/440");
 	}
 
 	@Bean

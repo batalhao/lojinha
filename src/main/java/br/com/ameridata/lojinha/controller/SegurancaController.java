@@ -26,9 +26,4 @@ public class SegurancaController {
 		return "440";
 	}
 
-	@GetMapping("/401")
-	public String sessionUnauthorized() {
-		return "401";
-	}
-
 }

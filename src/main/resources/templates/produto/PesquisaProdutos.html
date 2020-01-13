@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/LayoutPadrao"
-	xmlns:lojinha="http://lojinha.ameridata.com.br/">
+	xmlns:lojinha="http://lojinha.ameridata.com.br/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 	<title>Pesquisa de produtos</title>
@@ -18,7 +18,7 @@
 						<h1>Pesquisa de produtos</h1>
 					</div>
 
-					<div class="col-xs-2">
+					<div class="col-xs-2" sec:authorize-url="/produtos/novo">
 						<div class="aw-page-header-controls">
 							<a class="btn  btn-default" th:href="@{/produtos/novo}">
 								<i class="glyphicon  glyphicon-plus-sign"></i>
@@ -178,7 +178,7 @@
 							<th class="table-produtos-col-precoVenda" id="precoVenda">Preço de venda</th>
 							<th class="table-produtos-col-comissao" id="comissao">Comissão</th>
 							<th class="table-produtos-col-estoque" id="estoque">Estoque</th>
-							<th class="table-produtos-col-acoes" id="acoes"></th>
+							<th class="table-produtos-col-acoes" id="acoes" sec:authorize="hasRole('ROLE_CADASTRAR_PRODUTO')"></th>
 						</tr>
 					</thead>
 
@@ -200,7 +200,7 @@
 							<td class="text-right" th:text="|R$ ${produto.precoVenda}|">R$ 0,00</td>
 							<td class="text-right" th:text="${produto.comissao} != null ? |${produto.comissao} %|">0,00 %</td>
 							<td class="text-right" th:text="|${produto.quantidadeEstoque}|">0,00</td>
-							<td class="text-center">
+							<td class="text-center" sec:authorize="hasRole('ROLE_CADASTRAR_PRODUTO')">
 								<a class="btn  btn-link  btn-xs" title="Editar">
 									<i class="glyphicon glyphicon-pencil"></i>
 								</a>
