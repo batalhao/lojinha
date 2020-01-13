@@ -20,6 +20,11 @@
 			</div>
 
 			<ul class="nav navbar-nav  navbar-right">
+			
+				<li>
+					<p class="navbar-text" 
+						th:text="${#authentication.principal.usuario.nome}"></p>
+				</li>
 
 				<!-- <li>
 						<a href="#" class="js-search-modal-trigger-show"><i class="fa  fa-search"></i></a>
