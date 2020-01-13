@@ -21,4 +21,14 @@ public class SegurancaController {
 		return "403";
 	}
 
+	@GetMapping("/440")
+	public String sessionExpired() {
+		return "440";
+	}
+
+	@GetMapping("/401")
+	public String sessionUnauthorized() {
+		return "401";
+	}
+
 }
