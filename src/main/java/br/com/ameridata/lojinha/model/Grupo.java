@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 
 /**
  * Classe: Grupo
- * 
+ *
  * @author Paulo R. Batalhão
  * @version 1.0.0
  * @since 0.1.1
@@ -25,59 +25,59 @@ import javax.validation.constraints.Size;
 @Table(name = "grupos")
 public class Grupo implements Serializable {
 
-	private static final long serialVersionUID = 7558982278274106276L;
+    private static final long serialVersionUID = 7558982278274106276L;
 
-	@Id
+    @Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    private Long id;
 
-	@NotBlank(message = "Nome: Campo obrigatório.")
-	@Size(max = 50, message = "Nome: Tamanho máximo de 50 caracteres.")
-	private String nome;
+    @NotBlank(message = "Nome: Campo obrigatório.")
+    @Size(max = 50, message = "Nome: Tamanho máximo de 50 caracteres.")
+    private String nome;
 
-	@ManyToMany
-	@JoinTable(name = "grupos_permissoes", joinColumns = @JoinColumn(name = "grupo_id"), inverseJoinColumns = @JoinColumn(name = "permissao_id"))
-	private List<Permissao> permissoes;
+    @ManyToMany
+    @JoinTable(name = "grupos_permissoes", joinColumns = @JoinColumn(name = "grupo_id"), inverseJoinColumns = @JoinColumn(name = "permissao_id"))
+    private List<Permissao> permissoes;
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public List<Permissao> getPermissoes() {
-		return permissoes;
-	}
+    public List<Permissao> getPermissoes() {
+        return permissoes;
+    }
 
-	public void setPermissoes(List<Permissao> permissoes) {
-		this.permissoes = permissoes;
-	}
+    public void setPermissoes(List<Permissao> permissoes) {
+        this.permissoes = permissoes;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Grupo other = (Grupo) obj;
-		return Objects.equals(id, other.id);
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Grupo other = (Grupo) obj;
+        return Objects.equals(id, other.id);
+    }
 
 }
