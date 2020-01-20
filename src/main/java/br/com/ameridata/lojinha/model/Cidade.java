@@ -21,67 +21,67 @@ import com.google.gson.annotations.Expose;
 @Table(name = "cidades")
 public class Cidade implements Serializable {
 
-	private static final long serialVersionUID = -6898722947358560393L;
+    private static final long serialVersionUID = -6898722947358560393L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Expose
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Expose
+    private Integer id;
 
-	@NotBlank(message = "Nome: Campo obrigatório.")
-	@Size(max = 50, message = "Nome: Tamanho máximo de 50 caracteres.")
-	@Expose
-	private String nome;
+    @NotBlank(message = "Nome: Campo obrigatório.")
+    @Size(max = 50, message = "Nome: Tamanho máximo de 50 caracteres.")
+    @Expose
+    private String nome;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@NotNull(message = "Estado: Campo obrigatório.")
-	@JoinColumn(name = "estado_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull(message = "Estado: Campo obrigatório.")
+    @JoinColumn(name = "estado_id")
 //	@JsonIgnore
-	private Estado estado;
+    private Estado estado;
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public Estado getEstado() {
-		return estado;
-	}
+    public Estado getEstado() {
+        return estado;
+    }
 
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public boolean hasEstado() {
-		return this.estado != null;
-	}
+    public boolean hasEstado() {
+        return this.estado != null;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cidade other = (Cidade) obj;
-		return Objects.equals(id, other.id);
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Cidade other = (Cidade) obj;
+        return Objects.equals(id, other.id);
+    }
 
 }
