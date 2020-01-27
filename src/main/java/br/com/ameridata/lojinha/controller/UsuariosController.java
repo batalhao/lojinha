@@ -1,7 +1,12 @@
 package br.com.ameridata.lojinha.controller;
 
-import javax.validation.Valid;
-
+import br.com.ameridata.lojinha.model.Usuario;
+import br.com.ameridata.lojinha.repository.Grupos;
+import br.com.ameridata.lojinha.repository.Usuarios;
+import br.com.ameridata.lojinha.repository.filter.UsuarioFilter;
+import br.com.ameridata.lojinha.service.CadastroUsuarioService;
+import br.com.ameridata.lojinha.service.exception.SenhaObrigatoriaUsuarioException;
+import br.com.ameridata.lojinha.service.exception.UsuarioEmailCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,51 +17,59 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.ameridata.lojinha.model.Usuario;
-import br.com.ameridata.lojinha.repository.Grupos;
-import br.com.ameridata.lojinha.service.CadastroUsuarioService;
-import br.com.ameridata.lojinha.service.exception.SenhaObrigatoriaUsuarioException;
-import br.com.ameridata.lojinha.service.exception.UsuarioEmailCadastradoException;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/usuarios")
 public class UsuariosController {
 
-	@Autowired
-	private CadastroUsuarioService usuarioService;
+    @Autowired
+    private CadastroUsuarioService usuarioService;
 
-	@Autowired
-	private Grupos grupos;
+    @Autowired
+    private Grupos grupos;
 
-//	@RequestMapping(value = "/usuarios/novo", method = RequestMethod.GET)
-	@GetMapping(value = "/novo")
-	public ModelAndView novo(Usuario usuario) {
-		ModelAndView modelAndView = new ModelAndView("usuario/CadastroUsuario");
-		modelAndView.addObject("grupos", grupos.findAll());
-		return modelAndView;
-	}
+    @Autowired
+    private Usuarios usuarios;
 
-//	@RequestMapping(value = "/usuarios/novo", method = RequestMethod.POST)
-	@PostMapping(value = "/novo")
-	public ModelAndView salvar(@Valid Usuario usuario, BindingResult result, Model model,
-			RedirectAttributes attributes) {
-		if (result.hasErrors()) {
-			return novo(usuario);
-		}
+    //	@RequestMapping(value = "/usuarios/novo", method = RequestMethod.GET)
+    @GetMapping(value = "/novo")
+    public ModelAndView novo(Usuario usuario) {
+        ModelAndView modelAndView = new ModelAndView("usuario/CadastroUsuario");
+        modelAndView.addObject("grupos", grupos.findAll());
+        return modelAndView;
+    }
 
-		try {
-			usuarioService.salvar(usuario);
-		} catch (UsuarioEmailCadastradoException e) {
-			result.rejectValue("email", e.getMessage(), e.getMessage());
-			return novo(usuario);
-		} catch (SenhaObrigatoriaUsuarioException e) {
-			result.rejectValue("senha", e.getMessage(), e.getMessage());
-			return novo(usuario);
-		}
+    //	@RequestMapping(value = "/usuarios/novo", method = RequestMethod.POST)
+    @PostMapping(value = "/novo")
+    public ModelAndView salvar(@Valid Usuario usuario, BindingResult result, Model model,
+                               RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            return novo(usuario);
+        }
 
-		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
+        try {
+            usuarioService.salvar(usuario);
+        } catch (UsuarioEmailCadastradoException e) {
+            result.rejectValue("email", e.getMessage(), e.getMessage());
+            return novo(usuario);
+        } catch (SenhaObrigatoriaUsuarioException e) {
+            result.rejectValue("senha", e.getMessage(), e.getMessage());
+            return novo(usuario);
+        }
 
-		return new ModelAndView("redirect:/usuarios/novo");
-	}
+        attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
+
+        return new ModelAndView("redirect:/usuarios/novo");
+    }
+
+    @GetMapping
+    public ModelAndView pesquisar(UsuarioFilter usuarioFilter) {
+        ModelAndView modelAndView = new ModelAndView("usuario/PesquisaUsuarios");
+        modelAndView.addObject("usuarios", usuarios.filtrar(usuarioFilter));
+        modelAndView.addObject("grupos", grupos.findAll());
+
+        return modelAndView;
+    }
 
 }
