@@ -64,10 +64,26 @@
             <a class="btn btn-primary" th:href="@{/usuarios}" role="button">Limpar</a>
         </form>
 
+        <div class="aw-datatable-toolbar">
+            <button class="btn btn-info  btn-xs  js-status-btn" data:status="ATIVAR">
+                <span>Ativar</span>
+            </button>
+
+            <button class="btn btn-danger  btn-xs  js-status-btn" data:status="DESATIVAR">
+                <span>Desativar</span>
+            </button>
+        </div>
+
         <div class="table-responsive  lj-tabela-simples">
             <table class="table  table-hover">
                 <thead>
                 <tr>
+                    <th class="table-usuarios-col-status">
+                        <div class="checkbox aw-checkbox-no-margin">
+                            <input type="checkbox" />
+                            <label/>
+                        </div>
+                    </th>
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Grupo</th>
@@ -78,6 +94,12 @@
 
                 <tbody>
                 <tr th:each="usuario : ${usuarios}">
+                    <td>
+                        <div class="checkbox aw-checkbox-no-margin">
+                            <input type="checkbox" class="js-selecao" data:id="${usuario.id}" />
+                            <label/>
+                        </div>
+                    </td>
                     <td th:text="${usuario.nome}"></td>
                     <td th:text="${usuario.email}"></td>
                     <td>
@@ -102,5 +124,8 @@
         </div>
     </div>
 </section>
+<th:block layout:fragment="javascript-extra">
+    <script th:src="@{/javascripts/multiselecao.js}"></script>
+<th:block>
 </body>
 </html>

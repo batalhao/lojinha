@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/500").permitAll()
 				.antMatchers("/cidades/novo").hasRole("CADASTRAR_CIDADE")
 				.antMatchers("/usuarios/novo").hasRole("CADASTRAR_USUARIO")
+				.antMatchers("/usuarios/status").hasRole("CADASTRAR_USUARIO")
 				.antMatchers("/produtos/novo").hasRole("CADASTRAR_PRODUTO")
 				.antMatchers("/fabricantes/novo").hasRole("CADASTRAR_FABRICANTE")
 				.antMatchers("/fornecedores/novo").hasRole("CADASTRAR_FORNECEDOR")
