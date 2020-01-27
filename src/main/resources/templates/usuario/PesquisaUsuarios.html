@@ -65,11 +65,11 @@
         </form>
 
         <div class="aw-datatable-toolbar">
-            <button class="btn btn-info  btn-xs  js-status-btn" data:status="ATIVAR">
+            <button class="btn btn-info  btn-xs  js-status-btn  disabled" data:status="ATIVAR" data:url="@{/usuarios/status}">
                 <span>Ativar</span>
             </button>
 
-            <button class="btn btn-danger  btn-xs  js-status-btn" data:status="DESATIVAR">
+            <button class="btn btn-danger  btn-xs  js-status-btn disabled" data:status="DESATIVAR" data:url="@{/usuarios/status}">
                 <span>Desativar</span>
             </button>
         </div>
@@ -80,7 +80,7 @@
                 <tr>
                     <th class="table-usuarios-col-status">
                         <div class="checkbox aw-checkbox-no-margin">
-                            <input type="checkbox" />
+                            <input type="checkbox" class="js-selecao-todos"/>
                             <label/>
                         </div>
                     </th>
@@ -95,7 +95,7 @@
                 <tbody>
                 <tr th:each="usuario : ${usuarios}">
                     <td>
-                        <div class="checkbox aw-checkbox-no-margin">
+                        <div class="checkbox aw-checkbox-no-margin" th:if="${#authentication.principal.usuario.id != usuario.id}">
                             <input type="checkbox" class="js-selecao" data:id="${usuario.id}" />
                             <label/>
                         </div>
@@ -105,7 +105,14 @@
                     <td>
                         <span th:each="grupo : ${usuario.grupos}" th:text="|${grupo.nome}${grupoStat.last ? '' : ', '}|"></span>
                     </td>
-                    <td th:text="${usuario.ativo} ? Ativo : Inativo"></td>
+                    <td>
+                        <th:block th:if="${usuario.ativo}">
+                            <span class="label  label-info" th:text="${usuario.ativo} ? Ativo : Inativo"></span>
+                        </th:block>
+                        <th:block th:if="${not usuario.ativo}">
+                            <span class="label  label-danger" th:text="${usuario.ativo} ? Ativo : Inativo"></span>
+                        </th:block>
+                    </td>
                     <td class="text-center">
                         <a class="btn  btn-link  btn-xs" title="Editar">
                             <i class="glyphicon glyphicon-pencil"></i>
@@ -122,6 +129,7 @@
                 </tbody>
             </table>
         </div>
+
     </div>
 </section>
 <th:block layout:fragment="javascript-extra">
