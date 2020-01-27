@@ -4,10 +4,15 @@ import br.com.ameridata.lojinha.model.Grupo;
 import br.com.ameridata.lojinha.model.Usuario;
 import br.com.ameridata.lojinha.model.UsuarioGrupo;
 import br.com.ameridata.lojinha.repository.filter.UsuarioFilter;
+import br.com.ameridata.lojinha.repository.paginacao.PaginacaoUtil;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
-import org.hibernate.sql.JoinType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
@@ -21,6 +26,9 @@ public class UsuariosImpl implements UsuariosQueries {
 
     @PersistenceContext
     private EntityManager manager;
+
+    @Autowired
+    private PaginacaoUtil paginacaoUtil;
 
     @Override
     public Optional<Usuario> buscaPorEmailEAtivo(String email) {
@@ -37,14 +45,29 @@ public class UsuariosImpl implements UsuariosQueries {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Usuario> filtrar(UsuarioFilter filtro) {
+    public Page<Usuario> filtrar(UsuarioFilter filtro, Pageable pageable) {
         @SuppressWarnings("deprecation")
         Criteria criteria = manager.unwrap(Session.class).createCriteria(Usuario.class);
 
-        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+//        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        paginacaoUtil.preparar(criteria, pageable);
         adicionarFiltro(criteria, filtro);
 
-        return criteria.list();
+        criteria.addOrder(Order.asc("nome"));
+
+        List<Usuario> usuariosFiltrados = criteria.list();
+        usuariosFiltrados.forEach(u -> Hibernate.initialize(u.getGrupos()));
+
+        return new PageImpl<>(usuariosFiltrados, pageable, total(filtro));
+    }
+
+    private Long total(UsuarioFilter filtro) {
+        @SuppressWarnings("deprecation")
+        Criteria criteria = manager.unwrap(Session.class).createCriteria(Usuario.class);
+        adicionarFiltro(criteria, filtro);
+        criteria.setProjection(Projections.rowCount());
+
+        return (Long) criteria.uniqueResult();
     }
 
     private void adicionarFiltro(Criteria criteria, UsuarioFilter filtro) {
@@ -57,7 +80,7 @@ public class UsuariosImpl implements UsuariosQueries {
                 criteria.add(Restrictions.ilike("email", filtro.getEmail(), MatchMode.START));
             }
 
-            criteria.createAlias("grupos", "g", JoinType.LEFT_OUTER_JOIN);
+//            criteria.createAlias("grupos", "g", JoinType.LEFT_OUTER_JOIN);
 
             if (filtro.getGrupos() != null && !filtro.getGrupos().isEmpty()) {
                 List<Criterion> criterionList = new ArrayList<>();
@@ -66,7 +89,7 @@ public class UsuariosImpl implements UsuariosQueries {
                     detachedCriteria.add(Restrictions.eq("id.grupo.id", grupoId));
                     detachedCriteria.setProjection(Projections.property("id.usuario"));
 
-                    criterionList.add(Subqueries.propertiesIn(new String[]{"id"}, detachedCriteria));
+                    criterionList.add(Subqueries.propertiesIn(new String[]{ "id" }, detachedCriteria));
                 }
 
                 Criterion[] criterions = new Criterion[criterionList.size()];

@@ -93,7 +93,7 @@
                 </thead>
 
                 <tbody>
-                <tr th:each="usuario : ${usuarios}">
+                <tr th:each="usuario : ${pagina.conteudo}">
                     <td>
                         <div class="checkbox aw-checkbox-no-margin" th:if="${#authentication.principal.usuario.id != usuario.id}">
                             <input type="checkbox" class="js-selecao" data:id="${usuario.id}" />
@@ -123,12 +123,14 @@
                     </td>
                 </tr>
 
-                <tr th:if="${usuarios.empty}">
-                    <td colspan="4">Nenhum usuário encontrado</td>
+                <tr th:if="${pagina.vazia}">
+                    <td colspan="6">Nenhum usuário encontrado</td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <lojinha:pagination page="${pagina}" />
 
     </div>
 </section>
