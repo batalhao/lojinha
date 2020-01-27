@@ -22,7 +22,7 @@
 
 			<th:block th:include="fragments/MensagemSucesso"></th:block>
 
-			<form method="POST" th:object="${fabricante}" class="form-vertical  js-form-loading">
+			<form method="POST" th:object="${fabricante}" th:action="@{/fabricantes/novo}" class="form-vertical  js-form-loading">
 
 				<th:block th:include="fragments/MensagensErroValidacao"></th:block>
 

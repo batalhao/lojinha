@@ -31,7 +31,8 @@
     </div>
 
     <div class="container-fluid">
-        <form method="POST" th:object="${usuario}">
+<!--        <form method="POST" th:object="${usuario}">-->
+            <form method="POST" th:object="${usuario}" th:action="@{/usuarios/novo}" class="form-vertical  js-form-loading">
             <lojinha:message />
 
             <div class="row">
