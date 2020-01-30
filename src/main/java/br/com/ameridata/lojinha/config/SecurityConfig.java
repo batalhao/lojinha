@@ -62,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/fornecedores").authenticated()
 				.antMatchers("/clientes").authenticated()
 				.antMatchers("/estados").authenticated()
+				.antMatchers("/vendas/**").authenticated()
 				.anyRequest().denyAll()
 			.and()
 				.formLogin()
