@@ -1,8 +1,9 @@
 package br.com.ameridata.lojinha.repository.helper.produto;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
+import br.com.ameridata.lojinha.dto.ProdutoDTO;
+import br.com.ameridata.lojinha.model.Produto;
+import br.com.ameridata.lojinha.repository.filter.ProdutoFilter;
+import br.com.ameridata.lojinha.repository.paginacao.PaginacaoUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -15,116 +16,126 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import br.com.ameridata.lojinha.model.Produto;
-import br.com.ameridata.lojinha.repository.filter.ProdutoFilter;
-import br.com.ameridata.lojinha.repository.paginacao.PaginacaoUtil;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
 
 public class ProdutosImpl implements ProdutosQueries {
 
-	@PersistenceContext
-	private EntityManager manager;
-	
-	@Autowired
-	private PaginacaoUtil paginacaoUtil;
+    @PersistenceContext
+    private EntityManager manager;
 
-	@SuppressWarnings("unchecked")
-	@Override
-	@Transactional(readOnly = true)
-	public Page<Produto> filtrar(ProdutoFilter filtro, Pageable pageable) {
-		@SuppressWarnings("deprecation")
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(Produto.class);
+    @Autowired
+    private PaginacaoUtil paginacaoUtil;
 
-		paginacaoUtil.preparar(criteria, pageable);
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Produto> filtrar(ProdutoFilter filtro, Pageable pageable) {
+        @SuppressWarnings("deprecation")
+        Criteria criteria = manager.unwrap(Session.class).createCriteria(Produto.class);
 
-		adicionarFiltro(filtro, criteria);
+        paginacaoUtil.preparar(criteria, pageable);
 
-		return new PageImpl<>(criteria.list(), pageable, total(filtro));
-	}
+        adicionarFiltro(filtro, criteria);
 
-	private Long total(ProdutoFilter filtro) {
-		@SuppressWarnings("deprecation")
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(Produto.class);
-		adicionarFiltro(filtro, criteria);
-		criteria.setProjection(Projections.rowCount());
+        return new PageImpl<>(criteria.list(), pageable, total(filtro));
+    }
 
-		return (Long) criteria.uniqueResult();
-	}
+    @Override
+    public List<ProdutoDTO> porSkuOuNome(String skuOuNome) {
+        String jpql = "select new br.com.ameridata.lojinha.dto.ProdutoDTO(id, sku, nome, origem, precoVenda, foto) " +
+                "from Produto where lower(sku) like :skuOuNome or lower(nome) like :skuOuNome order by nome asc ";
+        String pesqSkuOuNome = ("%" + skuOuNome + "%").toLowerCase();
+        List<ProdutoDTO> produtoDTOList = manager.createQuery(jpql, ProdutoDTO.class)
+                .setParameter("skuOuNome", pesqSkuOuNome).setMaxResults(2).getResultList();
+        return produtoDTOList;
+    }
 
-	private void adicionarFiltro(ProdutoFilter filtro, Criteria criteria) {
-		if (filtro != null) {
-			if (!StringUtils.isEmpty(filtro.getSku())) {
-				criteria.add(Restrictions.eq("sku", filtro.getSku()));
-			}
+    private Long total(ProdutoFilter filtro) {
+        @SuppressWarnings("deprecation")
+        Criteria criteria = manager.unwrap(Session.class).createCriteria(Produto.class);
+        adicionarFiltro(filtro, criteria);
+        criteria.setProjection(Projections.rowCount());
 
-			if (!StringUtils.isEmpty(filtro.getGtin())) {
-				criteria.add(Restrictions.eq("gtin", filtro.getGtin()));
-			}
+        return (Long) criteria.uniqueResult();
+    }
 
-			if (!StringUtils.isEmpty(filtro.getNome())) {
-				criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
-			}
+    private void adicionarFiltro(ProdutoFilter filtro, Criteria criteria) {
+        if (filtro != null) {
+            if (!StringUtils.isEmpty(filtro.getSku())) {
+                criteria.add(Restrictions.eq("sku", filtro.getSku()));
+            }
 
-			if (isFabricantePresente(filtro)) {
-				criteria.add(Restrictions.eq("fabricante", filtro.getFabricante()));
-			}
+            if (!StringUtils.isEmpty(filtro.getGtin())) {
+                criteria.add(Restrictions.eq("gtin", filtro.getGtin()));
+            }
 
-			if (isFornecedorPresente(filtro)) {
-				criteria.add(Restrictions.eq("fornecedor", filtro.getFornecedor()));
-			}
+            if (!StringUtils.isEmpty(filtro.getNome())) {
+                criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
+            }
 
-			if (isUnidadePresente(filtro)) {
-				criteria.add(Restrictions.eq("unidade", filtro.getUnidade()));
-			}
+            if (isFabricantePresente(filtro)) {
+                criteria.add(Restrictions.eq("fabricante", filtro.getFabricante()));
+            }
 
-			if (filtro.getOrigem() != null) {
-				criteria.add(Restrictions.eq("origem", filtro.getOrigem()));
-			}
+            if (isFornecedorPresente(filtro)) {
+                criteria.add(Restrictions.eq("fornecedor", filtro.getFornecedor()));
+            }
 
-			if (filtro.getCustoDe() != null) {
-				criteria.add(Restrictions.ge("custoUnitario", filtro.getCustoDe()));
-			}
+            if (isUnidadePresente(filtro)) {
+                criteria.add(Restrictions.eq("unidade", filtro.getUnidade()));
+            }
 
-			if (filtro.getCustoAte() != null) {
-				criteria.add(Restrictions.le("custoUnitario", filtro.getCustoAte()));
-			}
+            if (filtro.getOrigem() != null) {
+                criteria.add(Restrictions.eq("origem", filtro.getOrigem()));
+            }
 
-			if (filtro.getPrecoDe() != null) {
-				criteria.add(Restrictions.ge("precoVenda", filtro.getPrecoDe()));
-			}
+            if (filtro.getCustoDe() != null) {
+                criteria.add(Restrictions.ge("custoUnitario", filtro.getCustoDe()));
+            }
 
-			if (filtro.getPrecoAte() != null) {
-				criteria.add(Restrictions.le("precoVenda", filtro.getPrecoAte()));
-			}
+            if (filtro.getCustoAte() != null) {
+                criteria.add(Restrictions.le("custoUnitario", filtro.getCustoAte()));
+            }
 
-			if (filtro.getComissaoDe() != null) {
-				criteria.add(Restrictions.ge("comissao", filtro.getComissaoDe()));
-			}
+            if (filtro.getPrecoDe() != null) {
+                criteria.add(Restrictions.ge("precoVenda", filtro.getPrecoDe()));
+            }
 
-			if (filtro.getComissaoAte() != null) {
-				criteria.add(Restrictions.le("comissao", filtro.getComissaoAte()));
-			}
+            if (filtro.getPrecoAte() != null) {
+                criteria.add(Restrictions.le("precoVenda", filtro.getPrecoAte()));
+            }
 
-			if (filtro.getEstoqueDe() != null) {
-				criteria.add(Restrictions.ge("quantidadeEstoque", filtro.getEstoqueDe()));
-			}
+            if (filtro.getComissaoDe() != null) {
+                criteria.add(Restrictions.ge("comissao", filtro.getComissaoDe()));
+            }
 
-			if (filtro.getEstoqueAte() != null) {
-				criteria.add(Restrictions.le("quantidadeEstoque", filtro.getEstoqueAte()));
-			}
+            if (filtro.getComissaoAte() != null) {
+                criteria.add(Restrictions.le("comissao", filtro.getComissaoAte()));
+            }
 
-		}
-	}
+            if (filtro.getEstoqueDe() != null) {
+                criteria.add(Restrictions.ge("quantidadeEstoque", filtro.getEstoqueDe()));
+            }
 
-	private boolean isFabricantePresente(ProdutoFilter filtro) {
-		return filtro.getFabricante() != null && filtro.getFabricante().getId() != null;
-	}
+            if (filtro.getEstoqueAte() != null) {
+                criteria.add(Restrictions.le("quantidadeEstoque", filtro.getEstoqueAte()));
+            }
 
-	private boolean isFornecedorPresente(ProdutoFilter filtro) {
-		return filtro.getFornecedor() != null && filtro.getFornecedor().getId() != null;
-	}
+        }
+    }
 
-	private boolean isUnidadePresente(ProdutoFilter filtro) {
-		return filtro.getUnidade() != null && filtro.getUnidade().getDescricao() != null;
-	}
+    private boolean isFabricantePresente(ProdutoFilter filtro) {
+        return filtro.getFabricante() != null && filtro.getFabricante().getId() != null;
+    }
+
+    private boolean isFornecedorPresente(ProdutoFilter filtro) {
+        return filtro.getFornecedor() != null && filtro.getFornecedor().getId() != null;
+    }
+
+    private boolean isUnidadePresente(ProdutoFilter filtro) {
+        return filtro.getUnidade() != null && filtro.getUnidade().getDescricao() != null;
+    }
 
 }

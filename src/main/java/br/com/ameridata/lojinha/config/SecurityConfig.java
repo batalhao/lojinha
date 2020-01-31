@@ -36,7 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/images/**")
 				.antMatchers("/fotos/**")
 				.antMatchers("/javascripts/**")
-				.antMatchers("/stylesheets/**");
+				.antMatchers("/javascripts/vendors/**")
+				.antMatchers("/stylesheets/**")
+				.antMatchers("/stylesheets/vendors/**");
 	}
 
 	@Override
@@ -57,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //				.antMatchers("/usuarios/**").authenticated()
 				.antMatchers("/cidades").authenticated()
 				.antMatchers("/usuarios").authenticated()
-				.antMatchers("/produtos").authenticated()
+				.antMatchers("/produtos/**").authenticated()
 				.antMatchers("/fabricantes").authenticated()
 				.antMatchers("/fornecedores").authenticated()
 				.antMatchers("/clientes").authenticated()
