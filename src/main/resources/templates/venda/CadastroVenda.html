@@ -62,7 +62,7 @@
             </div>
 
             <div class="row">
-                <div class="form-group  col-sm-4  bw-required">
+                <div class="form-group  col-sm-4  lj-required">
                     <label class="control-label" for="nomeCliente">Cliente</label>
                     <div class="input-group">
                         <input id="nomeCliente" type="text" readonly="readonly" class="form-control" placeholder="Clique na lupa para pesquisar o cliente"/>
@@ -113,10 +113,31 @@
                     </div>
 
                     <div class="lj-tabela-produtos">
-                        <div class="lj-tabela-produtos__vazio">
+                        <div class="lj-tabela-item">
+                            <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--foto">
+                                <img th:src="@{/fotos/thumbnail.no-image-icon-sm.png}" class="img-responsive"/>
+                            </div>
+
+                            <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--detalhes">
+                                <span class="lj-tabela-produto-nome">Laptop 15</span>
+                                <span class="label  label-default">AA1112</span>
+                                <span class="lj-tabela-produto-origem">Importada</span>
+                            </div>
+
+                            <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--valores">
+                                <div class="lj-tabela-produto-valor-pequeno">
+                                    <input type="text" maxlength="3" class="lj-tabela-produto-campo-quantidade" value="1"/>
+                                    <span>x R$8,90</span>
+                                </div>
+                                <div class="lj-tabela-produto-valor-grande">R$8,90</div>
+                            </div>
+
+                        </div>
+
+<!--                        <div class="lj-tabela-produtos__vazio">
                             <i class="glyphicon  glyphicon-shopping-cart"></i>
                             <span>Você ainda não adicionou nenhum produto.</span>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
 

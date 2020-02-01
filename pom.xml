@@ -72,8 +72,10 @@
         <spring-security.version>5.2.1.RELEASE</spring-security.version> <!-- 4.1.1.RELEASE -->
 
         <!-- Thymeleaf - Extras Spring Security -->
-        <thymeleaf-extras-springsecurity.version>3.0.4.RELEASE
-        </thymeleaf-extras-springsecurity.version> <!-- 3.0.0.RELEASE -->
+        <thymeleaf-extras-springsecurity.version>3.0.4.RELEASE</thymeleaf-extras-springsecurity.version> <!-- 3.0.0.RELEASE -->
+
+        <!-- JUnit -->
+        <junit.version>4.13</junit.version>
     </properties>
 
     <build>
@@ -302,6 +304,14 @@
             <artifactId>lombok</artifactId>
             <version>1.18.10</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
