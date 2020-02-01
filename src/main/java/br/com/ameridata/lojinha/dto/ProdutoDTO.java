@@ -3,6 +3,7 @@ package br.com.ameridata.lojinha.dto;
 import br.com.ameridata.lojinha.model.Origem;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 
@@ -23,7 +24,7 @@ public class ProdutoDTO {
         this.nome = nome;
         this.origem = origem.getDescricao();
         this.precoVenda = precoVenda;
-        this.foto = foto;
+        this.foto = StringUtils.isEmpty(foto) ? "no-image-icon-sm.png" : foto;
     }
 
 }

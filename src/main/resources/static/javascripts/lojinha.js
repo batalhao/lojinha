@@ -75,6 +75,11 @@ Lojinha.Security = (function (){
 	
 }());
 
+Lojinha.formatarMoeda = function(valor) {
+	numeral.language('pt-br');
+	return numeral(valor).format('0,0.00');
+};
+
 $(function () {
 	var maskMoney = new Lojinha.MaskMoney();
 	maskMoney.enable();

@@ -1,0 +1,15 @@
+<script id="template-autocomplete-produto" type="text/x-handlebars-template">
+    <div class="lj-tabela-item">
+        <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--foto">
+            <img th:src="@{/fotos/thumbnail.{{foto}}}" class="img-responsive"/>
+        </div>
+        <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--detalhes">
+            <span class="lj-tabela-produto-nome">{{nome}}</span>
+            <span class="label  label-default">{{sku}}</span>
+            <span class="lj-tabela-produto-origem">{{origem}}</span>
+        </div>
+        <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--valores">
+            <div class="lj-tabela-produto-valor-medio">R${{valorFormatado}}</div>
+        </div>
+    </div>
+</script>

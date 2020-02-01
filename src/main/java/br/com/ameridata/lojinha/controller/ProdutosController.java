@@ -16,6 +16,7 @@ import br.com.ameridata.lojinha.service.exception.ProdutoSkuCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -116,7 +117,7 @@ public class ProdutosController {
         return modelAndView;
     }
 
-    @GetMapping("/pesquisa")
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     List<ProdutoDTO> pesquisar(String skuOuNome) {
         List<ProdutoDTO> produtoDTOList = produtos.porSkuOuNome(skuOuNome);
