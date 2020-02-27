@@ -63,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/clientes").authenticated()
 				.antMatchers("/estados").authenticated()
 				.antMatchers("/vendas/**").authenticated()
+				.antMatchers("/vendas/item").authenticated()
 				.antMatchers("/javascripts/vendors/**").authenticated()
 				.antMatchers("/stylesheets/vendors/**").authenticated()
 				.anyRequest().denyAll()

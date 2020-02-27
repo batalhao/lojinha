@@ -6,6 +6,8 @@ Lojinha.Autocomplete = (function () {
         this.skuOuNomeInput = $('.js-sku-nome-produto-input');
         var htmlTemplateAutocomplete = $('#template-autocomplete-produto').html();
         this.template = Handlebars.compile(htmlTemplateAutocomplete);
+        this.emitter = $({});
+        this.on = this.emitter.on.bind(this.emitter);
     }
 
     Autocomplete.prototype.iniciar = function () {
@@ -25,12 +27,18 @@ Lojinha.Autocomplete = (function () {
                     produto.valorFormatado = Lojinha.formatarMoeda(produto.precoVenda);
                     return this.template(produto);
                 }.bind(this)
+            },
+            list: {
+                onChooseEvent: onItemSelecionado.bind(this)
             }
         };
 
         this.skuOuNomeInput.easyAutocomplete(options);
     }
 
+    function onItemSelecionado() {
+        this.emitter.trigger('item-selecionado', this.skuOuNomeInput.getSelectedItemData());
+    }
     return Autocomplete
 
 }());
@@ -40,7 +48,8 @@ Lojinha.Autocomplete = (function () {
 //     return numeral(valor).format('0,0.00');
 // };
 
-$(function () {
-    var autocomplete = new Lojinha.Autocomplete();
-    autocomplete.iniciar();
-})
+/* CODIGO MOVIDO PARA venda.tabela-itens.js */
+// $(function () {
+//     var autocomplete = new Lojinha.Autocomplete();
+//     autocomplete.iniciar();
+// })

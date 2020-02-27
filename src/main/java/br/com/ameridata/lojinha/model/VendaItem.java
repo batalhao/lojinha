@@ -16,7 +16,7 @@ public class VendaItem {
     private BigDecimal valorUnitario;
     private Produto produto;
 
-    public BigDecimal valorTotal() {
+    public BigDecimal getValorTotal() {
         return valorUnitario.multiply(new BigDecimal(quantidade));
     }
 

@@ -1,4 +1,4 @@
-package br.com.ameridata.lojinha.venda;
+package br.com.ameridata.lojinha.session;
 
 import br.com.ameridata.lojinha.model.Produto;
 import org.junit.Before;

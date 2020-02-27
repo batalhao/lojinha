@@ -112,32 +112,11 @@
                         </div>
                     </div>
 
-                    <div class="lj-tabela-produtos">
-                        <div class="lj-tabela-item">
-                            <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--foto">
-                                <img th:src="@{/fotos/thumbnail.no-image-icon-sm.png}" class="img-responsive"/>
-                            </div>
-
-                            <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--detalhes">
-                                <span class="lj-tabela-produto-nome">Laptop 15</span>
-                                <span class="label  label-default">AA1112</span>
-                                <span class="lj-tabela-produto-origem">Importada</span>
-                            </div>
-
-                            <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--valores">
-                                <div class="lj-tabela-produto-valor-pequeno">
-                                    <input type="text" maxlength="3" class="lj-tabela-produto-campo-quantidade" value="1"/>
-                                    <span>x R$8,90</span>
-                                </div>
-                                <div class="lj-tabela-produto-valor-grande">R$8,90</div>
-                            </div>
-
-                        </div>
-
-<!--                        <div class="lj-tabela-produtos__vazio">
+                    <div class="lj-tabela-produtos  js-tabela-produtos-container">
+                     <div class="lj-tabela-produtos__vazio">
                             <i class="glyphicon  glyphicon-shopping-cart"></i>
                             <span>Você ainda não adicionou nenhum produto.</span>
-                        </div>-->
+                        </div>
                     </div>
                 </div>
 
@@ -195,6 +174,7 @@
     <script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
     <script th:src="@{/javascripts/cliente.pesquisa-rapida.js}"></script>
     <script th:src="@{/javascripts/venda.autocomplete-itens.js}"></script>
+    <script th:src="@{/javascripts/venda.tabela-itens.js}"></script>
     <script>
         $(function() {
             $('.js-abas-venda a').click(function (e) {

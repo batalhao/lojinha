@@ -1,10 +1,12 @@
 package br.com.ameridata.lojinha.config;
 
-import java.math.BigDecimal;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
-
+import br.com.ameridata.lojinha.controller.ProdutosController;
+import br.com.ameridata.lojinha.controller.converter.*;
+import br.com.ameridata.lojinha.session.TabelaVendaItens;
+import br.com.ameridata.lojinha.thymeleaf.LojinhaDialect;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.BeansException;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -35,21 +37,13 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
-import com.github.benmanes.caffeine.cache.Caffeine;
-import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
-
-import br.com.ameridata.lojinha.controller.ProdutosController;
-import br.com.ameridata.lojinha.controller.converter.CidadeConverter;
-import br.com.ameridata.lojinha.controller.converter.EmpresaConverter;
-import br.com.ameridata.lojinha.controller.converter.EstadoConverter;
-import br.com.ameridata.lojinha.controller.converter.FabricanteConverter;
-import br.com.ameridata.lojinha.controller.converter.FornecedorConverter;
-import br.com.ameridata.lojinha.controller.converter.GrupoConverter;
-import br.com.ameridata.lojinha.thymeleaf.LojinhaDialect;
-import nz.net.ultraq.thymeleaf.LayoutDialect;
+import java.math.BigDecimal;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
-@ComponentScan(basePackageClasses = { ProdutosController.class })
+@ComponentScan(basePackageClasses = { ProdutosController.class, TabelaVendaItens.class })
 @EnableWebMvc
 @EnableSpringDataWebSupport
 @EnableCaching

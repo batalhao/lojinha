@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div class="lj-tabela-item" th:each="item : ${itens}">
+    <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--foto">
+        <img th:src="@{/fotos/thumbnail.{foto}(foto=${item.produto.FotoOrNoImageIcon})}" class="img-responsive"/>
+    </div>
+
+    <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--detalhes">
+        <span class="lj-tabela-produto-nome" th:text="${item.produto.nome}">Negra Modelo Long Neck 355ml</span>
+        <span class="label  label-default" th:text="${item.produto.sku}">AA1112</span>
+        <span class="lj-tabela-produto-origem" th:text="${item.produto.origem.descricao}">Importada</span>
+    </div>
+
+    <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--valores">
+        <div class="lj-tabela-produto-valor-pequeno">
+            <input type="text" maxlength="3" class="lj-tabela-produto-campo-quantidade" value="1"/>
+            <span>x R$[[${{item.valorUnitario}}]]</span>
+        </div>
+        <div class="lj-tabela-produto-valor-grande">R$[[${{item.valorTotal}}]]</div>
+    </div>
+
+</div>
+</html>
