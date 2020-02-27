@@ -15,7 +15,7 @@
 
     <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--valores">
         <div class="lj-tabela-produto-valor-pequeno">
-            <input type="text" maxlength="3" class="lj-tabela-produto-campo-quantidade" value="1"/>
+            <input type="text" maxlength="3" class="lj-tabela-produto-campo-quantidade" th:value="${item.quantidade}"/>
             <span>x R$[[${{item.valorUnitario}}]]</span>
         </div>
         <div class="lj-tabela-produto-valor-grande">R$[[${{item.valorTotal}}]]</div>
