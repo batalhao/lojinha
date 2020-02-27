@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:data="http://www.thymeleaf.org/extras/data">
 
 <div class="lj-tabela-item" th:each="item : ${itens}">
     <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--foto">
@@ -15,7 +15,10 @@
 
     <div class="lj-tabela-item__coluna  lj-tabela-item__coluna--valores">
         <div class="lj-tabela-produto-valor-pequeno">
-            <input type="text" maxlength="3" class="lj-tabela-produto-campo-quantidade" th:value="${item.quantidade}"/>
+            <input type="text" maxlength="3"
+                   class="lj-tabela-produto-campo-quantidade  js-tabela-produto-quantidade-item"
+                   th:value="${item.quantidade}" data:id-produto="${item.produto.id}"
+            />
             <span>x R$[[${{item.valorUnitario}}]]</span>
         </div>
         <div class="lj-tabela-produto-valor-grande">R$[[${{item.valorTotal}}]]</div>

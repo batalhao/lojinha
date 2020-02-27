@@ -5,9 +5,7 @@ import br.com.ameridata.lojinha.repository.Produtos;
 import br.com.ameridata.lojinha.session.TabelaVendaItens;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
@@ -37,6 +35,16 @@ public class VendasController {
         ModelAndView modelAndView = new ModelAndView("venda/TabelaVendaItens");
         modelAndView.addObject("itens", itens.getItens());
 
+        return modelAndView;
+    }
+
+    @PutMapping("/item/{idProduto}")
+    public ModelAndView alterarQuantidadeItem(@PathVariable Long idProduto, Integer quantidade) {
+        Produto produto = produtos.findById(idProduto).orElse(null);
+        itens.alterarQuantidadeItens(produto, quantidade);
+
+        ModelAndView modelAndView = new ModelAndView("venda/TabelaVendaItens");
+        modelAndView.addObject("itens", itens.getItens());
         return modelAndView;
     }
 

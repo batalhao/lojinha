@@ -80,4 +80,16 @@ public class TabelaVendaItensTest {
         assertEquals(2, tabelaVendaItens.getItens().size());
     }
 
+    @Test
+    public void deveAlterarQuantidadeDoItem() throws Exception {
+        Produto p1 = new Produto();
+        p1.setId(1L);
+        p1.setPrecoVenda(new BigDecimal("4.5"));
+
+        tabelaVendaItens.adicionarItem(p1, 1);
+        tabelaVendaItens.alterarQuantidadeItens(p1, 10);
+
+        assertEquals(new BigDecimal("45.0"), tabelaVendaItens.getValorTotal());
+    }
+
 }

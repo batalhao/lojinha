@@ -24,9 +24,7 @@ public class TabelaVendaItens {
     }
 
     public void adicionarItem(Produto produto, Integer quantidade) {
-        Optional<VendaItem> vendaItemOptional = itens.stream()
-                .filter(i -> i.getProduto().equals(produto))
-                .findAny();
+        Optional<VendaItem> vendaItemOptional = buscarItemPorProduto(produto);
 
         VendaItem vendaItem;
 
@@ -44,7 +42,18 @@ public class TabelaVendaItens {
         }
     }
 
+    public void alterarQuantidadeItens(Produto produto, Integer quantidade) {
+        VendaItem vendaItem = buscarItemPorProduto(produto).get();
+        vendaItem.setQuantidade(quantidade);
+    }
+
     public List<VendaItem> getItens() {
         return itens;
+    }
+
+    private Optional<VendaItem> buscarItemPorProduto(Produto produto) {
+        return itens.stream()
+                .filter(i -> i.getProduto().equals(produto))
+                .findAny();
     }
 }

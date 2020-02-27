@@ -18,9 +18,33 @@ Lojinha.TabelaItens = (function () {
             }
         });
 
-        resposta.done(function (html) {
-            this.tabelaProdutosContainer.html(html);
-        }.bind(this));
+        // resposta.done(function (html) {
+        //     this.tabelaProdutosContainer.html(html);
+        //     $('.js-tabela-produto-quantidade-item').on('change', onQuantidadeItemAlterado.bind(this));
+        // }.bind(this));
+
+        resposta.done(onItemAtualizadoNoServidor.bind(this));
+    }
+
+    function onItemAtualizadoNoServidor(html) {
+        this.tabelaProdutosContainer.html(html);
+        $('.js-tabela-produto-quantidade-item').on('change', onQuantidadeItemAlterado.bind(this));
+    }
+
+    function onQuantidadeItemAlterado(evento) {
+        var input = $(evento.target);
+        var quantidade = input.val();
+        var idProduto = input.data('id-produto');
+
+        var resposta = $.ajax({
+            url: 'item/' + idProduto,
+            method: 'PUT',
+            data: {
+                quantidade: quantidade
+            }
+        });
+
+        resposta.done(onItemAtualizadoNoServidor.bind(this));
     }
 
     return TabelaItens;
