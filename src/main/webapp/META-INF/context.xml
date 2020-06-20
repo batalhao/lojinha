@@ -5,7 +5,7 @@
 		factory="org.apache.naming.factory.BeanFactory"
 		type="com.mchange.v2.c3p0.ComboPooledDataSource"
 		driverClass="com.mysql.cj.jdbc.Driver"
-		jdbcUrl="jdbc:mysql://localhost:3306/lojinha?useSSL=false" user="root"
+		jdbcUrl="jdbc:mysql://localhost:3306/lojinha?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Lisbon" user="root"
 		password="abc123456" initialPoolSize="5" minPoolSize="5" maxPoolSize="5" />
 </Context>
 
