@@ -75,7 +75,7 @@
         <thymeleaf-extras-springsecurity.version>3.0.4.RELEASE</thymeleaf-extras-springsecurity.version> <!-- 3.0.0.RELEASE -->
 
         <!-- JUnit -->
-        <junit.version>4.13</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
 
     <build>
