@@ -63,7 +63,7 @@
         <thymeleaf-extras-data-attribute.version>2.0.1</thymeleaf-extras-data-attribute.version>
 
         <!-- Google - Guava (Cache) -->
-        <guava.version>28.1-jre</guava.version> <!-- 19.0 -->
+        <guava.version>29.0-jre</guava.version> <!-- 19.0 -->
 
         <!-- Apache Bean Utils -->
         <commons-beanutils.version>1.9.4</commons-beanutils.version> <!-- 1.9.2 -->
