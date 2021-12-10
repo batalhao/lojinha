@@ -40,7 +40,7 @@
         <thymeleaf-layout-dialect.version>2.4.1</thymeleaf-layout-dialect.version> <!-- 2.0.0-SNAPSHOT -->
 
         <!-- Logging -->
-        <log4j.version>2.12.1</log4j.version> <!-- 2.6 -->
+        <log4j.version>2.15.0</log4j.version> <!-- 2.6 -->
         <jcl-over-slf4j.version>1.7.29</jcl-over-slf4j.version> <!-- 1.7.21 -->
 
         <!-- JPA / Hibernate -->
